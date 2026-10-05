@@ -1,0 +1,12 @@
+{
+  "contractVersion": 1,
+  "api": "planRollout(nodes, options)",
+  "requirements": [
+    "Exclude nodes with healthy === false.",
+    "Return an array of batches containing node IDs.",
+    "Each batch contains at most options.maxBatchSize nodes; default maxBatchSize is 2.",
+    "Preserve deterministic input order among eligible nodes.",
+    "Every eligible node appears exactly once."
+  ]
+}
+

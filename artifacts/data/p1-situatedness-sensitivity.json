@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "capabilityGaps": [
+    0,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5
+  ],
+  "trueMissingContextPenalties": [
+    0.1,
+    0.2,
+    0.3,
+    0.4
+  ],
+  "rows": [
+    {
+      "situatednessWeight": 0,
+      "cells": 44,
+      "mistakes": 16,
+      "accuracy": 0.6363636363636364,
+      "totalRegret": 2.5,
+      "meanRegret": 0.056818181818181816
+    },
+    {
+      "situatednessWeight": 0.05,
+      "cells": 44,
+      "mistakes": 16,
+      "accuracy": 0.6363636363636364,
+      "totalRegret": 2.5,
+      "meanRegret": 0.056818181818181816
+    },
+    {
+      "situatednessWeight": 0.1,
+      "cells": 44,
+      "mistakes": 12,
+      "accuracy": 0.7272727272727273,
+      "totalRegret": 1.7000000000000004,
+      "meanRegret": 0.03863636363636364
+    },
+    {
+      "situatednessWeight": 0.15,
+      "cells": 44,
+      "mistakes": 10,
+      "accuracy": 0.7727272727272727,
+      "totalRegret": 1.1000000000000003,
+      "meanRegret": 0.02500000000000001
+    },
+    {
+      "situatednessWeight": 0.2,
+      "cells": 44,
+      "mistakes": 8,
+      "accuracy": 0.8181818181818182,
+      "totalRegret": 0.7000000000000003,
+      "meanRegret": 0.015909090909090914
+    },
+    {
+      "situatednessWeight": 0.25,
+      "cells": 44,
+      "mistakes": 8,
+      "accuracy": 0.8181818181818182,
+      "totalRegret": 0.5000000000000001,
+      "meanRegret": 0.011363636363636366
+    },
+    {
+      "situatednessWeight": 0.3,
+      "cells": 44,
+      "mistakes": 8,
+      "accuracy": 0.8181818181818182,
+      "totalRegret": 0.5000000000000001,
+      "meanRegret": 0.011363636363636366
+    },
+    {
+      "situatednessWeight": 0.35,
+      "cells": 44,
+      "mistakes": 10,
+      "accuracy": 0.7727272727272727,
+      "totalRegret": 0.7000000000000003,
+      "meanRegret": 0.015909090909090914
+    },
+    {
+      "situatednessWeight": 0.4,
+      "cells": 44,
+      "mistakes": 12,
+      "accuracy": 0.7272727272727273,
+      "totalRegret": 1.1,
+      "meanRegret": 0.025
+    },
+    {
+      "situatednessWeight": 0.45,
+      "cells": 44,
+      "mistakes": 16,
+      "accuracy": 0.6363636363636364,
+      "totalRegret": 1.7000000000000006,
+      "meanRegret": 0.03863636363636365
+    },
+    {
+      "situatednessWeight": 0.5,
+      "cells": 44,
+      "mistakes": 20,
+      "accuracy": 0.5454545454545454,
+      "totalRegret": 2.5000000000000004,
+      "meanRegret": 0.05681818181818183
+    }
+  ],
+  "bestMeanRegret": 0.011363636363636366,
+  "bestWeights": [
+    0.25,
+    0.3
+  ]
+}
+

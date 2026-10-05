@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://position-less-hoopers.dev/schemas/responsibility.schema.json",
+  "title": "PLH Responsibility",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "needId",
+    "assigneeId",
+    "assignmentVersion",
+    "authority",
+    "evidenceObligations",
+    "offeredAt",
+    "renewAfter",
+    "expiresAt",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "needId": { "type": "string", "minLength": 1 },
+    "assigneeId": { "type": "string", "minLength": 1 },
+    "assignmentVersion": { "type": "integer", "minimum": 1 },
+    "status": {
+      "enum": ["offered", "accepted", "active", "released", "revoked", "completed"]
+    },
+    "authority": {
+      "type": "object",
+      "required": ["investigate", "propose", "execute", "requestHelp", "mutateScopes"],
+      "properties": {
+        "investigate": { "type": "boolean" },
+        "propose": { "type": "boolean" },
+        "execute": { "type": "boolean" },
+        "requestHelp": { "type": "boolean" },
+        "mutateScopes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
+

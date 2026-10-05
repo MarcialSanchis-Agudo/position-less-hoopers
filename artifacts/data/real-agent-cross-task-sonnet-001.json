@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "kind": "real-agent-development-cross-task",
+  "eligibleForHeldOutClaims": false,
+  "exclusionReason": "Development event streams were designed during method development; results are replicated across two TaskPacks but are not held out.",
+  "executor": {
+    "provider": "Anthropic",
+    "cli": "Claude Code",
+    "modelId": "claude-sonnet-5-5",
+    "effort": "medium",
+    "freshSessionPerInvocation": true
+  },
+  "taskPacks": [
+    {
+      "taskPackId": "checkout-incident",
+      "repeats": 5,
+      "policies": {
+        "static": {
+          "successCount": 0,
+          "runCount": 5,
+          "meanAgentInvocations": 0,
+          "meanUnnecessaryInvocations": 0,
+          "meanAgentExecutionMs": 0,
+          "meanUnnecessaryAgentExecutionMs": 0,
+          "meanRecoveryTriggerLatencyMs": null
+        },
+        "greedy": {
+          "successCount": 5,
+          "runCount": 5,
+          "meanAgentInvocations": 5,
+          "meanUnnecessaryInvocations": 3,
+          "meanAgentExecutionMs": 70812.2,
+          "meanUnnecessaryAgentExecutionMs": 42318,
+          "meanRecoveryTriggerLatencyMs": 0
+        },
+        "plh_direct": {
+          "successCount": 5,
+          "runCount": 5,
+          "meanAgentInvocations": 1,
+          "meanUnnecessaryInvocations": 0,
+          "meanAgentExecutionMs": 17946.4,
+          "meanUnnecessaryAgentExecutionMs": 0,
+          "meanRecoveryTriggerLatencyMs": 60000
+        },
+        "plh_pressure": {
+          "successCount": 5,
+          "runCount": 5,
+          "meanAgentInvocations": 1,
+          "meanUnnecessaryInvocations": 0,
+          "meanAgentExecutionMs": 16971.6,
+          "meanUnnecessaryAgentExecutionMs": 0,
+          "meanRecoveryTriggerLatencyMs": 0
+        }
+      }
+    },
+    {
+      "taskPackId": "config-migration-incident",
+      "repeats": 5,
+      "policies": {
+        "static": {
+          "successCount": 0,
+          "runCount": 5,
+          "meanAgentInvocations": 0,
+          "meanUnnecessaryInvocations": 0,
+          "meanAgentExecutionMs": 0,
+          "meanUnnecessaryAgentExecutionMs": 0,
+          "meanRecoveryTriggerLatencyMs": null
+        },
+        "greedy": {
+          "successCount": 5,
+          "runCount": 5,
+          "meanAgentInvocations": 5,
+          "meanUnnecessaryInvocations": 3,
+          "meanAgentExecutionMs": 70308.2,
+          "meanUnnecessaryAgentExecutionMs": 41610.8,
+          "meanRecoveryTriggerLatencyMs": 0
+        },
+        "plh_direct": {
+          "successCount": 5,
+          "runCount": 5,
+          "meanAgentInvocations": 1,
+          "meanUnnecessaryInvocations": 0,
+          "meanAgentExecutionMs": 17079.8,
+          "meanUnnecessaryAgentExecutionMs": 0,
+          "meanRecoveryTriggerLatencyMs": 60000
+        },
+        "plh_pressure": {
+          "successCount": 5,
+          "runCount": 5,
+          "meanAgentInvocations": 1,
+          "meanUnnecessaryInvocations": 0,
+          "meanAgentExecutionMs": 17753.2,
+          "meanUnnecessaryAgentExecutionMs": 0,
+          "meanRecoveryTriggerLatencyMs": 0
+        }
+      }
+    }
+  ],
+  "aggregateAcrossTaskPackMeans": {
+    "greedy": {
+      "meanAgentExecutionMs": 70560.2,
+      "meanUnnecessaryAgentExecutionMs": 41964.4,
+      "meanAgentInvocations": 5,
+      "meanUnnecessaryInvocations": 3
+    },
+    "plh_direct": {
+      "meanAgentExecutionMs": 17513.1,
+      "meanAgentInvocations": 1,
+      "meanUnnecessaryInvocations": 0
+    },
+    "plh_pressure": {
+      "meanAgentExecutionMs": 17362.4,
+      "meanAgentInvocations": 1,
+      "meanUnnecessaryInvocations": 0
+    }
+  },
+  "derivedDevelopmentComparisons": {
+    "plhPressureVsGreedyMeanExecutionReductionFraction": 0.75393493782614,
+    "plhDirectVsGreedyMeanExecutionReductionFraction": 0.7517991729048388
+  }
+}
+

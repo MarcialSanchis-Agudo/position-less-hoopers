@@ -1,0 +1,244 @@
+{
+  "before": {
+    "schemaVersion": 1,
+    "goalId": "goal-p0-clean",
+    "workflowRunId": "run-001",
+    "observedAt": "2026-09-25T08:00:00.000Z",
+    "stateVersion": "v1",
+    "agents": [
+      {
+        "sessionId": "session-implement",
+        "stepRunId": "work-implement",
+        "adapterId": "fixture",
+        "modelId": "model-a",
+        "lifecycle": "active",
+        "workspaceId": null,
+        "workspaceVersionSeen": null,
+        "progress": {
+          "outputSeq": 12,
+          "lastActivityAt": "2026-09-25T07:59:58.000Z",
+          "stalled": false
+        },
+        "operatingMode": null,
+        "artifactRefs": [],
+        "evidenceRefs": []
+      },
+      {
+        "sessionId": "session-verify",
+        "stepRunId": "work-verify",
+        "adapterId": "fixture",
+        "modelId": "model-b",
+        "lifecycle": "active",
+        "workspaceId": null,
+        "workspaceVersionSeen": null,
+        "progress": {
+          "outputSeq": 4,
+          "lastActivityAt": "2026-09-25T07:59:57.000Z",
+          "stalled": false
+        },
+        "operatingMode": null,
+        "artifactRefs": [],
+        "evidenceRefs": []
+      }
+    ],
+    "work": [
+      {
+        "workId": "work-implement",
+        "stepId": "implement",
+        "workflowRunId": "run-001",
+        "status": "active",
+        "objective": null,
+        "assignedSessionId": "session-implement",
+        "workspaceId": null,
+        "readSet": [
+          "src/api.ts"
+        ],
+        "writeSet": [
+          "src/service.ts"
+        ],
+        "evidenceStatus": null,
+        "refuteStatus": null,
+        "lastTransitionId": null
+      },
+      {
+        "workId": "work-verify",
+        "stepId": "verify",
+        "workflowRunId": "run-001",
+        "status": "active",
+        "objective": null,
+        "assignedSessionId": "session-verify",
+        "workspaceId": null,
+        "readSet": [
+          "test/service.test.ts"
+        ],
+        "writeSet": [],
+        "evidenceStatus": null,
+        "refuteStatus": null,
+        "lastTransitionId": null
+      }
+    ],
+    "coverage": [
+      {
+        "workId": "work-implement",
+        "status": "covered",
+        "sessionId": "session-implement",
+        "reason": null
+      },
+      {
+        "workId": "work-verify",
+        "status": "covered",
+        "sessionId": "session-verify",
+        "reason": null
+      }
+    ],
+    "overlaps": [],
+    "contentions": [],
+    "evidenceGaps": [],
+    "uncovered": [],
+    "resources": {
+      "activeAgentCount": 2,
+      "concurrencyLimit": 2,
+      "knownCostUsd": 0.42,
+      "budgetRemainingUsd": null
+    },
+    "sourceRefs": {
+      "sessionIds": [
+        "session-implement",
+        "session-verify"
+      ],
+      "stepRunIds": [
+        "work-implement",
+        "work-verify"
+      ],
+      "harnessTransitionIds": [
+        "ht-001",
+        "ht-002"
+      ]
+    }
+  },
+  "after": {
+    "schemaVersion": 1,
+    "goalId": "goal-p0-clean",
+    "workflowRunId": "run-001",
+    "observedAt": "2026-09-25T08:01:00.000Z",
+    "stateVersion": "v2",
+    "agents": [
+      {
+        "sessionId": "session-implement",
+        "stepRunId": "work-implement",
+        "adapterId": "fixture",
+        "modelId": "model-a",
+        "lifecycle": "stopped",
+        "workspaceId": null,
+        "workspaceVersionSeen": null,
+        "progress": {
+          "outputSeq": 12,
+          "lastActivityAt": "2026-09-25T07:59:58.000Z",
+          "stalled": false
+        },
+        "operatingMode": null,
+        "artifactRefs": [],
+        "evidenceRefs": []
+      },
+      {
+        "sessionId": "session-verify",
+        "stepRunId": "work-verify",
+        "adapterId": "fixture",
+        "modelId": "model-b",
+        "lifecycle": "active",
+        "workspaceId": null,
+        "workspaceVersionSeen": null,
+        "progress": {
+          "outputSeq": 5,
+          "lastActivityAt": "2026-09-25T08:00:58.000Z",
+          "stalled": false
+        },
+        "operatingMode": null,
+        "artifactRefs": [],
+        "evidenceRefs": []
+      }
+    ],
+    "work": [
+      {
+        "workId": "work-implement",
+        "stepId": "implement",
+        "workflowRunId": "run-001",
+        "status": "active",
+        "objective": null,
+        "assignedSessionId": "session-implement",
+        "workspaceId": null,
+        "readSet": [
+          "src/api.ts"
+        ],
+        "writeSet": [
+          "src/service.ts"
+        ],
+        "evidenceStatus": null,
+        "refuteStatus": null,
+        "lastTransitionId": null
+      },
+      {
+        "workId": "work-verify",
+        "stepId": "verify",
+        "workflowRunId": "run-001",
+        "status": "active",
+        "objective": null,
+        "assignedSessionId": "session-verify",
+        "workspaceId": null,
+        "readSet": [
+          "test/service.test.ts"
+        ],
+        "writeSet": [],
+        "evidenceStatus": null,
+        "refuteStatus": null,
+        "lastTransitionId": null
+      }
+    ],
+    "coverage": [
+      {
+        "workId": "work-implement",
+        "status": "uncovered",
+        "sessionId": "session-implement",
+        "reason": "session_not_live"
+      },
+      {
+        "workId": "work-verify",
+        "status": "covered",
+        "sessionId": "session-verify",
+        "reason": null
+      }
+    ],
+    "overlaps": [],
+    "contentions": [],
+    "evidenceGaps": [],
+    "uncovered": [
+      {
+        "workId": "work-implement",
+        "reason": "session_not_live",
+        "sessionId": "session-implement"
+      }
+    ],
+    "resources": {
+      "activeAgentCount": 1,
+      "concurrencyLimit": 2,
+      "knownCostUsd": 0.46,
+      "budgetRemainingUsd": null
+    },
+    "sourceRefs": {
+      "sessionIds": [
+        "session-implement",
+        "session-verify"
+      ],
+      "stepRunIds": [
+        "work-implement",
+        "work-verify"
+      ],
+      "harnessTransitionIds": [
+        "ht-001",
+        "ht-002",
+        "ht-003"
+      ]
+    }
+  }
+}
+

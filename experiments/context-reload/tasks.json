@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "tasks": [
+    {
+      "taskId": "cr-001-route-policy",
+      "title": "Fix route selection precedence",
+      "seedPath": "experiments/context-reload/tasks/cr-001-route-policy/seed",
+      "contextPath": "experiments/context-reload/tasks/cr-001-route-policy/context.md"
+    },
+    {
+      "taskId": "cr-002-evidence-dedupe",
+      "title": "Fix stable evidence deduplication",
+      "seedPath": "experiments/context-reload/tasks/cr-002-evidence-dedupe/seed",
+      "contextPath": "experiments/context-reload/tasks/cr-002-evidence-dedupe/context.md"
+    },
+    {
+      "taskId": "cr-003-budget-guard",
+      "title": "Fix budget admission accounting",
+      "seedPath": "experiments/context-reload/tasks/cr-003-budget-guard/seed",
+      "contextPath": "experiments/context-reload/tasks/cr-003-budget-guard/context.md"
+    },
+    {
+      "taskId": "cr-004-state-version",
+      "title": "Reject stale workspace commits",
+      "seedPath": "experiments/context-reload/tasks/cr-004-state-version/seed",
+      "contextPath": "experiments/context-reload/tasks/cr-004-state-version/context.md"
+    },
+    {
+      "taskId": "cr-005-overlap-pairs",
+      "title": "Fix structural overlap pair emission",
+      "seedPath": "experiments/context-reload/tasks/cr-005-overlap-pairs/seed",
+      "contextPath": "experiments/context-reload/tasks/cr-005-overlap-pairs/context.md"
+    }
+  ]
+}
+

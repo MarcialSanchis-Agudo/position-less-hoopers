@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PLH Court Visualizer</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow">Position Less Hoopers</p>
+        <h1>Court visualizer</h1>
+        <p>Load a PLH snapshot or CoordinationField JSON and inspect structural coverage, overlap, contention, and evidence gaps.</p>
+      </div>
+      <label class="file-button">
+        Load JSON
+        <input id="file" type="file" accept="application/json,.json">
+      </label>
+    </header>
+
+    <section class="controls">
+      <button id="demo-clean">Demo: clean</button>
+      <button id="demo-loss">Demo: worker loss</button>
+      <span id="status">No snapshot loaded.</span>
+    </section>
+
+    <section class="metrics" id="metrics"></section>
+
+    <section class="court">
+      <div class="lane-label">Agents</div>
+      <div id="agents" class="lane"></div>
+      <svg id="links" aria-label="coverage links"></svg>
+      <div class="lane-label">Work</div>
+      <div id="work" class="lane"></div>
+    </section>
+
+    <section class="details">
+      <article>
+        <h2>Structural overlaps</h2>
+        <div id="overlaps"></div>
+      </article>
+      <article>
+        <h2>Contentions</h2>
+        <div id="contentions"></div>
+      </article>
+      <article>
+        <h2>Evidence gaps</h2>
+        <div id="gaps"></div>
+      </article>
+    </section>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
+

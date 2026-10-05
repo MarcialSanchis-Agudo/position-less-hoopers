@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "hoopers-arena-state-shifts-v1",
+  "baseScenario": "examples/hoopers-arena/scenarios/last-possession.json",
+  "frozenDesignIntent": "Test fixed positions, fixed archetypes, globally optimized predefined functions, and PLH state-derived functions across qualitatively different defensive state shifts without changing agent capability profiles.",
+  "shifts": [
+    {
+      "id": "hard_trap",
+      "sourceState": "trapState"
+    },
+    {
+      "id": "switch_mismatch",
+      "state": {
+        "stateVersion": "possession:switch",
+        "live": true,
+        "possession": "offense",
+        "scoreDiff": 0,
+        "gameClockSeconds": 8,
+        "shotClockSeconds": 8,
+        "ballHandler": "A",
+        "defense": {
+          "mode": "switch",
+          "trappedBallHandler": false,
+          "switchedPair": [
+            "A",
+            "C"
+          ]
+        },
+        "goal": {
+          "id": "win-possession",
+          "type": "maximize_expected_possession_value",
+          "constraint": "exploit the mismatch before the defense resets while preserving spacing"
+        },
+        "defenders": [
+          {
+            "id": "X1",
+            "location": {
+              "x": 5,
+              "y": 5.7
+            },
+            "matchup": "C"
+          },
+          {
+            "id": "X2",
+            "location": {
+              "x": 2,
+              "y": 2.2
+            },
+            "matchup": "B"
+          },
+          {
+            "id": "X3",
+            "location": {
+              "x": 5.5,
+              "y": 6.4
+            },
+            "matchup": "A"
+          },
+          {
+            "id": "X4",
+            "location": {
+              "x": 7.5,
+              "y": 4
+            },
+            "matchup": "D"
+          },
+          {
+            "id": "X5",
+            "location": {
+              "x": 4.2,
+              "y": 2
+            },
+            "matchup": "E"
+          }
+        ]
+      },
+      "agentLocations": {
+        "A": {
+          "x": 5.3,
+          "y": 6.9
+        },
+        "B": {
+          "x": 1.7,
+          "y": 1.6
+        },
+        "C": {
+          "x": 5,
+          "y": 5.7
+        },
+        "D": {
+          "x": 8.1,
+          "y": 4
+        },
+        "E": {
+          "x": 4,
+          "y": 1.7
+        }
+      }
+    },
+    {
+      "id": "paint_collapse",
+      "state": {
+        "stateVersion": "possession:paint-collapse",
+        "live": true,
+        "possession": "offense",
+        "scoreDiff": 0,
+        "gameClockSeconds": 8,
+        "shotClockSeconds": 8,
+        "ballHandler": "A",
+        "defense": {
+          "mode": "paint_collapse",
+          "trappedBallHandler": false,
+          "collapsedDefenders": 3
+        },
+        "goal": {
+          "id": "win-possession",
+          "type": "maximize_expected_possession_value",
+          "constraint": "move the ball out of the collapsed paint before recovery while maintaining rim and transition balance"
+        },
+        "defenders": [
+          {
+            "id": "X1",
+            "location": {
+              "x": 5,
+              "y": 5.8
+            },
+            "matchup": "A"
+          },
+          {
+            "id": "X2",
+            "location": {
+              "x": 4.2,
+              "y": 3.3
+            },
+            "matchup": "B"
+          },
+          {
+            "id": "X3",
+            "location": {
+              "x": 5.1,
+              "y": 3
+            },
+            "matchup": "C"
+          },
+          {
+            "id": "X4",
+            "location": {
+              "x": 6.2,
+              "y": 3.5
+            },
+            "matchup": "D"
+          },
+          {
+            "id": "X5",
+            "location": {
+              "x": 4,
+              "y": 2
+            },
+            "matchup": "E"
+          }
+        ]
+      },
+      "agentLocations": {
+        "A": {
+          "x": 5.1,
+          "y": 6.6
+        },
+        "B": {
+          "x": 2.8,
+          "y": 6
+        },
+        "C": {
+          "x": 5,
+          "y": 4.8
+        },
+        "D": {
+          "x": 8.5,
+          "y": 5
+        },
+        "E": {
+          "x": 3.6,
+          "y": 1.5
+        }
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "freezeId": "plh-v0.1-eval-freeze",
+  "status": "frozen-for-heldout-evaluation",
+  "frozenAfterDevelopmentTaskPacks": [
+    "checkout-incident",
+    "config-migration-incident"
+  ],
+  "notTunableOnHeldout": true,
+  "matcher": {
+    "capability": 1,
+    "situatedness": 0.35,
+    "continuity": 0.15,
+    "expectedCost": 0.05,
+    "switchCost": 0.1
+  },
+  "allocator": {
+    "urgency": 0.25,
+    "importance": 0.25,
+    "informationGain": 0.15,
+    "uncertainty": 0.05,
+    "marginalCoverage": 0.3,
+    "independentVerification": 0.15,
+    "accidentalOverlapPenalty": 0.2,
+    "mutationRiskPenalty": 0.35,
+    "maxIndependentDuplicates": 2
+  },
+  "switching": {
+    "switchMargin": 0.1,
+    "minTenureMs": 120000,
+    "cooldownMs": 180000
+  },
+  "pressure": {
+    "defaultNodeThreshold": 1,
+    "defaultGroupThreshold": 1,
+    "maxCascadeSteps": 100,
+    "nodeFirst": true
+  },
+  "developmentTriggerStreams": {
+    "note": "Checkout and Config Migration use matched event timing and pressure increments; semantic domain changes but event-stream shape does not. Held-out evaluation must vary event-stream shape.",
+    "eventTimesMs": [
+      60000,
+      120000,
+      180000,
+      240000,
+      300000
+    ],
+    "prePerturbationPressureAdds": [
+      0.2,
+      0.25,
+      0.2
+    ],
+    "perturbationPressureAdds": [
+      0.25,
+      0.35
+    ],
+    "explicitBlockedDelayMs": 60000
+  },
+  "claimBoundary": "Development results may support mechanism plausibility and cross-task replication, but final performance claims require held-out TaskPacks/events created after this freeze."
+}
+

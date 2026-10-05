@@ -1,0 +1,41 @@
+[
+  {
+    "schemaVersion": 1,
+    "runId": "pair-001-warm",
+    "pairId": "pair-001",
+    "taskId": "dev-task-001",
+    "condition": "warm",
+    "modelId": "same-model",
+    "contextPackageHash": "sha256:example",
+    "startedAt": "2026-09-28T08:00:00.000Z",
+    "finishedAt": "2026-09-28T08:00:30.000Z",
+    "inputTokens": 1200,
+    "outputTokens": 500,
+    "toolCalls": 6,
+    "fileReads": 3,
+    "repeatedFileReads": 0,
+    "staleStateActions": 0,
+    "timeToFirstUsefulActionMs": 8000,
+    "correct": true
+  },
+  {
+    "schemaVersion": 1,
+    "runId": "pair-001-cold",
+    "pairId": "pair-001",
+    "taskId": "dev-task-001",
+    "condition": "cold",
+    "modelId": "same-model",
+    "contextPackageHash": "sha256:example",
+    "startedAt": "2026-09-28T08:01:00.000Z",
+    "finishedAt": "2026-09-28T08:01:52.000Z",
+    "inputTokens": 2100,
+    "outputTokens": 650,
+    "toolCalls": 11,
+    "fileReads": 7,
+    "repeatedFileReads": 2,
+    "staleStateActions": 0,
+    "timeToFirstUsefulActionMs": 19000,
+    "correct": true
+  }
+]
+

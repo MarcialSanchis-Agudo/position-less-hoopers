@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "orca-ax-assignment-shift-v0",
+  "status": "frozen-post-hoc-mechanism-test",
+  "eligibleForHeldoutPerformanceClaim": false,
+  "taskPackId": "deployment-rollout-incident",
+  "taskPack": "examples/deployment-rollout-incident/task-pack.json",
+  "eventStream": "examples/deployment-rollout-incident/event-streams/challenge-refailure-after-recovery-v1.json",
+  "scenarioId": "deployment-hidden-contract",
+  "policy": "plh_hybrid_guarded",
+  "matcherMode": "capability_situated",
+  "region": {
+    "id": "region:orca-ax:deployment-rollout",
+    "goalId": "goal:restore-rollout-correctness",
+    "stateVersion": "orca-ax-slice-v0",
+    "exitConditions": ["evidence:deployment-rollout-v2"]
+  },
+  "episodes": [
+    {
+      "triggerEventId": "corroborated-rollout-risk",
+      "needId": "need:orca-ax:rollout:initial-recovery",
+      "stateVersion": "contract-v2:initial-recovery",
+      "objective": "Restore the rollout planner to the active v2 contract and verify it with authoritative evidence.",
+      "rationale": "The v2 contract is active and the external grader is failing after the contract reveal.",
+      "contextRefs": ["contract/rollout.json"],
+      "predictedAssigneeId": "agent-b",
+      "candidates": [
+        {
+          "id": "agent-a",
+          "capabilities": ["implement"],
+          "permissions": ["workspace-write"],
+          "capabilityScores": {"implement": 0.95},
+          "contextRefs": ["src/rollout.mjs"],
+          "available": true
+        },
+        {
+          "id": "agent-b",
+          "capabilities": ["implement"],
+          "permissions": ["workspace-write"],
+          "capabilityScores": {"implement": 0.82},
+          "contextRefs": ["contract/rollout.json"],
+          "available": true
+        }
+      ]
+    },
+    {
+      "triggerEventId": "regression-confirmed",
+      "needId": "need:orca-ax:rollout:regression-recovery",
+      "stateVersion": "contract-v2:regression-1",
+      "objective": "Repair the regressed rollout implementation while preserving the still-active v2 contract and verify it with authoritative evidence.",
+      "rationale": "The implementation was externally regressed after a prior successful v2 recovery.",
+      "contextRefs": ["src/rollout.mjs"],
+      "predictedAssigneeId": "agent-a",
+      "candidates": [
+        {
+          "id": "agent-a",
+          "capabilities": ["implement"],
+          "permissions": ["workspace-write"],
+          "capabilityScores": {"implement": 0.95},
+          "contextRefs": ["src/rollout.mjs"],
+          "available": true
+        },
+        {
+          "id": "agent-b",
+          "capabilities": ["implement"],
+          "permissions": ["workspace-write"],
+          "capabilityScores": {"implement": 0.82},
+          "contextRefs": ["contract/rollout.json"],
+          "available": true
+        }
+      ]
+    }
+  ],
+  "predictions": {
+    "assignmentSequence": ["agent-b", "agent-a"],
+    "needCount": 2,
+    "satisfiedNeedCount": 2,
+    "policyRecomputationCount": 3,
+    "agentInvocationCount": 2,
+    "suppressedExecutionCount": 1,
+    "finalCorrect": true
+  },
+  "claimBoundary": "This tests end-to-end mechanism composition and state-responsive assignment. Because both assignee identities use the same executor adapter/model, it does not establish a real-agent situatedness performance advantage."
+}
+

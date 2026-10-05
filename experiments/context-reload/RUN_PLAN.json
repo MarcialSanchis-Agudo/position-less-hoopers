@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "purpose": "development calibration only",
+  "modelPolicy": "same model and settings within every pair",
+  "budgetPolicy": "same tool and token budget within every pair",
+  "orderPolicy": "counterbalanced by task; reverse order on any repeated replicate",
+  "runs": [
+    {"sequence": 1, "taskId": "cr-001-route-policy", "condition": "warm"},
+    {"sequence": 2, "taskId": "cr-001-route-policy", "condition": "cold"},
+    {"sequence": 3, "taskId": "cr-002-evidence-dedupe", "condition": "cold"},
+    {"sequence": 4, "taskId": "cr-002-evidence-dedupe", "condition": "warm"},
+    {"sequence": 5, "taskId": "cr-003-budget-guard", "condition": "warm"},
+    {"sequence": 6, "taskId": "cr-003-budget-guard", "condition": "cold"},
+    {"sequence": 7, "taskId": "cr-004-state-version", "condition": "cold"},
+    {"sequence": 8, "taskId": "cr-004-state-version", "condition": "warm"},
+    {"sequence": 9, "taskId": "cr-005-overlap-pairs", "condition": "warm"},
+    {"sequence": 10, "taskId": "cr-005-overlap-pairs", "condition": "cold"}
+  ]
+}
+

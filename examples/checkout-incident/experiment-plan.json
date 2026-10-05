@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "status": "development",
+  "policies": [
+    "static",
+    "greedy",
+    "plh_direct",
+    "plh_pressure"
+  ],
+  "scenarios": [
+    "checkout-clean-v2",
+    "checkout-hidden-contract",
+    "checkout-external-mutation",
+    "checkout-worker-loss"
+  ],
+  "primaryDevelopmentMetrics": [
+    "external_correctness",
+    "recovery_latency_ms",
+    "coordination_recomputations",
+    "switch_count",
+    "unnecessary_switch_count",
+    "uncovered_need_time_ms"
+  ]
+}
+

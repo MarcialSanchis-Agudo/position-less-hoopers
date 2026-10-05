@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://position-less-hoopers.dev/schemas/experiment-run.schema.json",
+  "title": "PLH ExperimentRun",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "experimentId",
+    "conditionId",
+    "taskId",
+    "taskVersion",
+    "runKind",
+    "codeVersion",
+    "configHash",
+    "modelPool",
+    "startedAt",
+    "finishedAt",
+    "finalOutcome",
+    "graderVersion",
+    "eventTraceRef"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "experimentId": { "type": "string", "minLength": 1 },
+    "conditionId": { "type": "string", "minLength": 1 },
+    "taskId": { "type": "string", "minLength": 1 },
+    "taskVersion": { "type": "string", "minLength": 1 },
+    "runKind": { "enum": ["clean", "perturbed"] },
+    "perturbationId": { "type": ["string", "null"], "minLength": 1 },
+    "perturbationSeed": { "type": ["integer", "null"] },
+    "codeVersion": { "type": "string", "minLength": 1 },
+    "configHash": { "type": "string", "minLength": 1 },
+    "modelPool": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "finishedAt": { "type": "string", "format": "date-time" },
+    "finalOutcome": { "enum": ["success", "failure", "incomplete", "excluded"] },
+    "graderVersion": { "type": "string", "minLength": 1 },
+    "costUsd": { "type": ["number", "null"], "minimum": 0 },
+    "concurrencyCap": { "type": ["integer", "null"], "minimum": 1 },
+    "eventTraceRef": { "type": "string", "minLength": 1 },
+    "artifactRefs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "exclusionReason": { "type": ["string", "null"], "minLength": 1 }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "runKind": { "const": "perturbed" } },
+        "required": ["runKind"]
+      },
+      "then": { "required": ["perturbationId"] }
+    },
+    {
+      "if": {
+        "properties": { "finalOutcome": { "const": "excluded" } },
+        "required": ["finalOutcome"]
+      },
+      "then": { "required": ["exclusionReason"] }
+    }
+  ]
+}
+

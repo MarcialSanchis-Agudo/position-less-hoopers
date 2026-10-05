@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PLH CommandAgentAdapter",
+  "type": "object",
+  "required": ["schemaVersion", "adapterId", "command"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "adapterId": { "type": "string", "minLength": 1 },
+    "command": { "type": "string", "minLength": 1 },
+    "args": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "timeoutMs": { "type": "integer", "minimum": 1 },
+    "env": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}
+

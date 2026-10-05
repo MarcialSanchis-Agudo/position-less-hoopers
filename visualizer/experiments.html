@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PLH Experiment Dashboard</title>
+  <link rel="stylesheet" href="./experiments.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow">Position Less Hoopers</p>
+        <h1>Experiment dashboard</h1>
+        <p>Local development evidence only. Synthetic mechanism tests are shown separately from future real-agent results.</p>
+      </div>
+      <a href="./index.html">Open court visualizer →</a>
+    </header>
+
+    <section id="summary" class="summary"></section>
+
+    <nav id="tabs" class="tabs">
+      <button data-view="crossover" class="active">Context-cost crossover</button>
+      <button data-view="regimes">Cheap vs expensive</button>
+      <button data-view="sensitivity">Weight sensitivity</button>
+      <button data-view="calibration">Calibration heatmap</button>
+      <button data-view="court">CourtShift</button>
+    </nav>
+
+    <section class="figure-card">
+      <div>
+        <h2 id="figure-title"></h2>
+        <p id="figure-caption"></p>
+      </div>
+      <img id="figure" alt="">
+    </section>
+
+    <section class="data-card">
+      <h2>Key synthetic numbers</h2>
+      <div id="details"></div>
+    </section>
+  </main>
+
+  <script src="./experiment-data.js"></script>
+  <script type="module" src="./experiments.js"></script>
+</body>
+</html>
+

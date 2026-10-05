@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://position-less-hoopers.dev/schemas/need.schema.json",
+  "title": "PLH Need",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "fingerprint",
+    "goalId",
+    "objective",
+    "rationale",
+    "stateVersion",
+    "requirements",
+    "coverage",
+    "urgency",
+    "importance",
+    "uncertainty",
+    "risk",
+    "expectedInformationGain",
+    "redundancyPolicy",
+    "dependencies",
+    "evidenceObligations",
+    "exitConditions",
+    "createdBy",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "fingerprint": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "goalId": { "type": "string", "minLength": 1 },
+    "parentNeedId": { "type": ["string", "null"] },
+    "objective": { "type": "string", "minLength": 1 },
+    "rationale": { "type": "string", "minLength": 1 },
+    "stateVersion": { "type": "string", "minLength": 1 },
+    "urgency": { "type": "number", "minimum": 0, "maximum": 1 },
+    "importance": { "type": "number", "minimum": 0, "maximum": 1 },
+    "uncertainty": { "type": "number", "minimum": 0, "maximum": 1 },
+    "risk": { "type": "number", "minimum": 0, "maximum": 1 },
+    "expectedInformationGain": { "type": "number", "minimum": 0, "maximum": 1 },
+    "redundancyPolicy": {
+      "enum": ["complementary", "independent_duplicate", "exclusive"]
+    },
+    "createdBy": {
+      "enum": ["deterministic_signal", "agent_proposal", "orchestrator_judgment", "user"]
+    },
+    "status": {
+      "enum": ["open", "assigned", "active", "satisfied", "blocked", "superseded", "cancelled"]
+    }
+  }
+}
+

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "name": "courtshift-p0-pilot",
+  "status": "instrumentation-only",
+  "purpose": "Validate PLH CoordinationField responses to deterministic perturbations before agent-level comparative experiments.",
+  "scenarios": [
+    {
+      "id": "P2-worker-loss",
+      "perturbation": "worker_loss",
+      "expectedObservation": "Previously covered active work becomes uncovered when its assigned session is no longer live.",
+      "paperClaimAllowed": false
+    },
+    {
+      "id": "P4-external-workspace-conflict",
+      "perturbation": "external_workspace_mutation",
+      "expectedObservation": "Explicit belief-divergence/conflict evidence appears as contention while structural overlap remains a separate signal.",
+      "paperClaimAllowed": false
+    },
+    {
+      "id": "P6-hidden-integration-failure",
+      "perturbation": "hidden_integration_failure",
+      "expectedObservation": "Persisted incomplete verification state appears as an evidence gap.",
+      "paperClaimAllowed": false
+    }
+  ]
+}
+

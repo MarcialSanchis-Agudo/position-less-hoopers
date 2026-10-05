@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "taskPackId": "deployment-rollout-incident",
+  "version": "0.1.1",
+  "domain": "coding/constraint-planning",
+  "seedPath": "seed",
+  "activeContractPath": "contract/rollout.json",
+  "grader": {
+    "path": "grader/grade.mjs"
+  },
+  "evidenceRefTemplate": "evidence:deployment-rollout-v{version}",
+  "contracts": {
+    "1": "contracts/v1.json",
+    "2": "contracts/v2.json",
+    "3": "contracts/v3.json"
+  },
+  "scenarioFiles": [
+    "scenarios/clean-v2.json",
+    "scenarios/hidden-contract.json",
+    "scenarios/external-mutation.json",
+    "scenarios/worker-loss.json"
+  ]
+}
+

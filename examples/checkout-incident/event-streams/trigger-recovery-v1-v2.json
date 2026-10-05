@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "streamId": "checkout-trigger-recovery-v1-v2",
+  "taskPackId": "checkout-incident",
+  "initialContractVersion": 1,
+  "targetContractVersion": 2,
+  "pressureField": {
+    "nodes": [
+      { "id": "implementation_uncertainty", "threshold": 1 },
+      { "id": "verification_gap", "threshold": 1 }
+    ],
+    "groups": [
+      {
+        "id": "checkout_support_cluster",
+        "nodeIds": [
+          "implementation_uncertainty",
+          "verification_gap"
+        ],
+        "threshold": 1
+      }
+    ]
+  },
+  "events": [
+    {
+      "eventId": "minor-warning",
+      "tMs": 60000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.20 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "flaky-test",
+      "tMs": 120000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "verification_gap", "amount": 0.25 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "ambiguous-log",
+      "tMs": 180000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.20 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "callback-contract-mismatch",
+      "tMs": 240000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.25 },
+        { "nodeId": "verification_gap", "amount": 0.35 }
+      ],
+      "workspaceMutation": {
+        "type": "reveal_contract",
+        "contractVersion": 2
+      }
+    },
+    {
+      "eventId": "explicit-blocked",
+      "tMs": 300000,
+      "observable": true,
+      "directTrigger": true,
+      "pressureAdds": [],
+      "workspaceMutation": null
+    }
+  ]
+}
+

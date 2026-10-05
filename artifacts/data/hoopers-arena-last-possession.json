@@ -1,0 +1,654 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "last-possession-trap-5v5-v2",
+  "stateMode": "trap",
+  "initialTarget": {
+    "schemaVersion": 1,
+    "id": "target:possession:1",
+    "goalId": "win-possession",
+    "stateVersion": "possession:1",
+    "generatedBy": "deterministic_plh",
+    "requiredCoverage": [
+      {
+        "needId": "ball_screen",
+        "critical": true,
+        "objective": "Create separation with a high ball screen"
+      },
+      {
+        "needId": "primary_creation",
+        "critical": true,
+        "objective": "Create the first advantage from the top"
+      },
+      {
+        "needId": "rim_pressure",
+        "critical": false,
+        "objective": "Threaten the rim and occupy the low defender"
+      },
+      {
+        "needId": "strong_side_spacing",
+        "critical": false,
+        "objective": "Stretch the strong-side help defender"
+      },
+      {
+        "needId": "weak_side_spacing",
+        "critical": false,
+        "objective": "Hold weak-side gravity away from the action"
+      }
+    ],
+    "assignment": {
+      "ball_screen": "C",
+      "primary_creation": "A",
+      "rim_pressure": "E",
+      "strong_side_spacing": "B",
+      "weak_side_spacing": "D"
+    },
+    "constraints": {
+      "maxUncoveredCriticalNeeds": 0,
+      "maxMutationContention": 0,
+      "maxConcurrentResponsibilities": 5,
+      "budgetEnvelope": null
+    },
+    "evidenceObligations": [],
+    "exitConditions": [
+      "quality-shot-or-possession-end"
+    ],
+    "score": 5.941978318768298,
+    "goal": {
+      "id": "win-possession",
+      "type": "maximize_expected_possession_value",
+      "constraint": "preserve possession and create a quality shot before the clock expires"
+    },
+    "needs": [
+      {
+        "id": "primary_creation",
+        "objective": "Create the first advantage from the top",
+        "importance": 1,
+        "critical": true,
+        "target": {
+          "x": 5,
+          "y": 7.8
+        },
+        "capabilityWeights": {
+          "handle": 0.55,
+          "pass": 0.25,
+          "decision": 0.2
+        }
+      },
+      {
+        "id": "ball_screen",
+        "objective": "Create separation with a high ball screen",
+        "importance": 0.93,
+        "critical": true,
+        "target": {
+          "x": 5.2,
+          "y": 6
+        },
+        "capabilityWeights": {
+          "screen": 0.62,
+          "pass": 0.13,
+          "finish": 0.1,
+          "decision": 0.15
+        }
+      },
+      {
+        "id": "strong_side_spacing",
+        "objective": "Stretch the strong-side help defender",
+        "importance": 0.82,
+        "critical": false,
+        "target": {
+          "x": 2,
+          "y": 5.4
+        },
+        "capabilityWeights": {
+          "shoot": 0.68,
+          "cut": 0.15,
+          "decision": 0.17
+        }
+      },
+      {
+        "id": "weak_side_spacing",
+        "objective": "Hold weak-side gravity away from the action",
+        "importance": 0.82,
+        "critical": false,
+        "target": {
+          "x": 8.7,
+          "y": 2
+        },
+        "capabilityWeights": {
+          "shoot": 0.72,
+          "cut": 0.12,
+          "decision": 0.16
+        }
+      },
+      {
+        "id": "rim_pressure",
+        "objective": "Threaten the rim and occupy the low defender",
+        "importance": 0.88,
+        "critical": false,
+        "target": {
+          "x": 3.7,
+          "y": 1.7
+        },
+        "capabilityWeights": {
+          "finish": 0.58,
+          "cut": 0.24,
+          "screen": 0.08,
+          "decision": 0.1
+        }
+      }
+    ],
+    "components": [
+      {
+        "needId": "primary_creation",
+        "agentId": "A",
+        "capabilityFit": 0.9205,
+        "locality": 1,
+        "movement": 0,
+        "switched": false,
+        "score": 1.3405
+      },
+      {
+        "needId": "ball_screen",
+        "agentId": "C",
+        "capabilityFit": 0.9511,
+        "locality": 1,
+        "movement": 0,
+        "switched": false,
+        "score": 1.275123
+      },
+      {
+        "needId": "strong_side_spacing",
+        "agentId": "B",
+        "capabilityFit": 0.9116,
+        "locality": 0.8761006569007048,
+        "movement": 0.1414213562373093,
+        "switched": false,
+        "score": 1.044291318768297
+      },
+      {
+        "needId": "weak_side_spacing",
+        "agentId": "D",
+        "capabilityFit": 0.9431999999999999,
+        "locality": 1,
+        "movement": 0,
+        "switched": false,
+        "score": 1.117824
+      },
+      {
+        "needId": "rim_pressure",
+        "agentId": "E",
+        "capabilityFit": 0.903,
+        "locality": 1,
+        "movement": 0,
+        "switched": false,
+        "score": 1.16424
+      }
+    ],
+    "candidatesEvaluated": 120
+  },
+  "trapTarget": {
+    "schemaVersion": 1,
+    "id": "target:possession:2",
+    "goalId": "win-possession",
+    "stateVersion": "possession:2",
+    "generatedBy": "deterministic_plh",
+    "requiredCoverage": [
+      {
+        "needId": "ball_security",
+        "critical": true,
+        "objective": "Protect the ball and deliver the first pass out of the trap"
+      },
+      {
+        "needId": "release_outlet",
+        "critical": true,
+        "objective": "Flash into a safe passing window outside the trap"
+      },
+      {
+        "needId": "rim_window",
+        "critical": false,
+        "objective": "Occupy the dunker/rim window created by the rotation"
+      },
+      {
+        "needId": "short_roll_connector",
+        "critical": true,
+        "objective": "Occupy the middle and connect the 4-on-3 advantage"
+      },
+      {
+        "needId": "weak_side_lift",
+        "critical": false,
+        "objective": "Lift behind the rotating weak-side defender for a kickout"
+      }
+    ],
+    "assignment": {
+      "ball_security": "A",
+      "release_outlet": "B",
+      "rim_window": "E",
+      "short_roll_connector": "C",
+      "weak_side_lift": "D"
+    },
+    "constraints": {
+      "maxUncoveredCriticalNeeds": 0,
+      "maxMutationContention": 0,
+      "maxConcurrentResponsibilities": 5,
+      "budgetEnvelope": null
+    },
+    "evidenceObligations": [],
+    "exitConditions": [
+      "quality-shot-or-possession-end"
+    ],
+    "score": 5.0606753202870625,
+    "goal": {
+      "id": "win-possession",
+      "type": "maximize_expected_possession_value",
+      "constraint": "escape the trap, preserve spacing, and create a quality shot before the clock expires"
+    },
+    "needs": [
+      {
+        "id": "ball_security",
+        "objective": "Protect the ball and deliver the first pass out of the trap",
+        "importance": 1,
+        "critical": true,
+        "target": {
+          "x": 5,
+          "y": 7.4
+        },
+        "capabilityWeights": {
+          "handle": 0.5,
+          "pass": 0.25,
+          "decision": 0.25
+        }
+      },
+      {
+        "id": "release_outlet",
+        "objective": "Flash into a safe passing window outside the trap",
+        "importance": 1,
+        "critical": true,
+        "target": {
+          "x": 2.7,
+          "y": 6
+        },
+        "capabilityWeights": {
+          "handle": 0.15,
+          "pass": 0.45,
+          "shoot": 0.15,
+          "decision": 0.25
+        }
+      },
+      {
+        "id": "short_roll_connector",
+        "objective": "Occupy the middle and connect the 4-on-3 advantage",
+        "importance": 0.98,
+        "critical": true,
+        "target": {
+          "x": 5.1,
+          "y": 4.2
+        },
+        "capabilityWeights": {
+          "screen": 0.18,
+          "pass": 0.4,
+          "decision": 0.32,
+          "finish": 0.1
+        }
+      },
+      {
+        "id": "weak_side_lift",
+        "objective": "Lift behind the rotating weak-side defender for a kickout",
+        "importance": 0.88,
+        "critical": false,
+        "target": {
+          "x": 8.2,
+          "y": 4.8
+        },
+        "capabilityWeights": {
+          "shoot": 0.62,
+          "cut": 0.18,
+          "decision": 0.2
+        }
+      },
+      {
+        "id": "rim_window",
+        "objective": "Occupy the dunker/rim window created by the rotation",
+        "importance": 0.9,
+        "critical": false,
+        "target": {
+          "x": 3.8,
+          "y": 1.7
+        },
+        "capabilityWeights": {
+          "finish": 0.55,
+          "cut": 0.25,
+          "screen": 0.1,
+          "decision": 0.1
+        }
+      }
+    ],
+    "components": [
+      {
+        "needId": "ball_security",
+        "agentId": "A",
+        "capabilityFit": 0.9149999999999999,
+        "locality": 0.7142857142857145,
+        "movement": 0.39999999999999947,
+        "switched": true,
+        "score": 1.161
+      },
+      {
+        "needId": "release_outlet",
+        "agentId": "B",
+        "capabilityFit": 0.8935,
+        "locality": 0.5614744420752168,
+        "movement": 0.7810249675906655,
+        "switched": true,
+        "score": 1.0619833918059176
+      },
+      {
+        "needId": "short_roll_connector",
+        "agentId": "C",
+        "capabilityFit": 0.9244,
+        "locality": 0.35678917232533097,
+        "movement": 1.8027756377319943,
+        "switched": true,
+        "score": 0.9496692760084865
+      },
+      {
+        "needId": "weak_side_lift",
+        "agentId": "D",
+        "capabilityFit": 0.9338,
+        "locality": 0.2601258858484596,
+        "movement": 2.8442925306655784,
+        "switched": true,
+        "score": 0.7783362888362954
+      },
+      {
+        "needId": "rim_window",
+        "agentId": "E",
+        "capabilityFit": 0.8994999999999999,
+        "locality": 0.9090909090909094,
+        "movement": 0.09999999999999964,
+        "switched": true,
+        "score": 1.1096863636363636
+      }
+    ],
+    "candidatesEvaluated": 120
+  },
+  "shiftTarget": {
+    "schemaVersion": 1,
+    "id": "target:possession:2",
+    "goalId": "win-possession",
+    "stateVersion": "possession:2",
+    "generatedBy": "deterministic_plh",
+    "requiredCoverage": [
+      {
+        "needId": "ball_security",
+        "critical": true,
+        "objective": "Protect the ball and deliver the first pass out of the trap"
+      },
+      {
+        "needId": "release_outlet",
+        "critical": true,
+        "objective": "Flash into a safe passing window outside the trap"
+      },
+      {
+        "needId": "rim_window",
+        "critical": false,
+        "objective": "Occupy the dunker/rim window created by the rotation"
+      },
+      {
+        "needId": "short_roll_connector",
+        "critical": true,
+        "objective": "Occupy the middle and connect the 4-on-3 advantage"
+      },
+      {
+        "needId": "weak_side_lift",
+        "critical": false,
+        "objective": "Lift behind the rotating weak-side defender for a kickout"
+      }
+    ],
+    "assignment": {
+      "ball_security": "A",
+      "release_outlet": "B",
+      "rim_window": "E",
+      "short_roll_connector": "C",
+      "weak_side_lift": "D"
+    },
+    "constraints": {
+      "maxUncoveredCriticalNeeds": 0,
+      "maxMutationContention": 0,
+      "maxConcurrentResponsibilities": 5,
+      "budgetEnvelope": null
+    },
+    "evidenceObligations": [],
+    "exitConditions": [
+      "quality-shot-or-possession-end"
+    ],
+    "score": 5.0606753202870625,
+    "goal": {
+      "id": "win-possession",
+      "type": "maximize_expected_possession_value",
+      "constraint": "escape the trap, preserve spacing, and create a quality shot before the clock expires"
+    },
+    "needs": [
+      {
+        "id": "ball_security",
+        "objective": "Protect the ball and deliver the first pass out of the trap",
+        "importance": 1,
+        "critical": true,
+        "target": {
+          "x": 5,
+          "y": 7.4
+        },
+        "capabilityWeights": {
+          "handle": 0.5,
+          "pass": 0.25,
+          "decision": 0.25
+        }
+      },
+      {
+        "id": "release_outlet",
+        "objective": "Flash into a safe passing window outside the trap",
+        "importance": 1,
+        "critical": true,
+        "target": {
+          "x": 2.7,
+          "y": 6
+        },
+        "capabilityWeights": {
+          "handle": 0.15,
+          "pass": 0.45,
+          "shoot": 0.15,
+          "decision": 0.25
+        }
+      },
+      {
+        "id": "short_roll_connector",
+        "objective": "Occupy the middle and connect the 4-on-3 advantage",
+        "importance": 0.98,
+        "critical": true,
+        "target": {
+          "x": 5.1,
+          "y": 4.2
+        },
+        "capabilityWeights": {
+          "screen": 0.18,
+          "pass": 0.4,
+          "decision": 0.32,
+          "finish": 0.1
+        }
+      },
+      {
+        "id": "weak_side_lift",
+        "objective": "Lift behind the rotating weak-side defender for a kickout",
+        "importance": 0.88,
+        "critical": false,
+        "target": {
+          "x": 8.2,
+          "y": 4.8
+        },
+        "capabilityWeights": {
+          "shoot": 0.62,
+          "cut": 0.18,
+          "decision": 0.2
+        }
+      },
+      {
+        "id": "rim_window",
+        "objective": "Occupy the dunker/rim window created by the rotation",
+        "importance": 0.9,
+        "critical": false,
+        "target": {
+          "x": 3.8,
+          "y": 1.7
+        },
+        "capabilityWeights": {
+          "finish": 0.55,
+          "cut": 0.25,
+          "screen": 0.1,
+          "decision": 0.1
+        }
+      }
+    ],
+    "components": [
+      {
+        "needId": "ball_security",
+        "agentId": "A",
+        "capabilityFit": 0.9149999999999999,
+        "locality": 0.7142857142857145,
+        "movement": 0.39999999999999947,
+        "switched": true,
+        "score": 1.161
+      },
+      {
+        "needId": "release_outlet",
+        "agentId": "B",
+        "capabilityFit": 0.8935,
+        "locality": 0.5614744420752168,
+        "movement": 0.7810249675906655,
+        "switched": true,
+        "score": 1.0619833918059176
+      },
+      {
+        "needId": "short_roll_connector",
+        "agentId": "C",
+        "capabilityFit": 0.9244,
+        "locality": 0.35678917232533097,
+        "movement": 1.8027756377319943,
+        "switched": true,
+        "score": 0.9496692760084865
+      },
+      {
+        "needId": "weak_side_lift",
+        "agentId": "D",
+        "capabilityFit": 0.9338,
+        "locality": 0.2601258858484596,
+        "movement": 2.8442925306655784,
+        "switched": true,
+        "score": 0.7783362888362954
+      },
+      {
+        "needId": "rim_window",
+        "agentId": "E",
+        "capabilityFit": 0.8994999999999999,
+        "locality": 0.9090909090909094,
+        "movement": 0.09999999999999964,
+        "switched": true,
+        "score": 1.1096863636363636
+      }
+    ],
+    "candidatesEvaluated": 120
+  },
+  "shift": {
+    "plh": {
+      "assignment": {
+        "ball_security": "A",
+        "release_outlet": "B",
+        "rim_window": "E",
+        "short_roll_connector": "C",
+        "weak_side_lift": "D"
+      },
+      "score": 5.0606753202870625,
+      "oracleRegret": 0
+    },
+    "fixedPosition": {
+      "assignment": {
+        "ball_security": "A",
+        "release_outlet": "D",
+        "short_roll_connector": "C",
+        "weak_side_lift": "B",
+        "rim_window": "E"
+      },
+      "score": 4.394020636331055,
+      "oracleRegret": 0.6666546839560077
+    },
+    "fixedArchetype": {
+      "assignment": {
+        "ball_security": "A",
+        "release_outlet": "D",
+        "short_roll_connector": "C",
+        "weak_side_lift": "B",
+        "rim_window": "E"
+      },
+      "score": 4.394020636331055,
+      "oracleRegret": 0.6666546839560077
+    },
+    "dynamicPredefinedRoles": {
+      "assignment": {
+        "ball_security": "A",
+        "release_outlet": "B",
+        "short_roll_connector": "C",
+        "weak_side_lift": "D",
+        "rim_window": "E"
+      },
+      "score": 5.0606753202870625,
+      "oracleRegret": 0,
+      "candidatesEvaluated": 120
+    }
+  },
+  "trap": {
+    "plh": {
+      "assignment": {
+        "ball_security": "A",
+        "release_outlet": "B",
+        "rim_window": "E",
+        "short_roll_connector": "C",
+        "weak_side_lift": "D"
+      },
+      "score": 5.0606753202870625,
+      "oracleRegret": 0
+    },
+    "fixedPosition": {
+      "assignment": {
+        "ball_security": "A",
+        "release_outlet": "D",
+        "short_roll_connector": "C",
+        "weak_side_lift": "B",
+        "rim_window": "E"
+      },
+      "score": 4.394020636331055,
+      "oracleRegret": 0.6666546839560077
+    },
+    "fixedArchetype": {
+      "assignment": {
+        "ball_security": "A",
+        "release_outlet": "D",
+        "short_roll_connector": "C",
+        "weak_side_lift": "B",
+        "rim_window": "E"
+      },
+      "score": 4.394020636331055,
+      "oracleRegret": 0.6666546839560077
+    },
+    "dynamicPredefinedRoles": {
+      "assignment": {
+        "ball_security": "A",
+        "release_outlet": "B",
+        "short_roll_connector": "C",
+        "weak_side_lift": "D",
+        "rim_window": "E"
+      },
+      "score": 5.0606753202870625,
+      "oracleRegret": 0,
+      "candidatesEvaluated": 120
+    }
+  }
+}
+

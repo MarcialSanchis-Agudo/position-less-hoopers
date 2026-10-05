@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "trigger-coupled-signals-v1",
+  "status": "synthetic-mechanism-test",
+  "paperClaimAllowed": false,
+  "policies": ["react_every_event", "plh_direct", "plh_pressure"],
+  "pressureField": {
+    "nodes": [
+      { "id": "implementation_uncertainty", "threshold": 1 },
+      { "id": "verification_gap", "threshold": 1 },
+      { "id": "worker_loss", "threshold": 1 }
+    ],
+    "groups": [
+      {
+        "id": "checkout_support_cluster",
+        "nodeIds": ["implementation_uncertainty", "verification_gap"],
+        "threshold": 1
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "eventId": "minor-warning",
+      "tMs": 60000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.20 }
+      ],
+      "truth": { "supportNeeded": false, "workerLost": false }
+    },
+    {
+      "eventId": "flaky-test",
+      "tMs": 120000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "verification_gap", "amount": 0.25 }
+      ],
+      "truth": { "supportNeeded": false, "workerLost": false }
+    },
+    {
+      "eventId": "ambiguous-log",
+      "tMs": 180000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.20 }
+      ],
+      "truth": { "supportNeeded": false, "workerLost": false }
+    },
+    {
+      "eventId": "callback-contract-mismatch",
+      "tMs": 240000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.25 },
+        { "nodeId": "verification_gap", "amount": 0.35 }
+      ],
+      "truth": { "supportNeeded": true, "workerLost": false }
+    },
+    {
+      "eventId": "explicit-blocked",
+      "tMs": 300000,
+      "observable": true,
+      "directTrigger": true,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.20 }
+      ],
+      "truth": { "supportNeeded": true, "workerLost": false }
+    },
+    {
+      "eventId": "worker-loss",
+      "tMs": 360000,
+      "observable": true,
+      "directTrigger": true,
+      "pressureAdds": [
+        { "nodeId": "worker_loss", "amount": 1.10 }
+      ],
+      "truth": { "supportNeeded": true, "workerLost": true }
+    }
+  ]
+}
+

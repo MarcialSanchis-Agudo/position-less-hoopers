@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "candidateId": "plh-hybrid-trigger-v0",
+  "status": "post-hoc-candidate-frozen-for-diagnostic",
+  "derivedAfter": [
+    "claude-sonnet-trigger-direct-only-001",
+    "claude-sonnet-trigger-delayed-pressure-001"
+  ],
+  "eligibleForHeldoutPerformanceClaim": false,
+  "basePolicyFreezeId": "plh-v0.1-eval-freeze",
+  "semantics": {
+    "triggerRule": "directTrigger OR pressureThresholdCrossing",
+    "directTriggerFallback": true,
+    "pressureThresholdsChanged": false,
+    "cooldownAdded": false,
+    "postRecoverySuppressionAdded": false
+  },
+  "predictions": {
+    "challenge-direct-only-v1": {
+      "agentInvocationCount": 1,
+      "recoveryTriggerEventId": "explicit-contract-mismatch",
+      "recoveryTriggerLatencyMs": 0,
+      "finalCorrect": true
+    },
+    "challenge-delayed-pressure-v1": {
+      "agentInvocationCount": 2,
+      "recoveryTriggerEventId": "corroborated-rollout-risk",
+      "recoveryTriggerLatencyMs": 50000,
+      "postRecoveryInvocationCount": 1,
+      "finalCorrect": true
+    }
+  },
+  "knownLimitation": "The naive OR rule can emit a redundant post-recovery recomputation when a later direct trigger follows an earlier successful pressure-triggered recovery.",
+  "nextDesignQuestion": "Whether post-recovery suppression, event acknowledgement, or cooldown can remove duplicate reevaluation without masking a genuinely new failure."
+}
+

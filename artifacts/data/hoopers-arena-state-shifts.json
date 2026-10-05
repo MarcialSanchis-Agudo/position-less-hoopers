@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "hoopers-arena-state-shifts-v1",
+  "baseScenario": "examples/hoopers-arena/scenarios/last-possession.json",
+  "designIntent": "Test fixed positions, fixed archetypes, globally optimized predefined functions, and PLH state-derived functions across qualitatively different defensive state shifts without changing agent capability profiles.",
+  "shiftCount": 3,
+  "byPolicy": {
+    "plh": {
+      "meanOracleRegret": 0
+    },
+    "fixedPosition": {
+      "meanOracleRegret": 0.373310796622295
+    },
+    "fixedArchetype": {
+      "meanOracleRegret": 0.373310796622295
+    },
+    "dynamicPredefinedFunctions": {
+      "meanOracleRegret": 0.3922638399685446,
+      "exactAssignmentMatches": 1
+    }
+  },
+  "rows": [
+    {
+      "shiftId": "hard_trap",
+      "stateMode": "trap",
+      "plhRegret": 0,
+      "fixedPositionRegret": 0.6666546839560077,
+      "fixedArchetypeRegret": 0.6666546839560077,
+      "dynamicPredefinedRegret": 0,
+      "dynamicCandidatesEvaluated": 120,
+      "oracleAssignment": {
+        "ball_security": "A",
+        "release_outlet": "B",
+        "rim_window": "E",
+        "short_roll_connector": "C",
+        "weak_side_lift": "D"
+      },
+      "dynamicPredefinedAssignment": {
+        "ball_security": "A",
+        "release_outlet": "B",
+        "short_roll_connector": "C",
+        "weak_side_lift": "D",
+        "rim_window": "E"
+      }
+    },
+    {
+      "shiftId": "switch_mismatch",
+      "stateMode": "switch",
+      "plhRegret": 0,
+      "fixedPositionRegret": 0,
+      "fixedArchetypeRegret": 0,
+      "dynamicPredefinedRegret": 0.9466254341398148,
+      "dynamicCandidatesEvaluated": 120,
+      "oracleAssignment": {
+        "ghost_rescreen": "C",
+        "mismatch_attack": "A",
+        "seal_window": "E",
+        "strong_corner_hold": "B",
+        "weak_side_exchange": "D"
+      },
+      "dynamicPredefinedAssignment": {
+        "mismatch_attack": "A",
+        "ghost_rescreen": "C",
+        "strong_corner_hold": "D",
+        "weak_side_exchange": "B",
+        "seal_window": "E"
+      }
+    },
+    {
+      "shiftId": "paint_collapse",
+      "stateMode": "paint_collapse",
+      "plhRegret": 0,
+      "fixedPositionRegret": 0.45327770591087724,
+      "fixedArchetypeRegret": 0.45327770591087724,
+      "dynamicPredefinedRegret": 0.23016608576581898,
+      "dynamicCandidatesEvaluated": 120,
+      "oracleAssignment": {
+        "ball_reversal": "B",
+        "baseline_drift": "A",
+        "crash_balance": "E",
+        "nail_connector": "C",
+        "weak_side_skip": "D"
+      },
+      "dynamicPredefinedAssignment": {
+        "ball_reversal": "A",
+        "nail_connector": "C",
+        "weak_side_skip": "D",
+        "baseline_drift": "B",
+        "crash_balance": "E"
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": 1,
+  "requirements": [
+    "A payment.succeeded callback marks an existing checkout paid.",
+    "Duplicate callback event IDs must not emit duplicate paid events."
+  ]
+}
+

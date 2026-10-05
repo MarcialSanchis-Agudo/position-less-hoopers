@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "challengeId": "plh-trigger-challenge-v0.1",
+  "status": "frozen-post-hoc-diagnostic",
+  "derivedAfterResultSet": "claude-sonnet-deployment-heldout-002",
+  "eligibleForHeldoutPerformanceClaim": false,
+  "policyFreezeId": "plh-v0.1-eval-freeze",
+  "purpose": "Probe failure boundaries of the frozen trigger policies after the first held-out deployment result.",
+  "streams": [
+    {
+      "path": "examples/deployment-rollout-incident/event-streams/challenge-direct-only-v1.json",
+      "hypothesis": "An explicit semantic trigger with subthreshold pressure should be handled by plh_direct but missed by frozen plh_pressure.",
+      "predictions": {
+        "greedy": {
+          "firstPostRevealTriggerEventId": "explicit-contract-mismatch",
+          "triggerLatencyMs": 0,
+          "recomputationCount": 5
+        },
+        "plh_direct": {
+          "firstPostRevealTriggerEventId": "explicit-contract-mismatch",
+          "triggerLatencyMs": 0,
+          "recomputationCount": 1
+        },
+        "plh_pressure": {
+          "firstPostRevealTriggerEventId": null,
+          "triggerLatencyMs": null,
+          "recomputationCount": 0
+        },
+        "static": {
+          "firstPostRevealTriggerEventId": null,
+          "triggerLatencyMs": null,
+          "recomputationCount": 0
+        }
+      }
+    },
+    {
+      "path": "examples/deployment-rollout-incident/event-streams/challenge-delayed-pressure-v1.json",
+      "hypothesis": "When contract failure precedes the pressure threshold crossing, frozen plh_pressure should recover later than greedy but earlier than plh_direct.",
+      "predictions": {
+        "greedy": {
+          "firstPostRevealTriggerEventId": "rollout-contract-mismatch",
+          "triggerLatencyMs": 0,
+          "recomputationCount": 7
+        },
+        "plh_direct": {
+          "firstPostRevealTriggerEventId": "explicit-rollout-blocked",
+          "triggerLatencyMs": 80000,
+          "recomputationCount": 1
+        },
+        "plh_pressure": {
+          "firstPostRevealTriggerEventId": "corroborated-rollout-risk",
+          "triggerLatencyMs": 50000,
+          "recomputationCount": 1
+        },
+        "static": {
+          "firstPostRevealTriggerEventId": null,
+          "triggerLatencyMs": null,
+          "recomputationCount": 0
+        }
+      }
+    }
+  ],
+  "rule": "Do not change frozen trigger semantics or pressure thresholds after inspecting challenge outcomes. Any hybrid direct-or-pressure policy must receive a new version and evaluation boundary."
+}
+

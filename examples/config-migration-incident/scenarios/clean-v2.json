@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "config-clean-v2",
+  "kind": "clean",
+  "initialContractVersion": 2,
+  "targetContractVersion": 2,
+  "perturbation": null
+}
+

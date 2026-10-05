@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "switching-pilot-v1",
+  "status": "synthetic-mechanism-test",
+  "paperClaimAllowed": false,
+  "description": "Same Need and candidate-state trace under no-switch, greedy-switch, and PLH hysteresis.",
+  "policies": [
+    "no_switch",
+    "greedy_switch",
+    "plh_hysteresis"
+  ],
+  "initial": {
+    "assigneeId": "a",
+    "needContextRef": "src/checkout.mjs"
+  },
+  "timeline": [
+    {
+      "tMs": 0,
+      "label": "initial",
+      "candidates": {
+        "a": { "capability": 0.90, "situated": true, "available": true },
+        "b": { "capability": 0.86, "situated": true, "available": true }
+      }
+    },
+    {
+      "tMs": 180000,
+      "label": "small-oscillation-b",
+      "candidates": {
+        "a": { "capability": 0.90, "situated": true, "available": true },
+        "b": { "capability": 0.95, "situated": true, "available": true }
+      }
+    },
+    {
+      "tMs": 240000,
+      "label": "small-oscillation-a",
+      "candidates": {
+        "a": { "capability": 0.96, "situated": true, "available": true },
+        "b": { "capability": 0.94, "situated": true, "available": true }
+      }
+    },
+    {
+      "tMs": 300000,
+      "label": "worker-loss-a",
+      "perturbation": "worker_loss",
+      "candidates": {
+        "a": { "capability": 0.96, "situated": true, "available": false },
+        "b": { "capability": 0.88, "situated": true, "available": true },
+        "c": { "capability": 0.82, "situated": false, "available": true }
+      }
+    },
+    {
+      "tMs": 360000,
+      "label": "post-recovery",
+      "candidates": {
+        "a": { "capability": 0.96, "situated": true, "available": false },
+        "b": { "capability": 0.90, "situated": true, "available": true },
+        "c": { "capability": 0.84, "situated": false, "available": true }
+      }
+    }
+  ],
+  "metrics": [
+    "switch_count",
+    "unnecessary_switch_count",
+    "uncovered_after_worker_loss_ms",
+    "context_reload_events",
+    "final_operational_assignee"
+  ]
+}
+

@@ -1,0 +1,29 @@
+{
+  "name": "position-less-hoopers",
+  "version": "0.0.1",
+  "description": "Need-first, state-responsive coordination for multi-agent systems.",
+  "type": "module",
+  "bin": {
+    "plh-field": "./bin/plh-field.mjs"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "test:watch": "node --test --watch",
+    "field": "node ./bin/plh-field.mjs",
+    "build:figures": "node ./scripts/generate-figures.mjs",
+    "context:prepare": "node ./scripts/prepare-context-reload.mjs",
+    "context:summarize": "node ./scripts/summarize-context-reload.mjs",
+    "task:prepare": "node ./scripts/prepare-task-pack.mjs",
+    "cell:run": "node ./scripts/run-experiment-cell.mjs",
+    "matrix:clean": "node ./scripts/run-clean-matrix.mjs",
+    "matrix:perturbed": "node ./scripts/run-perturbed-matrix.mjs",
+    "matrix:event": "node ./scripts/run-event-stream-matrix.mjs",
+    "matrix:event:repeats": "node ./scripts/run-event-stream-replicates.mjs",
+    "orca:assignment": "node ./scripts/run-orca-ax-assignment-shift.mjs",
+    "hoopers:suite": "node ./scripts/run-hoopers-arena-suite.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+

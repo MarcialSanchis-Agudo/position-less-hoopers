@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "adapterId": "reference-agent",
+  "command": "node",
+  "args": ["./reference-agent.mjs"],
+  "timeoutMs": 30000,
+  "env": {}
+}
+

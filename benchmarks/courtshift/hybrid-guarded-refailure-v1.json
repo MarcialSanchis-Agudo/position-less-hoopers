@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "challengeId": "plh-hybrid-guarded-refailure-v1",
+  "status": "frozen-post-hoc-diagnostic",
+  "derivedAfterResultSet": "claude-sonnet-hybrid-guarded-delayed-pressure-001",
+  "eligibleForHeldoutPerformanceClaim": false,
+  "policyCandidate": "plh_hybrid_guarded",
+  "stream": "examples/deployment-rollout-incident/event-streams/challenge-refailure-after-recovery-v1.json",
+  "hypothesis": "Evidence-aware execution suppression should skip a stale post-recovery trigger but permit a later trigger after authoritative correctness is broken again.",
+  "predictions": {
+    "policyRecomputationCount": 3,
+    "agentInvocationCount": 2,
+    "suppressedExecutionCount": 1,
+    "recoveryAttemptCount": 2,
+    "redundantInvocationCount": 0,
+    "firstRecoveryTriggerEventId": "corroborated-rollout-risk",
+    "firstRecoveryTriggerLatencyMs": 50000,
+    "secondRecoveryTriggerEventId": "regression-confirmed",
+    "finalCorrect": true
+  },
+  "rule": "Do not change guarded-hybrid semantics after inspecting this diagnostic. Any further suppression or acknowledgement logic requires a new candidate boundary."
+}
+

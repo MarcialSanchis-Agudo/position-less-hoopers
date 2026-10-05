@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "runId": "REPLACE",
+  "pairId": "REPLACE",
+  "taskId": "REPLACE",
+  "condition": "warm",
+  "modelId": "REPLACE",
+  "contextPackageHash": "REPLACE_FROM_RUN_META",
+  "startedAt": "REPLACE",
+  "finishedAt": "REPLACE",
+  "inputTokens": 0,
+  "outputTokens": 0,
+  "toolCalls": 0,
+  "fileReads": 0,
+  "repeatedFileReads": 0,
+  "staleStateActions": 0,
+  "timeToFirstUsefulActionMs": null,
+  "correct": false,
+  "graderVersion": "npm-test-v1",
+  "artifactRefs": []
+}
+

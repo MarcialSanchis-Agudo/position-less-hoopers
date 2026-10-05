@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm test
+      - name: Verify context-reload seeds fail before repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          for dir in experiments/context-reload/tasks/*/seed; do
+            echo "Checking $dir"
+            if (cd "$dir" && npm test); then
+              echo "Seed unexpectedly passes before repair: $dir"
+              exit 1
+            fi
+          done
+      - run: npm run build:figures
+

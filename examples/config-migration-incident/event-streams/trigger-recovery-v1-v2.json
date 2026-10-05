@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "streamId": "config-trigger-recovery-v1-v2",
+  "taskPackId": "config-migration-incident",
+  "initialContractVersion": 1,
+  "targetContractVersion": 2,
+  "pressureField": {
+    "nodes": [
+      {
+        "id": "schema_uncertainty",
+        "threshold": 1
+      },
+      {
+        "id": "compatibility_gap",
+        "threshold": 1
+      }
+    ],
+    "groups": [
+      {
+        "id": "migration_support_cluster",
+        "nodeIds": [
+          "schema_uncertainty",
+          "compatibility_gap"
+        ],
+        "threshold": 1
+      }
+    ]
+  },
+  "events": [
+    {
+      "eventId": "deprecated-key-warning",
+      "tMs": 60000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        {
+          "nodeId": "schema_uncertainty",
+          "amount": 0.2
+        }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "nested-object-warning",
+      "tMs": 120000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        {
+          "nodeId": "compatibility_gap",
+          "amount": 0.25
+        }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "ambiguous-merge-log",
+      "tMs": 180000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        {
+          "nodeId": "schema_uncertainty",
+          "amount": 0.2
+        }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "migration-contract-mismatch",
+      "tMs": 240000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        {
+          "nodeId": "schema_uncertainty",
+          "amount": 0.25
+        },
+        {
+          "nodeId": "compatibility_gap",
+          "amount": 0.35
+        }
+      ],
+      "workspaceMutation": {
+        "type": "reveal_contract",
+        "contractVersion": 2
+      }
+    },
+    {
+      "eventId": "explicit-migration-blocked",
+      "tMs": 300000,
+      "observable": true,
+      "directTrigger": true,
+      "pressureAdds": [],
+      "workspaceMutation": null
+    }
+  ]
+}
+

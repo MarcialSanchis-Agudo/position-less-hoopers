@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "adapterId": "claim-only-agent",
+  "command": "node",
+  "args": ["./claim-only-agent.mjs"],
+  "timeoutMs": 30000,
+  "env": {}
+}
+

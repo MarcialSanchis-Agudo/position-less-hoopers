@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "nodeThresholds": [
+    0.75,
+    1,
+    1.25,
+    1.5
+  ],
+  "groupThresholds": [
+    0.75,
+    1,
+    1.25,
+    1.5
+  ],
+  "rows": [
+    {
+      "nodeThreshold": 0.75,
+      "groupThreshold": 0.75,
+      "scenarios": 3,
+      "coordinationRecomputations": 3,
+      "unnecessaryRecomputations": 1,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 0.75,
+      "groupThreshold": 1,
+      "scenarios": 3,
+      "coordinationRecomputations": 3,
+      "unnecessaryRecomputations": 1,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 0.75,
+      "groupThreshold": 1.25,
+      "scenarios": 3,
+      "coordinationRecomputations": 3,
+      "unnecessaryRecomputations": 1,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 0.75,
+      "groupThreshold": 1.5,
+      "scenarios": 3,
+      "coordinationRecomputations": 3,
+      "unnecessaryRecomputations": 1,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 60000
+    },
+    {
+      "nodeThreshold": 1,
+      "groupThreshold": 0.75,
+      "scenarios": 3,
+      "coordinationRecomputations": 3,
+      "unnecessaryRecomputations": 1,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 1,
+      "groupThreshold": 1,
+      "scenarios": 3,
+      "coordinationRecomputations": 3,
+      "unnecessaryRecomputations": 1,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 1,
+      "groupThreshold": 1.25,
+      "scenarios": 3,
+      "coordinationRecomputations": 3,
+      "unnecessaryRecomputations": 1,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 1,
+      "groupThreshold": 1.5,
+      "scenarios": 3,
+      "coordinationRecomputations": 2,
+      "unnecessaryRecomputations": 1,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 120000
+    },
+    {
+      "nodeThreshold": 1.25,
+      "groupThreshold": 0.75,
+      "scenarios": 3,
+      "coordinationRecomputations": 2,
+      "unnecessaryRecomputations": 0,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 1.25,
+      "groupThreshold": 1,
+      "scenarios": 3,
+      "coordinationRecomputations": 2,
+      "unnecessaryRecomputations": 0,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 1.25,
+      "groupThreshold": 1.25,
+      "scenarios": 3,
+      "coordinationRecomputations": 2,
+      "unnecessaryRecomputations": 0,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 1.25,
+      "groupThreshold": 1.5,
+      "scenarios": 3,
+      "coordinationRecomputations": 1,
+      "unnecessaryRecomputations": 0,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 120000
+    },
+    {
+      "nodeThreshold": 1.5,
+      "groupThreshold": 0.75,
+      "scenarios": 3,
+      "coordinationRecomputations": 2,
+      "unnecessaryRecomputations": 0,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 1.5,
+      "groupThreshold": 1,
+      "scenarios": 3,
+      "coordinationRecomputations": 2,
+      "unnecessaryRecomputations": 0,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 1.5,
+      "groupThreshold": 1.25,
+      "scenarios": 3,
+      "coordinationRecomputations": 2,
+      "unnecessaryRecomputations": 0,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "nodeThreshold": 1.5,
+      "groupThreshold": 1.5,
+      "scenarios": 3,
+      "coordinationRecomputations": 1,
+      "unnecessaryRecomputations": 0,
+      "falsePositiveHelpCount": 0,
+      "missedSupportCount": 0,
+      "meanHelpTriggerLatencyMs": 120000
+    }
+  ]
+}
+

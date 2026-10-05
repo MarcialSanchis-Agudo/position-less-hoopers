@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "switching-pilot-v1",
+  "runs": [
+    {
+      "schemaVersion": 1,
+      "scenarioId": "switching-pilot-v1",
+      "policy": "no_switch",
+      "switchCount": 0,
+      "unnecessarySwitchCount": 0,
+      "contextReloadEvents": 0,
+      "workerLossAtMs": 300000,
+      "recoveryAtMs": null,
+      "uncoveredAfterWorkerLossMs": 60000,
+      "finalAssigneeId": "a",
+      "finalOperational": false,
+      "events": [
+        {
+          "tMs": 0,
+          "type": "Stayed",
+          "assigneeId": "a",
+          "reason": "policy_no_switch"
+        },
+        {
+          "tMs": 180000,
+          "type": "Stayed",
+          "assigneeId": "a",
+          "reason": "policy_no_switch"
+        },
+        {
+          "tMs": 240000,
+          "type": "Stayed",
+          "assigneeId": "a",
+          "reason": "policy_no_switch"
+        },
+        {
+          "tMs": 300000,
+          "type": "CoverageLost",
+          "assigneeId": "a"
+        },
+        {
+          "tMs": 300000,
+          "type": "Stayed",
+          "assigneeId": "a",
+          "reason": "policy_no_switch"
+        },
+        {
+          "tMs": 360000,
+          "type": "Stayed",
+          "assigneeId": "a",
+          "reason": "policy_no_switch"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "switching-pilot-v1",
+      "policy": "greedy_switch",
+      "switchCount": 3,
+      "unnecessarySwitchCount": 2,
+      "contextReloadEvents": 0,
+      "workerLossAtMs": 300000,
+      "recoveryAtMs": 300000,
+      "uncoveredAfterWorkerLossMs": 0,
+      "finalAssigneeId": "b",
+      "finalOperational": true,
+      "events": [
+        {
+          "tMs": 0,
+          "type": "Stayed",
+          "assigneeId": "a",
+          "reason": "already_best"
+        },
+        {
+          "tMs": 180000,
+          "type": "Switched",
+          "fromAssigneeId": "a",
+          "toAssigneeId": "b",
+          "forced": false,
+          "reason": "greedy_best"
+        },
+        {
+          "tMs": 240000,
+          "type": "Switched",
+          "fromAssigneeId": "b",
+          "toAssigneeId": "a",
+          "forced": false,
+          "reason": "greedy_best"
+        },
+        {
+          "tMs": 300000,
+          "type": "CoverageLost",
+          "assigneeId": "a"
+        },
+        {
+          "tMs": 300000,
+          "type": "Switched",
+          "fromAssigneeId": "a",
+          "toAssigneeId": "b",
+          "forced": true,
+          "reason": "current_unavailable"
+        },
+        {
+          "tMs": 300000,
+          "type": "CoverageRestored",
+          "assigneeId": "b"
+        },
+        {
+          "tMs": 360000,
+          "type": "Stayed",
+          "assigneeId": "b",
+          "reason": "already_best"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "switching-pilot-v1",
+      "policy": "plh_hysteresis",
+      "switchCount": 1,
+      "unnecessarySwitchCount": 0,
+      "contextReloadEvents": 0,
+      "workerLossAtMs": 300000,
+      "recoveryAtMs": 300000,
+      "uncoveredAfterWorkerLossMs": 0,
+      "finalAssigneeId": "b",
+      "finalOperational": true,
+      "events": [
+        {
+          "tMs": 0,
+          "type": "Stayed",
+          "assigneeId": "a",
+          "reason": "current_best"
+        },
+        {
+          "tMs": 180000,
+          "type": "Stayed",
+          "assigneeId": "a",
+          "reason": "current_best"
+        },
+        {
+          "tMs": 240000,
+          "type": "Stayed",
+          "assigneeId": "a",
+          "reason": "current_best"
+        },
+        {
+          "tMs": 300000,
+          "type": "CoverageLost",
+          "assigneeId": "a"
+        },
+        {
+          "tMs": 300000,
+          "type": "Switched",
+          "fromAssigneeId": "a",
+          "toAssigneeId": "b",
+          "forced": true,
+          "reason": "current_unavailable",
+          "scoreDelta": null
+        },
+        {
+          "tMs": 300000,
+          "type": "CoverageRestored",
+          "assigneeId": "b"
+        },
+        {
+          "tMs": 360000,
+          "type": "Stayed",
+          "assigneeId": "b",
+          "reason": "current_best"
+        }
+      ]
+    }
+  ]
+}
+

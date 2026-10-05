@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": 3,
+  "requirements": [
+    "All v2 requirements remain in force.",
+    "backoff_ms migrates to retry.backoffMs.",
+    "circuit_breaker migrates to resilience.circuitBreaker.",
+    "Existing nested resilience objects are merged rather than replaced.",
+    "Deprecated flat keys backoff_ms and circuit_breaker are removed."
+  ]
+}
+

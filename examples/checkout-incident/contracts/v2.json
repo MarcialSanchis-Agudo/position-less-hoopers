@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": 2,
+  "requirements": [
+    "A payment.succeeded callback marks an existing checkout paid.",
+    "Duplicate callback event IDs must not emit duplicate paid events.",
+    "signatureValid must be true before a callback is accepted.",
+    "Callback amountCents and currency must match the checkout.",
+    "Invalid, mismatched, or unknown-checkout callbacks must not poison the event ID: a corrected retry with the same event ID may later succeed."
+  ]
+}
+

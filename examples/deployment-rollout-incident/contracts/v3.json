@@ -1,0 +1,15 @@
+{
+  "contractVersion": 3,
+  "benchmarkRevision": "r2",
+  "api": "planRollout(nodes, options)",
+  "requirements": [
+    "All v2 requirements remain.",
+    "Exclude nodes with maintenance === true.",
+    "A node with dependsOn IDs may be scheduled only in a batch strictly after every eligible dependency has been scheduled.",
+    "Respect options.maxBatchWeight when provided. Node weight defaults to 1. The sum of node weights in a batch must not exceed maxBatchWeight.",
+    "If an eligible canary has an eligible unresolved dependency, throw an Error because the canary-first and dependency-order constraints cannot both be satisfied.",
+    "If no remaining node is schedulable because of unresolved or cyclic dependencies, throw an Error.",
+    "Preserve deterministic input order among currently feasible nodes."
+  ]
+}
+

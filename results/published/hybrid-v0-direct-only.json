@@ -1,0 +1,232 @@
+  1 | {
+  2 |   "schemaVersion": 1,
+  3 |   "taskPack": "examples/deployment-rollout-incident/task-pack.json",
+  4 |   "adapter": "examples/adapters/claude-code.json",
+  5 |   "eventStream": "examples/deployment-rollout-incident/event-streams/challenge-direct-only-v1.json",
+  6 |   "repeats": 5,
+  7 |   "replicateCount": 5,
+  8 |   "failedReplicateCount": 0,
+  9 |   "byPolicy": [
+ 10 |     {
+ 11 |       "policy": "plh_hybrid",
+ 12 |       "runCount": 5,
+ 13 |       "successCount": 5,
+ 14 |       "agentInvocationCount": {
+ 15 |         "n": 5,
+ 16 |         "mean": 1,
+ 17 |         "min": 1,
+ 18 |         "max": 1
+ 19 |       },
+ 20 |       "prePerturbationInvocationCount": {
+ 21 |         "n": 5,
+ 22 |         "mean": 0,
+ 23 |         "min": 0,
+ 24 |         "max": 0
+ 25 |       },
+ 26 |       "recoveryAttemptCount": {
+ 27 |         "n": 5,
+ 28 |         "mean": 1,
+ 29 |         "min": 1,
+ 30 |         "max": 1
+ 31 |       },
+ 32 |       "postRecoveryInvocationCount": {
+ 33 |         "n": 5,
+ 34 |         "mean": 0,
+ 35 |         "min": 0,
+ 36 |         "max": 0
+ 37 |       },
+ 38 |       "redundantInvocationCount": {
+ 39 |         "n": 5,
+ 40 |         "mean": 0,
+ 41 |         "min": 0,
+ 42 |         "max": 0
+ 43 |       },
+ 44 |       "unnecessaryInvocationCount": {
+ 45 |         "n": 5,
+ 46 |         "mean": 0,
+ 47 |         "min": 0,
+ 48 |         "max": 0
+ 49 |       },
+ 50 |       "totalAgentExecutionMs": {
+ 51 |         "n": 5,
+ 52 |         "mean": 22479,
+ 53 |         "min": 19364,
+ 54 |         "max": 25196
+ 55 |       },
+ 56 |       "prePerturbationAgentExecutionMs": {
+ 57 |         "n": 5,
+ 58 |         "mean": 0,
+ 59 |         "min": 0,
+ 60 |         "max": 0
+ 61 |       },
+ 62 |       "recoveryAttemptAgentExecutionMs": {
+ 63 |         "n": 5,
+ 64 |         "mean": 22479,
+ 65 |         "min": 19364,
+ 66 |         "max": 25196
+ 67 |       },
+ 68 |       "postRecoveryAgentExecutionMs": {
+ 69 |         "n": 5,
+ 70 |         "mean": 0,
+ 71 |         "min": 0,
+ 72 |         "max": 0
+ 73 |       },
+ 74 |       "redundantAgentExecutionMs": {
+ 75 |         "n": 5,
+ 76 |         "mean": 0,
+ 77 |         "min": 0,
+ 78 |         "max": 0
+ 79 |       },
+ 80 |       "unnecessaryAgentExecutionMs": {
+ 81 |         "n": 5,
+ 82 |         "mean": 0,
+ 83 |         "min": 0,
+ 84 |         "max": 0
+ 85 |       },
+ 86 |       "recoveryTriggerLatencyMs": {
+ 87 |         "n": 5,
+ 88 |         "mean": 0,
+ 89 |         "min": 0,
+ 90 |         "max": 0
+ 91 |       }
+ 92 |     }
+ 93 |   ],
+ 94 |   "replicates": [
+ 95 |     {
+ 96 |       "replicate": 1,
+ 97 |       "processExitCode": 0,
+ 98 |       "rows": [
+ 99 |         {
+100 |           "policy": "plh_hybrid",
+101 |           "processExitCode": 0,
+102 |           "policyRecomputationCount": 1,
+103 |           "agentInvocationCount": 1,
+104 |           "prePerturbationInvocationCount": 0,
+105 |           "recoveryAttemptCount": 1,
+106 |           "postRecoveryInvocationCount": 0,
+107 |           "redundantInvocationCount": 0,
+108 |           "unnecessaryInvocationCount": 0,
+109 |           "recoveryTriggerEventId": "explicit-contract-mismatch",
+110 |           "recoveryTriggerLatencyMs": 0,
+111 |           "totalAgentExecutionMs": 19364,
+112 |           "prePerturbationAgentExecutionMs": 0,
+113 |           "recoveryAttemptAgentExecutionMs": 19364,
+114 |           "postRecoveryAgentExecutionMs": 0,
+115 |           "redundantAgentExecutionMs": 0,
+116 |           "unnecessaryAgentExecutionMs": 0,
+117 |           "finalCorrect": true,
+118 |           "evidenceSatisfied": true
+119 |         }
+120 |       ]
+121 |     },
+122 |     {
+123 |       "replicate": 2,
+124 |       "processExitCode": 0,
+125 |       "rows": [
+126 |         {
+127 |           "policy": "plh_hybrid",
+128 |           "processExitCode": 0,
+129 |           "policyRecomputationCount": 1,
+130 |           "agentInvocationCount": 1,
+131 |           "prePerturbationInvocationCount": 0,
+132 |           "recoveryAttemptCount": 1,
+133 |           "postRecoveryInvocationCount": 0,
+134 |           "redundantInvocationCount": 0,
+135 |           "unnecessaryInvocationCount": 0,
+136 |           "recoveryTriggerEventId": "explicit-contract-mismatch",
+137 |           "recoveryTriggerLatencyMs": 0,
+138 |           "totalAgentExecutionMs": 20217,
+139 |           "prePerturbationAgentExecutionMs": 0,
+140 |           "recoveryAttemptAgentExecutionMs": 20217,
+141 |           "postRecoveryAgentExecutionMs": 0,
+142 |           "redundantAgentExecutionMs": 0,
+143 |           "unnecessaryAgentExecutionMs": 0,
+144 |           "finalCorrect": true,
+145 |           "evidenceSatisfied": true
+146 |         }
+147 |       ]
+148 |     },
+149 |     {
+150 |       "replicate": 3,
+151 |       "processExitCode": 0,
+152 |       "rows": [
+153 |         {
+154 |           "policy": "plh_hybrid",
+155 |           "processExitCode": 0,
+156 |           "policyRecomputationCount": 1,
+157 |           "agentInvocationCount": 1,
+158 |           "prePerturbationInvocationCount": 0,
+159 |           "recoveryAttemptCount": 1,
+160 |           "postRecoveryInvocationCount": 0,
+161 |           "redundantInvocationCount": 0,
+162 |           "unnecessaryInvocationCount": 0,
+163 |           "recoveryTriggerEventId": "explicit-contract-mismatch",
+164 |           "recoveryTriggerLatencyMs": 0,
+165 |           "totalAgentExecutionMs": 23431,
+166 |           "prePerturbationAgentExecutionMs": 0,
+167 |           "recoveryAttemptAgentExecutionMs": 23431,
+168 |           "postRecoveryAgentExecutionMs": 0,
+169 |           "redundantAgentExecutionMs": 0,
+170 |           "unnecessaryAgentExecutionMs": 0,
+171 |           "finalCorrect": true,
+172 |           "evidenceSatisfied": true
+173 |         }
+174 |       ]
+175 |     },
+176 |     {
+177 |       "replicate": 4,
+178 |       "processExitCode": 0,
+179 |       "rows": [
+180 |         {
+181 |           "policy": "plh_hybrid",
+182 |           "processExitCode": 0,
+183 |           "policyRecomputationCount": 1,
+184 |           "agentInvocationCount": 1,
+185 |           "prePerturbationInvocationCount": 0,
+186 |           "recoveryAttemptCount": 1,
+187 |           "postRecoveryInvocationCount": 0,
+188 |           "redundantInvocationCount": 0,
+189 |           "unnecessaryInvocationCount": 0,
+190 |           "recoveryTriggerEventId": "explicit-contract-mismatch",
+191 |           "recoveryTriggerLatencyMs": 0,
+192 |           "totalAgentExecutionMs": 25196,
+193 |           "prePerturbationAgentExecutionMs": 0,
+194 |           "recoveryAttemptAgentExecutionMs": 25196,
+195 |           "postRecoveryAgentExecutionMs": 0,
+196 |           "redundantAgentExecutionMs": 0,
+197 |           "unnecessaryAgentExecutionMs": 0,
+198 |           "finalCorrect": true,
+199 |           "evidenceSatisfied": true
+200 |         }
+201 |       ]
+202 |     },
+203 |     {
+204 |       "replicate": 5,
+205 |       "processExitCode": 0,
+206 |       "rows": [
+207 |         {
+208 |           "policy": "plh_hybrid",
+209 |           "processExitCode": 0,
+210 |           "policyRecomputationCount": 1,
+211 |           "agentInvocationCount": 1,
+212 |           "prePerturbationInvocationCount": 0,
+213 |           "recoveryAttemptCount": 1,
+214 |           "postRecoveryInvocationCount": 0,
+215 |           "redundantInvocationCount": 0,
+216 |           "unnecessaryInvocationCount": 0,
+217 |           "recoveryTriggerEventId": "explicit-contract-mismatch",
+218 |           "recoveryTriggerLatencyMs": 0,
+219 |           "totalAgentExecutionMs": 24187,
+220 |           "prePerturbationAgentExecutionMs": 0,
+221 |           "recoveryAttemptAgentExecutionMs": 24187,
+222 |           "postRecoveryAgentExecutionMs": 0,
+223 |           "redundantAgentExecutionMs": 0,
+224 |           "unnecessaryAgentExecutionMs": 0,
+225 |           "finalCorrect": true,
+226 |           "evidenceSatisfied": true
+227 |         }
+228 |       ]
+229 |     }
+230 |   ]
+231 | }
+232 | 

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "adapterId": "claude-code",
+  "command": "node",
+  "args": ["./claude-code-agent.mjs"],
+  "timeoutMs": 600000,
+  "env": {}
+}
+

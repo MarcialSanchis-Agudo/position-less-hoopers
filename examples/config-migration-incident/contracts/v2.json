@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": 2,
+  "requirements": [
+    "All v1 requirements remain in force.",
+    "timeout_ms migrates to network.timeoutMs.",
+    "Existing nested retry/network objects are merged rather than replaced.",
+    "Deprecated flat keys retry_count and timeout_ms are removed.",
+    "Unknown unrelated keys are preserved."
+  ]
+}
+

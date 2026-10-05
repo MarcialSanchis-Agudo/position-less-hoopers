@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "streamId": "deployment-challenge-refailure-after-recovery-v1",
+  "taskPackId": "deployment-rollout-incident",
+  "initialContractVersion": 1,
+  "targetContractVersion": 2,
+  "pressureField": {
+    "nodes": [
+      { "id": "operational_uncertainty", "threshold": 1 },
+      { "id": "placement_risk", "threshold": 1 }
+    ],
+    "groups": [
+      {
+        "id": "rollout_risk_cluster",
+        "nodeIds": ["operational_uncertainty", "placement_risk"],
+        "threshold": 1
+      }
+    ]
+  },
+  "events": [
+    {
+      "eventId": "health-check-lag",
+      "tMs": 30000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "operational_uncertainty", "amount": 0.12 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "zone-skew-notice",
+      "tMs": 95000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "placement_risk", "amount": 0.17 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "transient-lock-warning",
+      "tMs": 145000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "operational_uncertainty", "amount": 0.08 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "stale-inventory-hint",
+      "tMs": 210000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "placement_risk", "amount": 0.09 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "rollout-contract-mismatch",
+      "tMs": 260000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "operational_uncertainty", "amount": 0.2 },
+        { "nodeId": "placement_risk", "amount": 0.2 }
+      ],
+      "workspaceMutation": {
+        "type": "reveal_contract",
+        "contractVersion": 2
+      }
+    },
+    {
+      "eventId": "corroborated-rollout-risk",
+      "tMs": 310000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "operational_uncertainty", "amount": 0.08 },
+        { "nodeId": "placement_risk", "amount": 0.08 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "explicit-rollout-blocked",
+      "tMs": 340000,
+      "observable": true,
+      "directTrigger": true,
+      "pressureAdds": [],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "external-rollout-regression",
+      "tMs": 400000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [],
+      "workspaceMutation": {
+        "type": "copy_taskpack_file",
+        "source": "seed/src/rollout.mjs",
+        "destination": "src/rollout.mjs"
+      }
+    },
+    {
+      "eventId": "regression-confirmed",
+      "tMs": 420000,
+      "observable": true,
+      "directTrigger": true,
+      "pressureAdds": [],
+      "workspaceMutation": null
+    }
+  ],
+  "benchmarkRevision": "diagnostic-refailure-after-recovery-v1",
+  "evaluationClass": "post-hoc-diagnostic"
+}
+

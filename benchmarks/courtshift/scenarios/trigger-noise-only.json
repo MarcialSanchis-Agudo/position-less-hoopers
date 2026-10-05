@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "trigger-noise-only-v1",
+  "status": "synthetic-mechanism-test",
+  "paperClaimAllowed": false,
+  "policies": ["react_every_event", "plh_direct", "plh_pressure"],
+  "pressureField": {
+    "nodes": [
+      { "id": "implementation_uncertainty", "threshold": 1 },
+      { "id": "verification_gap", "threshold": 1 }
+    ],
+    "groups": [
+      {
+        "id": "checkout_support_cluster",
+        "nodeIds": ["implementation_uncertainty", "verification_gap"],
+        "threshold": 1.4
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "eventId": "minor-warning",
+      "tMs": 60000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.15 }
+      ],
+      "truth": { "supportNeeded": false, "workerLost": false }
+    },
+    {
+      "eventId": "flaky-test",
+      "tMs": 120000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "verification_gap", "amount": 0.20 }
+      ],
+      "truth": { "supportNeeded": false, "workerLost": false }
+    },
+    {
+      "eventId": "transient-log",
+      "tMs": 180000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.10 }
+      ],
+      "truth": { "supportNeeded": false, "workerLost": false }
+    }
+  ]
+}
+

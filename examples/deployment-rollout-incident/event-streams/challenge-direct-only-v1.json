@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "streamId": "deployment-challenge-direct-only-v1",
+  "taskPackId": "deployment-rollout-incident",
+  "initialContractVersion": 1,
+  "targetContractVersion": 2,
+  "pressureField": {
+    "nodes": [
+      { "id": "operational_uncertainty", "threshold": 1 },
+      { "id": "placement_risk", "threshold": 1 }
+    ],
+    "groups": [
+      {
+        "id": "rollout_risk_cluster",
+        "nodeIds": ["operational_uncertainty", "placement_risk"],
+        "threshold": 1
+      }
+    ]
+  },
+  "events": [
+    {
+      "eventId": "health-check-lag",
+      "tMs": 30000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "operational_uncertainty", "amount": 0.12 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "zone-skew-notice",
+      "tMs": 95000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "placement_risk", "amount": 0.17 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "transient-lock-warning",
+      "tMs": 145000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "operational_uncertainty", "amount": 0.08 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "stale-inventory-hint",
+      "tMs": 210000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "placement_risk", "amount": 0.09 }
+      ],
+      "workspaceMutation": null
+    },
+    {
+      "eventId": "explicit-contract-mismatch",
+      "tMs": 260000,
+      "observable": true,
+      "directTrigger": true,
+      "pressureAdds": [
+        { "nodeId": "operational_uncertainty", "amount": 0.1 },
+        { "nodeId": "placement_risk", "amount": 0.1 }
+      ],
+      "workspaceMutation": {
+        "type": "reveal_contract",
+        "contractVersion": 2
+      }
+    }
+  ],
+  "benchmarkRevision": "diagnostic-direct-only-v1",
+  "evaluationClass": "post-hoc-diagnostic"
+}
+

@@ -1,0 +1,60 @@
+{
+  "goalId": "goal-p0-clean",
+  "workflowRunId": "run-001",
+  "stateVersion": "v2",
+  "observedAt": "2026-09-25T08:01:00.000Z",
+  "agents": [
+    {
+      "sessionId": "session-implement",
+      "stepRunId": "work-implement",
+      "adapterId": "fixture",
+      "modelId": "model-a",
+      "lifecycle": "stopped",
+      "progress": {
+        "outputSeq": 12,
+        "lastActivityAt": "2026-09-25T07:59:58.000Z",
+        "stalled": false
+      }
+    },
+    {
+      "sessionId": "session-verify",
+      "stepRunId": "work-verify",
+      "adapterId": "fixture",
+      "modelId": "model-b",
+      "lifecycle": "active",
+      "progress": {
+        "outputSeq": 5,
+        "lastActivityAt": "2026-09-25T08:00:58.000Z",
+        "stalled": false
+      }
+    }
+  ],
+  "work": [
+    {
+      "workId": "work-implement",
+      "stepId": "implement",
+      "workflowRunId": "run-001",
+      "status": "active",
+      "assignedSessionId": "session-implement",
+      "readSet": ["src/api.ts"],
+      "writeSet": ["src/service.ts"]
+    },
+    {
+      "workId": "work-verify",
+      "stepId": "verify",
+      "workflowRunId": "run-001",
+      "status": "active",
+      "assignedSessionId": "session-verify",
+      "readSet": ["test/service.test.ts"],
+      "writeSet": []
+    }
+  ],
+  "resources": {
+    "knownCostUsd": 0.46,
+    "concurrencyLimit": 2
+  },
+  "sourceRefs": {
+    "harnessTransitionIds": ["ht-001", "ht-002", "ht-003"]
+  }
+}
+

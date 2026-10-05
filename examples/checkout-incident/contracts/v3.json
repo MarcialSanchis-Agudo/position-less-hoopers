@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": 3,
+  "requirements": [
+    "All v2 requirements remain in force.",
+    "Only callbacks with processor=primary may settle a checkout.",
+    "A rejected secondary-processor callback must not poison the event ID: a corrected primary-processor retry with the same event ID may later succeed."
+  ]
+}
+

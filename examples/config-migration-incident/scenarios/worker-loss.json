@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "config-worker-loss",
+  "kind": "perturbed",
+  "initialContractVersion": 2,
+  "targetContractVersion": 2,
+  "perturbation": {
+    "type": "worker_loss",
+    "trigger": {
+      "kind": "semantic_event",
+      "event": "first_persisted_patch"
+    },
+    "target": "current_assignee"
+  }
+}
+

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "resultSet": "claude-sonnet-deployment-heldout-002",
+  "status": "valid-heldout",
+  "eligibleForScientificAnalysis": true,
+  "benchmarkRevision": "deployment-rollout-incident@0.1.1",
+  "eventStream": "deployment-trigger-recovery-v1-v2-heldout-r2",
+  "freezeId": "plh-v0.1-eval-freeze",
+  "executor": {
+    "provider": "Anthropic",
+    "cli": "Claude Code",
+    "modelId": "claude-sonnet-5-5",
+    "effort": "medium",
+    "freshSessionPerInvocation": true
+  },
+  "repeats": 5,
+  "failedReplicateCount": 0,
+  "policies": {
+    "static": {
+      "successCount": 0,
+      "runCount": 5,
+      "meanAgentInvocations": 0,
+      "meanRedundantInvocations": 0,
+      "meanAgentExecutionMs": 0,
+      "meanRedundantAgentExecutionMs": 0,
+      "meanRecoveryTriggerLatencyMs": null
+    },
+    "greedy": {
+      "successCount": 5,
+      "runCount": 5,
+      "meanAgentInvocations": 6,
+      "meanPrePerturbationInvocations": 4,
+      "meanRecoveryAttempts": 1,
+      "meanPostRecoveryInvocations": 1,
+      "meanRedundantInvocations": 5,
+      "meanAgentExecutionMs": 85766,
+      "meanPrePerturbationAgentExecutionMs": 51488.8,
+      "meanRecoveryAttemptAgentExecutionMs": 20762,
+      "meanPostRecoveryAgentExecutionMs": 13515.2,
+      "meanRedundantAgentExecutionMs": 65004,
+      "meanRecoveryTriggerLatencyMs": 0
+    },
+    "plh_direct": {
+      "successCount": 5,
+      "runCount": 5,
+      "meanAgentInvocations": 1,
+      "meanPrePerturbationInvocations": 0,
+      "meanRecoveryAttempts": 1,
+      "meanPostRecoveryInvocations": 0,
+      "meanRedundantInvocations": 0,
+      "meanAgentExecutionMs": 20413.8,
+      "meanRedundantAgentExecutionMs": 0,
+      "meanRecoveryTriggerLatencyMs": 80000
+    },
+    "plh_pressure": {
+      "successCount": 5,
+      "runCount": 5,
+      "meanAgentInvocations": 1,
+      "meanPrePerturbationInvocations": 0,
+      "meanRecoveryAttempts": 1,
+      "meanPostRecoveryInvocations": 0,
+      "meanRedundantInvocations": 0,
+      "meanAgentExecutionMs": 23519.2,
+      "meanRedundantAgentExecutionMs": 0,
+      "meanRecoveryTriggerLatencyMs": 0
+    }
+  },
+  "derivedComparisons": {
+    "plhPressureVsGreedyInvocationReductionFraction": 0.8333333333333334,
+    "plhPressureVsGreedyExecutionReductionFraction": 0.7257747825478628,
+    "plhDirectVsGreedyExecutionReductionFraction": 0.7619826038290232
+  },
+  "claimBoundary": "Valid held-out evidence for this TaskPack/event stream/model configuration only; broader generalization requires additional held-out TaskPacks and at least one second executor family."
+}
+

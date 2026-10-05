@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "kind": "real-agent-development",
+  "eligibleForHeldOutClaims": false,
+  "exclusionReason": "Single development run on one hand-designed event stream; not replicated or held out.",
+  "model": {
+    "provider": "Anthropic",
+    "cli": "Claude Code",
+    "cliVersion": "2.1.285",
+    "modelId": "claude-sonnet-5-5",
+    "effort": "medium",
+    "freshSessionPerInvocation": true
+  },
+  "taskPackId": "checkout-incident",
+  "scenarioId": "checkout-hidden-contract",
+  "eventStreamId": "checkout-trigger-recovery-v1-v2",
+  "rows": [
+    {
+      "policy": "static",
+      "policyRecomputationCount": 0,
+      "agentInvocationCount": 0,
+      "unnecessaryInvocationCount": 0,
+      "totalAgentExecutionMs": 0,
+      "unnecessaryAgentExecutionMs": 0,
+      "recoveryTriggerEventId": null,
+      "recoveryTriggerLatencyMs": null,
+      "finalCorrect": false,
+      "evidenceSatisfied": false
+    },
+    {
+      "policy": "greedy",
+      "policyRecomputationCount": 5,
+      "agentInvocationCount": 5,
+      "unnecessaryInvocationCount": 3,
+      "totalAgentExecutionMs": 78913,
+      "unnecessaryAgentExecutionMs": 46476,
+      "recoveryTriggerEventId": "callback-contract-mismatch",
+      "recoveryTriggerLatencyMs": 0,
+      "finalCorrect": true,
+      "evidenceSatisfied": true
+    },
+    {
+      "policy": "plh_direct",
+      "policyRecomputationCount": 1,
+      "agentInvocationCount": 1,
+      "unnecessaryInvocationCount": 0,
+      "totalAgentExecutionMs": 17385,
+      "unnecessaryAgentExecutionMs": 0,
+      "recoveryTriggerEventId": "explicit-blocked",
+      "recoveryTriggerLatencyMs": 60000,
+      "finalCorrect": true,
+      "evidenceSatisfied": true
+    },
+    {
+      "policy": "plh_pressure",
+      "policyRecomputationCount": 1,
+      "agentInvocationCount": 1,
+      "unnecessaryInvocationCount": 0,
+      "totalAgentExecutionMs": 17933,
+      "unnecessaryAgentExecutionMs": 0,
+      "recoveryTriggerEventId": "callback-contract-mismatch",
+      "recoveryTriggerLatencyMs": 0,
+      "finalCorrect": true,
+      "evidenceSatisfied": true
+    }
+  ]
+}
+

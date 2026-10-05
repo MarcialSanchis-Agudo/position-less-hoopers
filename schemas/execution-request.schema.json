@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PLH ExecutionRequest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "requestId",
+    "regionId",
+    "goalId",
+    "stateVersion",
+    "need",
+    "responsibility",
+    "workspace",
+    "taskInstruction",
+    "contextPackageRefs",
+    "expectedEvidenceRefs"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "requestId": { "type": "string", "minLength": 1 },
+    "regionId": { "type": "string", "minLength": 1 },
+    "goalId": { "type": "string", "minLength": 1 },
+    "stateVersion": { "type": "string", "minLength": 1 },
+    "workspace": { "type": "string", "minLength": 1 },
+    "taskInstruction": { "type": "string", "minLength": 1 },
+    "contextPackageRefs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "expectedEvidenceRefs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    }
+  }
+}
+

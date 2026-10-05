@@ -1,0 +1,325 @@
+{
+  "comparisons": [
+    {
+      "schemaVersion": 1,
+      "scenarioId": "trigger-coupled-signals-v1",
+      "runs": [
+        {
+          "schemaVersion": 1,
+          "scenarioId": "trigger-coupled-signals-v1",
+          "policy": "react_every_event",
+          "coordinationRecomputations": 6,
+          "usefulRecomputations": 2,
+          "unnecessaryRecomputations": 4,
+          "triggerPrecision": 0.3333333333333333,
+          "supportNeededAtMs": 240000,
+          "helpTriggeredAtMs": 240000,
+          "helpTriggerLatencyMs": 0,
+          "switchTriggeredAtMs": 360000,
+          "switchTriggerLatencyMs": 0,
+          "falsePositiveHelp": false,
+          "falsePositiveSwitch": false,
+          "recomputations": [
+            {
+              "eventId": "minor-warning",
+              "tMs": 60000,
+              "reason": "observable_event",
+              "actions": []
+            },
+            {
+              "eventId": "flaky-test",
+              "tMs": 120000,
+              "reason": "observable_event",
+              "actions": []
+            },
+            {
+              "eventId": "ambiguous-log",
+              "tMs": 180000,
+              "reason": "observable_event",
+              "actions": []
+            },
+            {
+              "eventId": "callback-contract-mismatch",
+              "tMs": 240000,
+              "reason": "observable_event",
+              "actions": [
+                "help"
+              ]
+            },
+            {
+              "eventId": "explicit-blocked",
+              "tMs": 300000,
+              "reason": "observable_event",
+              "actions": []
+            },
+            {
+              "eventId": "worker-loss",
+              "tMs": 360000,
+              "reason": "observable_event",
+              "actions": [
+                "switch"
+              ]
+            }
+          ]
+        },
+        {
+          "schemaVersion": 1,
+          "scenarioId": "trigger-coupled-signals-v1",
+          "policy": "plh_direct",
+          "coordinationRecomputations": 2,
+          "usefulRecomputations": 2,
+          "unnecessaryRecomputations": 0,
+          "triggerPrecision": 1,
+          "supportNeededAtMs": 240000,
+          "helpTriggeredAtMs": 300000,
+          "helpTriggerLatencyMs": 60000,
+          "switchTriggeredAtMs": 360000,
+          "switchTriggerLatencyMs": 0,
+          "falsePositiveHelp": false,
+          "falsePositiveSwitch": false,
+          "recomputations": [
+            {
+              "eventId": "explicit-blocked",
+              "tMs": 300000,
+              "reason": "direct_semantic_trigger",
+              "actions": [
+                "help"
+              ]
+            },
+            {
+              "eventId": "worker-loss",
+              "tMs": 360000,
+              "reason": "direct_semantic_trigger",
+              "actions": [
+                "switch"
+              ]
+            }
+          ]
+        },
+        {
+          "schemaVersion": 1,
+          "scenarioId": "trigger-coupled-signals-v1",
+          "policy": "plh_pressure",
+          "coordinationRecomputations": 2,
+          "usefulRecomputations": 2,
+          "unnecessaryRecomputations": 0,
+          "triggerPrecision": 1,
+          "supportNeededAtMs": 240000,
+          "helpTriggeredAtMs": 240000,
+          "helpTriggerLatencyMs": 0,
+          "switchTriggeredAtMs": 360000,
+          "switchTriggerLatencyMs": 0,
+          "falsePositiveHelp": false,
+          "falsePositiveSwitch": false,
+          "recomputations": [
+            {
+              "eventId": "callback-contract-mismatch",
+              "tMs": 240000,
+              "reason": "group:checkout_support_cluster",
+              "actions": [
+                "help"
+              ]
+            },
+            {
+              "eventId": "worker-loss",
+              "tMs": 360000,
+              "reason": "node:worker_loss",
+              "actions": [
+                "switch"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "trigger-noise-only-v1",
+      "runs": [
+        {
+          "schemaVersion": 1,
+          "scenarioId": "trigger-noise-only-v1",
+          "policy": "react_every_event",
+          "coordinationRecomputations": 3,
+          "usefulRecomputations": 0,
+          "unnecessaryRecomputations": 3,
+          "triggerPrecision": 0,
+          "supportNeededAtMs": null,
+          "helpTriggeredAtMs": null,
+          "helpTriggerLatencyMs": null,
+          "switchTriggeredAtMs": null,
+          "switchTriggerLatencyMs": null,
+          "falsePositiveHelp": false,
+          "falsePositiveSwitch": false,
+          "recomputations": [
+            {
+              "eventId": "minor-warning",
+              "tMs": 60000,
+              "reason": "observable_event",
+              "actions": []
+            },
+            {
+              "eventId": "flaky-test",
+              "tMs": 120000,
+              "reason": "observable_event",
+              "actions": []
+            },
+            {
+              "eventId": "transient-log",
+              "tMs": 180000,
+              "reason": "observable_event",
+              "actions": []
+            }
+          ]
+        },
+        {
+          "schemaVersion": 1,
+          "scenarioId": "trigger-noise-only-v1",
+          "policy": "plh_direct",
+          "coordinationRecomputations": 0,
+          "usefulRecomputations": 0,
+          "unnecessaryRecomputations": 0,
+          "triggerPrecision": null,
+          "supportNeededAtMs": null,
+          "helpTriggeredAtMs": null,
+          "helpTriggerLatencyMs": null,
+          "switchTriggeredAtMs": null,
+          "switchTriggerLatencyMs": null,
+          "falsePositiveHelp": false,
+          "falsePositiveSwitch": false,
+          "recomputations": []
+        },
+        {
+          "schemaVersion": 1,
+          "scenarioId": "trigger-noise-only-v1",
+          "policy": "plh_pressure",
+          "coordinationRecomputations": 0,
+          "usefulRecomputations": 0,
+          "unnecessaryRecomputations": 0,
+          "triggerPrecision": null,
+          "supportNeededAtMs": null,
+          "helpTriggeredAtMs": null,
+          "helpTriggerLatencyMs": null,
+          "switchTriggeredAtMs": null,
+          "switchTriggerLatencyMs": null,
+          "falsePositiveHelp": false,
+          "falsePositiveSwitch": false,
+          "recomputations": []
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "scenarioId": "trigger-slow-drift-v1",
+      "runs": [
+        {
+          "schemaVersion": 1,
+          "scenarioId": "trigger-slow-drift-v1",
+          "policy": "react_every_event",
+          "coordinationRecomputations": 3,
+          "usefulRecomputations": 0,
+          "unnecessaryRecomputations": 3,
+          "triggerPrecision": 0,
+          "supportNeededAtMs": null,
+          "helpTriggeredAtMs": null,
+          "helpTriggerLatencyMs": null,
+          "switchTriggeredAtMs": null,
+          "switchTriggerLatencyMs": null,
+          "falsePositiveHelp": false,
+          "falsePositiveSwitch": false,
+          "recomputations": [
+            {
+              "eventId": "drift-1",
+              "tMs": 60000,
+              "reason": "observable_event",
+              "actions": []
+            },
+            {
+              "eventId": "drift-2",
+              "tMs": 120000,
+              "reason": "observable_event",
+              "actions": []
+            },
+            {
+              "eventId": "drift-3",
+              "tMs": 180000,
+              "reason": "observable_event",
+              "actions": []
+            }
+          ]
+        },
+        {
+          "schemaVersion": 1,
+          "scenarioId": "trigger-slow-drift-v1",
+          "policy": "plh_direct",
+          "coordinationRecomputations": 0,
+          "usefulRecomputations": 0,
+          "unnecessaryRecomputations": 0,
+          "triggerPrecision": null,
+          "supportNeededAtMs": null,
+          "helpTriggeredAtMs": null,
+          "helpTriggerLatencyMs": null,
+          "switchTriggeredAtMs": null,
+          "switchTriggerLatencyMs": null,
+          "falsePositiveHelp": false,
+          "falsePositiveSwitch": false,
+          "recomputations": []
+        },
+        {
+          "schemaVersion": 1,
+          "scenarioId": "trigger-slow-drift-v1",
+          "policy": "plh_pressure",
+          "coordinationRecomputations": 1,
+          "usefulRecomputations": 0,
+          "unnecessaryRecomputations": 1,
+          "triggerPrecision": 0,
+          "supportNeededAtMs": null,
+          "helpTriggeredAtMs": null,
+          "helpTriggerLatencyMs": null,
+          "switchTriggeredAtMs": null,
+          "switchTriggerLatencyMs": null,
+          "falsePositiveHelp": false,
+          "falsePositiveSwitch": false,
+          "recomputations": [
+            {
+              "eventId": "drift-3",
+              "tMs": 180000,
+              "reason": "node:implementation_uncertainty",
+              "actions": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "policy": "plh_direct",
+      "scenarios": 3,
+      "coordinationRecomputations": 2,
+      "unnecessaryRecomputations": 0,
+      "usefulRecomputations": 2,
+      "falsePositiveHelpCount": 0,
+      "meanHelpTriggerLatencyMs": 60000
+    },
+    {
+      "policy": "plh_pressure",
+      "scenarios": 3,
+      "coordinationRecomputations": 3,
+      "unnecessaryRecomputations": 1,
+      "usefulRecomputations": 2,
+      "falsePositiveHelpCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    },
+    {
+      "policy": "react_every_event",
+      "scenarios": 3,
+      "coordinationRecomputations": 12,
+      "unnecessaryRecomputations": 10,
+      "usefulRecomputations": 2,
+      "falsePositiveHelpCount": 0,
+      "meanHelpTriggerLatencyMs": 0
+    }
+  ]
+}
+

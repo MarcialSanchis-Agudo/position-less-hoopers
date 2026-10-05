@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "status": "synthetic-mechanism-test",
+  "matcherWeights": {
+    "capability": 1,
+    "situatedness": 0.35,
+    "continuity": 0.15,
+    "expectedCost": 0.05,
+    "switchCost": 0.10
+  },
+  "scenarios": [
+    {
+      "id": "locality-beats-small-capability-edge",
+      "need": {
+        "id": "need-1",
+        "requiredCapabilities": ["implement"],
+        "contextRefs": ["src/payments.ts"],
+        "staticPreference": ["a", "b"]
+      },
+      "truth": {
+        "capabilityWeight": 1,
+        "missingContextPenalty": 0.30,
+        "switchPenalty": 0,
+        "costPenalty": 0
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "capabilities": ["implement"],
+          "capabilityScores": { "implement": 0.95 },
+          "contextRefs": [],
+          "available": true
+        },
+        {
+          "id": "b",
+          "capabilities": ["implement"],
+          "capabilityScores": { "implement": 0.86 },
+          "contextRefs": ["src/payments.ts"],
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "large-capability-edge-beats-locality",
+      "need": {
+        "id": "need-2",
+        "requiredCapabilities": ["verify"],
+        "contextRefs": ["spec/auth.md"],
+        "staticPreference": ["b", "a"]
+      },
+      "truth": {
+        "capabilityWeight": 1,
+        "missingContextPenalty": 0.08,
+        "switchPenalty": 0,
+        "costPenalty": 0
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "capabilities": ["verify"],
+          "capabilityScores": { "verify": 0.98 },
+          "contextRefs": [],
+          "available": true
+        },
+        {
+          "id": "b",
+          "capabilities": ["verify"],
+          "capabilityScores": { "verify": 0.50 },
+          "contextRefs": ["spec/auth.md"],
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "continuity-avoids-unnecessary-reload",
+      "need": {
+        "id": "need-3",
+        "requiredCapabilities": ["debug"],
+        "contextRefs": ["src/cache.ts"],
+        "staticPreference": ["a", "b"]
+      },
+      "truth": {
+        "capabilityWeight": 1,
+        "missingContextPenalty": 0.10,
+        "switchPenalty": 0.14,
+        "costPenalty": 0
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "capabilities": ["debug"],
+          "capabilityScores": { "debug": 0.90 },
+          "contextRefs": ["src/cache.ts"],
+          "currentNeedId": "need-3",
+          "available": true
+        },
+        {
+          "id": "b",
+          "capabilities": ["debug"],
+          "capabilityScores": { "debug": 0.94 },
+          "contextRefs": ["src/cache.ts"],
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": "hard-constraint-dominates-score",
+      "need": {
+        "id": "need-4",
+        "requiredCapabilities": ["deploy"],
+        "requiredPermissions": ["prod-write"],
+        "staticPreference": ["a", "b"]
+      },
+      "truth": {
+        "capabilityWeight": 1,
+        "missingContextPenalty": 0,
+        "switchPenalty": 0,
+        "costPenalty": 0
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "capabilities": ["deploy"],
+          "capabilityScores": { "deploy": 0.99 },
+          "permissions": [],
+          "available": true
+        },
+        {
+          "id": "b",
+          "capabilities": ["deploy"],
+          "capabilityScores": { "deploy": 0.72 },
+          "permissions": ["prod-write"],
+          "available": true
+        }
+      ]
+    }
+  ]
+}
+

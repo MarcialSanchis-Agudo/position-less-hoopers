@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "candidateId": "plh-hybrid-trigger-v1-evidence-guarded",
+  "status": "post-hoc-candidate-frozen-for-diagnostic",
+  "derivedAfter": [
+    "claude-sonnet-hybrid-direct-only-001",
+    "claude-sonnet-hybrid-delayed-pressure-001"
+  ],
+  "eligibleForHeldoutPerformanceClaim": false,
+  "basePolicyFreezeId": "plh-v0.1-eval-freeze",
+  "predecessor": "plh-hybrid-trigger-v0",
+  "semantics": {
+    "triggerRule": "directTrigger OR pressureThresholdCrossing",
+    "pressureThresholdsChanged": false,
+    "cooldownAdded": false,
+    "executionGuard": "Before a post-reveal agent invocation, authoritative grading of the active target contract may suppress execution only when the target contract is already correct and its expected evidence reference is present.",
+    "triggerDecisionStillRecorded": true
+  },
+  "predictions": {
+    "challenge-direct-only-v1": {
+      "policyRecomputationCount": 1,
+      "agentInvocationCount": 1,
+      "suppressedExecutionCount": 0,
+      "recoveryTriggerEventId": "explicit-contract-mismatch",
+      "recoveryTriggerLatencyMs": 0,
+      "finalCorrect": true
+    },
+    "challenge-delayed-pressure-v1": {
+      "policyRecomputationCount": 2,
+      "agentInvocationCount": 1,
+      "suppressedExecutionCount": 1,
+      "recoveryTriggerEventId": "corroborated-rollout-risk",
+      "recoveryTriggerLatencyMs": 50000,
+      "postRecoveryInvocationCount": 0,
+      "finalCorrect": true
+    }
+  },
+  "knownLimitation": "The guard trusts the authoritative grader for the active target contract. A later failure outside that grader contract may require a new state version or evidence obligation rather than suppression."
+}
+

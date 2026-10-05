@@ -1,0 +1,15 @@
+{
+  "contractVersion": 2,
+  "benchmarkRevision": "r2",
+  "api": "planRollout(nodes, options)",
+  "requirements": [
+    "All v1 requirements remain.",
+    "Exclude nodes whose zone appears in options.blockedZones.",
+    "If options.canaryNodeId names an eligible node, the first batch must contain only that canary.",
+    "If an eligible canary batch is created, every subsequent batch may contain at most one node from the same zone.",
+    "If no eligible canary batch is created, retain v1 batching semantics apart from blocked-zone filtering.",
+    "Preserve deterministic input order when selecting the next feasible node.",
+    "Every eligible non-blocked node appears exactly once."
+  ]
+}
+

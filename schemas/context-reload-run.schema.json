@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://position-less-hoopers.dev/schemas/context-reload-run.schema.json",
+  "title": "PLH Context Reload Run",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "runId",
+    "pairId",
+    "taskId",
+    "condition",
+    "modelId",
+    "contextPackageHash",
+    "startedAt",
+    "finishedAt",
+    "inputTokens",
+    "outputTokens",
+    "toolCalls",
+    "fileReads",
+    "repeatedFileReads",
+    "staleStateActions",
+    "correct"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "runId": { "type": "string", "minLength": 1 },
+    "pairId": { "type": "string", "minLength": 1 },
+    "taskId": { "type": "string", "minLength": 1 },
+    "condition": { "enum": ["warm", "cold"] },
+    "modelId": { "type": "string", "minLength": 1 },
+    "contextPackageHash": { "type": "string", "minLength": 1 },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "finishedAt": { "type": "string", "format": "date-time" },
+    "inputTokens": { "type": "integer", "minimum": 0 },
+    "outputTokens": { "type": "integer", "minimum": 0 },
+    "toolCalls": { "type": "integer", "minimum": 0 },
+    "fileReads": { "type": "integer", "minimum": 0 },
+    "repeatedFileReads": { "type": "integer", "minimum": 0 },
+    "staleStateActions": { "type": "integer", "minimum": 0 },
+    "timeToFirstUsefulActionMs": { "type": ["number", "null"], "minimum": 0 },
+    "correct": { "type": "boolean" },
+    "graderVersion": { "type": ["string", "null"] },
+    "artifactRefs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
+

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "trigger-slow-drift-v1",
+  "status": "synthetic-mechanism-test",
+  "paperClaimAllowed": false,
+  "policies": ["react_every_event", "plh_direct", "plh_pressure"],
+  "pressureField": {
+    "nodes": [
+      { "id": "implementation_uncertainty", "threshold": 1 }
+    ]
+  },
+  "timeline": [
+    {
+      "eventId": "drift-1",
+      "tMs": 60000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.35 }
+      ],
+      "truth": { "supportNeeded": false, "workerLost": false }
+    },
+    {
+      "eventId": "drift-2",
+      "tMs": 120000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.35 }
+      ],
+      "truth": { "supportNeeded": false, "workerLost": false }
+    },
+    {
+      "eventId": "drift-3",
+      "tMs": 180000,
+      "observable": true,
+      "directTrigger": false,
+      "pressureAdds": [
+        { "nodeId": "implementation_uncertainty", "amount": 0.35 }
+      ],
+      "truth": { "supportNeeded": false, "workerLost": false }
+    }
+  ]
+}
+
