@@ -20,10 +20,10 @@
     "matrix:event": "node ./scripts/run-event-stream-matrix.mjs",
     "matrix:event:repeats": "node ./scripts/run-event-stream-replicates.mjs",
     "orca:assignment": "node ./scripts/run-orca-ax-assignment-shift.mjs",
+    "orca:context": "node ./scripts/run-orca-ax-context-routing-comparison.mjs",
     "hoopers:suite": "node ./scripts/run-hoopers-arena-suite.mjs"
   },
   "engines": {
     "node": ">=20"
   }
 }
-
