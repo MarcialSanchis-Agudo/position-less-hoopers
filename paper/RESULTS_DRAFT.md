@@ -67,6 +67,17 @@ A follow-on post-hoc candidate, `plh_hybrid_guarded`, keeps the same trigger dec
 
 In a subsequent post-hoc re-failure diagnostic, the same guarded policy recovered 5/5 after an initial v2 failure, suppressed the stale post-recovery direct trigger, then responded again after the workspace was deliberately regressed under the still-active v2 contract. Each run produced 3 recomputation decisions, 2 actual agent invocations, 1 suppressed execution, 2 genuine recovery attempts, and 0 redundant invocations. The first recovery remained at `corroborated-rollout-risk` with 50 s logical delay; the second real invocation occurred at `regression-confirmed`. Mean total agent execution was 42.820 s, of which 20.158 s was the genuine second recovery. This supports the mechanism-level distinction between reevaluation and execution without showing held-out generalization.
 
+### ORCA AX assignment-shift vertical slice — 1 real-agent run
+
+A frozen post-hoc mechanism test composed guarded wake-up, Need admission, P3b allocation, P1 capability+situatedness matching, leased Responsibility, RunnerPort execution, and authoritative evidence-gated Need satisfaction. The real Claude run matched the frozen assignment prediction exactly: `agent-b → agent-a`.
+
+- First recovery Need at `corroborated-rollout-risk`: `agent-b` was selected despite lower implementation capability (0.82 vs 0.95) because it had the required contract context, yielding matcher score 1.17 vs 0.95.
+- The stale `explicit-rollout-blocked` trigger was reevaluated but suppressed because authoritative v2 evidence was already satisfied.
+- After the workspace regression, the new Need at `regression-confirmed` shifted to `agent-a`, which now had the relevant implementation context and scored 1.30 vs 0.82.
+- Both Needs were satisfied by authoritative v2 evidence; both executions completed successfully in 21.527 s and 21.012 s respectively; final external grading passed all 6 checks.
+
+This establishes end-to-end composition and state-responsive Responsibility assignment in the current ORCA AX slice. It does not establish a real-agent situatedness performance advantage because both candidate identities are executed by the same Claude adapter/model; the assignment identities are coordination entities rather than independently instantiated model workers.
+
 ## Invalidated held-out run
 
 `claude-sonnet-deployment-heldout-001` is excluded from all scientific analysis because benchmark revision r1 contained a contradiction between the public v1 compatibility test and the external v2 zone-diversity grader.
@@ -74,4 +85,3 @@ In a subsequent post-hoc re-failure diagnostic, the same guarded policy recovere
 See:
 
 `results/local/claude-sonnet-deployment-heldout-001/INVALIDATED.json`
-
