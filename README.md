@@ -88,9 +88,10 @@ PLH is being built in phases so that each coordination mechanism can be measured
 | P6e — Clean experiment matrix | ✅ implemented | TaskPack × policy orchestration with machine-readable cell results |
 | P6f — Perturbed experiment matrix | ✅ implemented | two-phase contract reveal/mutation recovery with recovery latency and exclusions |
 | P6g — Event-driven policy matrix | ✅ implemented | policy-specific real-agent recomputation/trigger behavior across an event stream |
+| ORCA AX vertical slice | 🧪 experimental | guarded wake-up → Need → situated assignment → Responsibility → real execution → authoritative evidence |
 | P6h — Live worker interruption | next | session interruption + reassignment for real worker-loss recovery |
 
-Current local suite: **197 deterministic tests**.
+Current local suite: **212 deterministic tests**.
 
 ## A result we already care about
 
@@ -258,4 +259,3 @@ Each experimental run should carry a machine-readable manifest containing code/c
 ## License
 
 Apache-2.0.
-
