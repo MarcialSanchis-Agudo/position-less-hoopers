@@ -65,11 +65,19 @@ We may say:
 
 We may not use the operator smoke to compare warm vs cold performance because both conditions were solved inside one persistent assistant context.
 
+## Narrow real-agent pilot evidence
+
+We may say, only with the stated scope:
+
+- in one frozen post-hoc Deployment Rollout Incident pilot using Claude Sonnet 5.5, medium effort, and five matched pairs, capability+situatedness routing preserved 5/5 correctness and reduced mean first-recovery agent execution time from 19.773 s to 18.183 s relative to capability-only routing;
+- the effect was localized to the episode where routing differed: the second recovery selected the same worker under both policies and had effectively identical mean execution time;
+- this is a positive context-routing pilot signal, not evidence that situatedness generally improves real-agent efficiency across tasks, models, providers, or workloads.
+
 ## Claims under test
 
 Do not state as findings yet:
 
-- situatedness improves real-agent task efficiency;
+- situatedness improves real-agent task efficiency in general;
 - PLH improves real-agent success under perturbation;
 - PLH reduces recovery latency;
 - PLH reduces accidental duplication (P3a measures it; reduction requires P3b experiments);
@@ -94,4 +102,3 @@ Any final claim must identify:
 - resource constraints,
 - metric,
 - uncertainty.
-

@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "orca-ax-context-routing-v0",
+  "repeats": 5,
+  "failedRunCount": 0,
+  "matcherModes": [
+    "capability",
+    "capability_situated"
+  ],
+  "byMatcherMode": [
+    {
+      "matcherMode": "capability",
+      "runCount": 5,
+      "successCount": 5,
+      "evidenceSatisfiedCount": 5,
+      "assignmentSequences": [
+        [
+          "agent-a",
+          "agent-a"
+        ],
+        [
+          "agent-a",
+          "agent-a"
+        ],
+        [
+          "agent-a",
+          "agent-a"
+        ],
+        [
+          "agent-a",
+          "agent-a"
+        ],
+        [
+          "agent-a",
+          "agent-a"
+        ]
+      ],
+      "contextMisalignedAssignmentCount": {
+        "n": 5,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "firstRecoveryAgentExecutionMs": {
+        "n": 5,
+        "mean": 19773.2,
+        "min": 18901,
+        "max": 21746
+      },
+      "totalAgentExecutionMs": {
+        "n": 5,
+        "mean": 39810,
+        "min": 37195,
+        "max": 41772
+      },
+      "suppressedExecutionCount": {
+        "n": 5,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "agentInvocationCount": {
+        "n": 5,
+        "mean": 2,
+        "min": 2,
+        "max": 2
+      }
+    },
+    {
+      "matcherMode": "capability_situated",
+      "runCount": 5,
+      "successCount": 5,
+      "evidenceSatisfiedCount": 5,
+      "assignmentSequences": [
+        [
+          "agent-b",
+          "agent-a"
+        ],
+        [
+          "agent-b",
+          "agent-a"
+        ],
+        [
+          "agent-b",
+          "agent-a"
+        ],
+        [
+          "agent-b",
+          "agent-a"
+        ],
+        [
+          "agent-b",
+          "agent-a"
+        ]
+      ],
+      "contextMisalignedAssignmentCount": {
+        "n": 5,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      },
+      "firstRecoveryAgentExecutionMs": {
+        "n": 5,
+        "mean": 18183,
+        "min": 16371,
+        "max": 19294
+      },
+      "totalAgentExecutionMs": {
+        "n": 5,
+        "mean": 38188.2,
+        "min": 35126,
+        "max": 41157
+      },
+      "suppressedExecutionCount": {
+        "n": 5,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "agentInvocationCount": {
+        "n": 5,
+        "mean": 2,
+        "min": 2,
+        "max": 2
+      }
+    }
+  ],
+  "comparison": {
+    "firstRecoveryAgentExecutionMs": {
+      "capabilityMinusSituated": 1590.2000000000007
+    },
+    "totalAgentExecutionMs": {
+      "capabilityMinusSituated": 1621.800000000003
+    }
+  },
+  "records": [
+    {
+      "replicate": 1,
+      "matcherMode": "capability",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-a",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 1,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 19234,
+      "totalAgentExecutionMs": 37195,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    },
+    {
+      "replicate": 1,
+      "matcherMode": "capability_situated",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-b",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 0,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 17545,
+      "totalAgentExecutionMs": 37336,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    },
+    {
+      "replicate": 2,
+      "matcherMode": "capability_situated",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-b",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 0,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 18452,
+      "totalAgentExecutionMs": 40231,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    },
+    {
+      "replicate": 2,
+      "matcherMode": "capability",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-a",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 1,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 19766,
+      "totalAgentExecutionMs": 37887,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    },
+    {
+      "replicate": 3,
+      "matcherMode": "capability",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-a",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 1,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 19219,
+      "totalAgentExecutionMs": 41367,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    },
+    {
+      "replicate": 3,
+      "matcherMode": "capability_situated",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-b",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 0,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 16371,
+      "totalAgentExecutionMs": 41157,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    },
+    {
+      "replicate": 4,
+      "matcherMode": "capability_situated",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-b",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 0,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 19294,
+      "totalAgentExecutionMs": 35126,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    },
+    {
+      "replicate": 4,
+      "matcherMode": "capability",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-a",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 1,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 21746,
+      "totalAgentExecutionMs": 40829,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    },
+    {
+      "replicate": 5,
+      "matcherMode": "capability",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-a",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 1,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 18901,
+      "totalAgentExecutionMs": 41772,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    },
+    {
+      "replicate": 5,
+      "matcherMode": "capability_situated",
+      "processExitCode": 0,
+      "assignmentSequence": [
+        "agent-b",
+        "agent-a"
+      ],
+      "contextMisalignedAssignmentCount": 0,
+      "finalCorrect": true,
+      "evidenceSatisfied": true,
+      "firstRecoveryAgentExecutionMs": 19253,
+      "totalAgentExecutionMs": 37091,
+      "suppressedExecutionCount": 1,
+      "agentInvocationCount": 2
+    }
+  ]
+}

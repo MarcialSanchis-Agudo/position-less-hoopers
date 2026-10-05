@@ -78,6 +78,16 @@ A frozen post-hoc mechanism test composed guarded wake-up, Need admission, P3b a
 
 This establishes end-to-end composition and state-responsive Responsibility assignment in the current ORCA AX slice. It does not establish a real-agent situatedness performance advantage because both candidate identities are executed by the same Claude adapter/model; the assignment identities are coordination entities rather than independently instantiated model workers.
 
+### ORCA AX real-context routing pilot — 5 matched replicates per policy
+
+A follow-on frozen post-hoc pilot gave the two worker identities different bounded warm-context packages while keeping the same Claude Sonnet 5.5 model, medium effort, fresh session per execution, TaskPack, event stream, and guarded trigger policy. Capability-only routing selected `agent-a → agent-a` in all five runs, producing one context-misaligned first assignment per run. Capability+situatedness selected `agent-b → agent-a` in all five runs, producing zero context-misaligned assignments. Both conditions achieved 5/5 final correctness and authoritative evidence satisfaction.
+
+For the first recovery—the episode where the routing decisions differed—capability-only mean agent execution was 19.773 s and capability+situatedness was 18.183 s, a paired mean reduction of 1.590 s (about 8.0%). The situated condition was faster in 4/5 matched pairs. A paired t-based 95% interval for the capability-minus-situated difference is approximately +0.046 s to +3.134 s; with only five pairs this should be treated as a positive pilot signal, not stable population-level evidence.
+
+Mean total agent execution was 39.810 s for capability-only and 38.188 s for capability+situatedness, a mean reduction of 1.622 s (about 4.1%), but this aggregate was noisier: situated routing was faster in only 3/5 total-time pairs and the paired 95% interval includes zero. The second recovery, where both policies selected `agent-a`, was effectively tied on average (20.037 s capability-only vs 20.005 s situated).
+
+This supports a narrow mechanism claim: on this one post-hoc TaskPack/model pilot, routing the first Need to the worker with matching prior context reduced mean real-agent execution time while preserving correctness. It does not establish general situatedness superiority across tasks, models, providers, or context regimes.
+
 ## Invalidated held-out run
 
 `claude-sonnet-deployment-heldout-001` is excluded from all scientific analysis because benchmark revision r1 contained a contradiction between the public v1 compatibility test and the external v2 zone-diversity grader.
