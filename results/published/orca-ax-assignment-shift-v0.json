@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "orca-ax-assignment-shift-v0",
+  "policy": "plh_hybrid_guarded",
+  "matcherMode": "capability_situated",
+  "assignmentSequence": [
+    "agent-b",
+    "agent-a"
+  ],
+  "predictedAssignmentSequence": [
+    "agent-b",
+    "agent-a"
+  ],
+  "needCount": 2,
+  "satisfiedNeedCount": 2,
+  "policyRecomputationCount": 3,
+  "agentInvocationCount": 2,
+  "suppressedExecutionCount": 1,
+  "targetRevealedAtMs": 260000,
+  "finalCorrect": true,
+  "evidenceSatisfied": true,
+  "assignments": [
+    {
+      "eventId": "corroborated-rollout-risk",
+      "needId": "need:orca-ax:rollout:initial-recovery",
+      "assigneeId": "agent-b",
+      "predictedAssigneeId": "agent-b",
+      "matcherDecision": {
+        "schemaVersion": 1,
+        "needId": "need:orca-ax:rollout:initial-recovery",
+        "mode": "capability_situated",
+        "candidateIds": [
+          "agent-a",
+          "agent-b"
+        ],
+        "selectedCandidateId": "agent-b",
+        "selectedScore": {
+          "total": 1.17,
+          "capability": 0.82,
+          "situatedness": 1,
+          "expectedCost": 0,
+          "switchCost": 0,
+          "continuity": 0
+        },
+        "ranked": [
+          {
+            "candidateId": "agent-b",
+            "score": {
+              "total": 1.17,
+              "capability": 0.82,
+              "situatedness": 1,
+              "expectedCost": 0,
+              "switchCost": 0,
+              "continuity": 0
+            }
+          },
+          {
+            "candidateId": "agent-a",
+            "score": {
+              "total": 0.95,
+              "capability": 0.95,
+              "situatedness": 0,
+              "expectedCost": 0,
+              "switchCost": 0,
+              "continuity": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "eventId": "regression-confirmed",
+      "needId": "need:orca-ax:rollout:regression-recovery",
+      "assigneeId": "agent-a",
+      "predictedAssigneeId": "agent-a",
+      "matcherDecision": {
+        "schemaVersion": 1,
+        "needId": "need:orca-ax:rollout:regression-recovery",
+        "mode": "capability_situated",
+        "candidateIds": [
+          "agent-a",
+          "agent-b"
+        ],
+        "selectedCandidateId": "agent-a",
+        "selectedScore": {
+          "total": 1.2999999999999998,
+          "capability": 0.95,
+          "situatedness": 1,
+          "expectedCost": 0,
+          "switchCost": 0,
+          "continuity": 0
+        },
+        "ranked": [
+          {
+            "candidateId": "agent-a",
+            "score": {
+              "total": 1.2999999999999998,
+              "capability": 0.95,
+              "situatedness": 1,
+              "expectedCost": 0,
+              "switchCost": 0,
+              "continuity": 0
+            }
+          },
+          {
+            "candidateId": "agent-b",
+            "score": {
+              "total": 0.82,
+              "capability": 0.82,
+              "situatedness": 0,
+              "expectedCost": 0,
+              "switchCost": 0,
+              "continuity": 0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "reevaluations": [
+    {
+      "eventId": "corroborated-rollout-risk",
+      "tMs": 310000,
+      "reason": "group:rollout_risk_cluster",
+      "authoritativeCorrectBeforeAction": false
+    },
+    {
+      "eventId": "explicit-rollout-blocked",
+      "tMs": 340000,
+      "reason": "direct_semantic_trigger",
+      "authoritativeCorrectBeforeAction": true
+    },
+    {
+      "eventId": "regression-confirmed",
+      "tMs": 420000,
+      "reason": "direct_semantic_trigger",
+      "authoritativeCorrectBeforeAction": false
+    }
+  ],
+  "executions": [
+    {
+      "eventId": "corroborated-rollout-risk",
+      "needId": "need:orca-ax:rollout:initial-recovery",
+      "assigneeId": "agent-b",
+      "responsibilityId": "responsibility_3aef2c523484e606",
+      "executionStatus": "completed",
+      "executionDurationMs": 21527,
+      "externalCorrect": true,
+      "evidenceSatisfied": true,
+      "finishStatus": "need_satisfied"
+    },
+    {
+      "eventId": "regression-confirmed",
+      "needId": "need:orca-ax:rollout:regression-recovery",
+      "assigneeId": "agent-a",
+      "responsibilityId": "responsibility_126fa7b8c66421cc",
+      "executionStatus": "completed",
+      "executionDurationMs": 21012,
+      "externalCorrect": true,
+      "evidenceSatisfied": true,
+      "finishStatus": "need_satisfied"
+    }
+  ],
+  "suppressedExecutions": [
+    {
+      "eventId": "explicit-rollout-blocked",
+      "tMs": 340000,
+      "reason": "authoritative_target_already_satisfied"
+    }
+  ],
+  "region": {
+    "id": "region:orca-ax:deployment-rollout",
+    "status": "active",
+    "needs": [
+      {
+        "schemaVersion": 1,
+        "id": "need:orca-ax:rollout:initial-recovery",
+        "fingerprint": "sha256:c08fffe3e16dab346ea164c8fd33e84fd6b62bb4eb379671fbe8a5d48d8cfdaf",
+        "goalId": "goal:restore-rollout-correctness",
+        "parentNeedId": null,
+        "objective": "Restore the rollout planner to the active v2 contract and verify it with authoritative evidence.",
+        "rationale": "The v2 contract is active and the external grader is failing after the contract reveal.",
+        "stateVersion": "contract-v2:initial-recovery",
+        "requirements": {
+          "capabilities": [
+            "implement"
+          ],
+          "toolAccess": [],
+          "permissions": [
+            "workspace-write"
+          ],
+          "workspaceAccess": [],
+          "contextRefs": [
+            "contract/rollout.json"
+          ]
+        },
+        "coverage": {
+          "targetRefs": [
+            "contract/rollout.json",
+            "src/rollout.mjs"
+          ],
+          "hypothesisRefs": [],
+          "evidenceTypes": [
+            "external-grader"
+          ],
+          "mutationScopes": [
+            "src/rollout.mjs"
+          ]
+        },
+        "urgency": 1,
+        "importance": 1,
+        "uncertainty": 0.4,
+        "risk": 0.7,
+        "expectedInformationGain": 0.5,
+        "redundancyPolicy": "exclusive",
+        "dependencies": [],
+        "evidenceObligations": [
+          "evidence:deployment-rollout-v2"
+        ],
+        "exitConditions": [
+          "evidence:deployment-rollout-v2"
+        ],
+        "createdBy": "deterministic_signal",
+        "expiresAt": null,
+        "status": "satisfied",
+        "createdAt": "2026-10-05T08:05:10.000Z",
+        "updatedAt": "2026-10-05T08:05:13.000Z",
+        "statusReason": "evidence_obligations_met"
+      },
+      {
+        "schemaVersion": 1,
+        "id": "need:orca-ax:rollout:regression-recovery",
+        "fingerprint": "sha256:0881428e378a5880300bd8c5b8b14578507577e44f192547038a14c3d06c38bb",
+        "goalId": "goal:restore-rollout-correctness",
+        "parentNeedId": null,
+        "objective": "Repair the regressed rollout implementation while preserving the still-active v2 contract and verify it with authoritative evidence.",
+        "rationale": "The implementation was externally regressed after a prior successful v2 recovery.",
+        "stateVersion": "contract-v2:regression-1",
+        "requirements": {
+          "capabilities": [
+            "implement"
+          ],
+          "toolAccess": [],
+          "permissions": [
+            "workspace-write"
+          ],
+          "workspaceAccess": [],
+          "contextRefs": [
+            "src/rollout.mjs"
+          ]
+        },
+        "coverage": {
+          "targetRefs": [
+            "contract/rollout.json",
+            "src/rollout.mjs"
+          ],
+          "hypothesisRefs": [],
+          "evidenceTypes": [
+            "external-grader"
+          ],
+          "mutationScopes": [
+            "src/rollout.mjs"
+          ]
+        },
+        "urgency": 1,
+        "importance": 1,
+        "uncertainty": 0.4,
+        "risk": 0.7,
+        "expectedInformationGain": 0.5,
+        "redundancyPolicy": "exclusive",
+        "dependencies": [],
+        "evidenceObligations": [
+          "evidence:deployment-rollout-v2"
+        ],
+        "exitConditions": [
+          "evidence:deployment-rollout-v2"
+        ],
+        "createdBy": "deterministic_signal",
+        "expiresAt": null,
+        "status": "satisfied",
+        "createdAt": "2026-10-05T08:07:00.000Z",
+        "updatedAt": "2026-10-05T08:07:03.000Z",
+        "statusReason": "evidence_obligations_met"
+      }
+    ],
+    "responsibilities": [
+      {
+        "schemaVersion": 1,
+        "id": "responsibility_3aef2c523484e606",
+        "needId": "need:orca-ax:rollout:initial-recovery",
+        "assigneeId": "agent-b",
+        "assignmentVersion": 1,
+        "authority": {
+          "investigate": true,
+          "propose": true,
+          "execute": true,
+          "requestHelp": true,
+          "mutateScopes": [
+            "src/rollout.mjs"
+          ]
+        },
+        "evidenceObligations": [
+          "evidence:deployment-rollout-v2"
+        ],
+        "acquiredAt": "2026-10-05T08:05:11.000Z",
+        "offeredAt": "2026-10-05T08:05:10.000Z",
+        "renewAfter": "2026-10-05T08:10:10.000Z",
+        "expiresAt": "2026-10-05T08:35:10.000Z",
+        "handoffFrom": null,
+        "handoffReason": null,
+        "status": "completed",
+        "releasedAt": null,
+        "releaseReason": null,
+        "completedAt": "2026-10-05T08:05:13.000Z",
+        "updatedAt": "2026-10-05T08:05:13.000Z"
+      },
+      {
+        "schemaVersion": 1,
+        "id": "responsibility_126fa7b8c66421cc",
+        "needId": "need:orca-ax:rollout:regression-recovery",
+        "assigneeId": "agent-a",
+        "assignmentVersion": 1,
+        "authority": {
+          "investigate": true,
+          "propose": true,
+          "execute": true,
+          "requestHelp": true,
+          "mutateScopes": [
+            "src/rollout.mjs"
+          ]
+        },
+        "evidenceObligations": [
+          "evidence:deployment-rollout-v2"
+        ],
+        "acquiredAt": "2026-10-05T08:07:01.000Z",
+        "offeredAt": "2026-10-05T08:07:00.000Z",
+        "renewAfter": "2026-10-05T08:12:00.000Z",
+        "expiresAt": "2026-10-05T08:37:00.000Z",
+        "handoffFrom": null,
+        "handoffReason": null,
+        "status": "completed",
+        "releasedAt": null,
+        "releaseReason": null,
+        "completedAt": "2026-10-05T08:07:03.000Z",
+        "updatedAt": "2026-10-05T08:07:03.000Z"
+      }
+    ],
+    "evidenceRefs": [
+      "evidence:deployment-rollout-v2"
+    ]
+  },
+  "finalGrade": {
+    "schemaVersion": 1,
+    "contractVersion": 2,
+    "passed": 6,
+    "failed": 0,
+    "correct": true,
+    "evidenceRefs": [
+      "evidence:deployment-rollout-v2"
+    ],
+    "checks": [
+      {
+        "name": "v1-health-and-batch-size",
+        "ok": true
+      },
+      {
+        "name": "v1-stable-order",
+        "ok": true
+      },
+      {
+        "name": "v2-blocked-zones",
+        "ok": true
+      },
+      {
+        "name": "v2-canary-alone-first",
+        "ok": true
+      },
+      {
+        "name": "v2-zone-diversity-after-canary",
+        "ok": true
+      },
+      {
+        "name": "v2-blocked-canary-does-not-reappear",
+        "ok": true
+      }
+    ],
+    "graderExitCode": 0
+  }
+}
