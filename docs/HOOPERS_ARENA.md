@@ -91,6 +91,14 @@ The frozen v1 state-shift suite then evaluates three qualitatively different per
 
 In that frozen suite, the dynamic-predefined-function baseline matches the oracle in 1/3 shifts and has mean oracle regret about 0.392. This is stronger than the single-trap comparison because the state-shift set is fixed before reading the aggregate result.
 
+A separate post-hoc expanded v2 catalog adds three more explanatory states while preserving the same five offensive capability profiles:
+
+- **2–3 zone** → top reversal, high-post flash, short-corner occupancy, skip window, weak-side glass balance;
+- **drop coverage** → pocket pull-up, screen re-angle, rim dive, slot lift, tag punish;
+- **scramble rotation** → advance outlet, middle fill, corner sprint, rim run, transition safety balance.
+
+The expanded catalog therefore spans six qualitatively different state shifts. Every shift still has exactly five active Needs and five agents, so PLH and the globally optimized predefined-function baseline both search the same exact `5! = 120` assignments. The expanded catalog is intentionally labeled post-hoc explanatory mechanism material; it does not alter the frozen v1 result already reported.
+
 This is an exact result under the declared Hoopers Arena scoring model.
 
 It is **not** a claim that the PLH assignment is optimal real basketball strategy.

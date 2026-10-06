@@ -1,0 +1,13 @@
+{
+  "contractVersion": 2,
+  "api": "planAccessChanges(current, desired, options)",
+  "requirements": [
+    "All v1 requirements remain.",
+    "options.protectedPrincipals is a list of principals from whom permissions must not be removed.",
+    "Protected principals may still receive additions.",
+    "options.requiredPermissions maps principal names to permissions that must be present in the effective desired set.",
+    "Required permissions are added even when absent from desired.",
+    "The result remains deterministic and lexicographically sorted."
+  ]
+}
+

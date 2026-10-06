@@ -91,20 +91,23 @@ PLH is being built in phases so that each coordination mechanism can be measured
 | ORCA AX vertical slice | 🧪 experimental | guarded wake-up → Need → situated assignment → Responsibility → real execution → authoritative evidence |
 | P6h — Live worker interruption | next | session interruption + reassignment for real worker-loss recovery |
 
-Current local suite: **212 deterministic tests**.
+Current local suite: **219 deterministic tests**.
 
-## A result we already care about
+## Evidence and publication examples
 
-The current synthetic experiments are deliberately not presented as real-agent evidence. They do reveal the mechanism we need to measure empirically.
+The repo now contains five software TaskPacks spanning distinct coordination domains:
 
-In the seeded simulator:
+- Checkout Incident — integration/idempotency;
+- Config Migration Incident — data/config transformation;
+- Deployment Rollout Incident — constrained rollout planning;
+- Access Policy Incident — access-control reconciliation;
+- Event Replay Incident — event deduplication and dependency-aware replay.
 
-- capability-only is better when reconstructing context is cheap;
-- capability + situatedness becomes better when context loss is sufficiently expensive;
-- situated assignment reduces context reload frequency dramatically;
-- the synthetic crossover occurs near a context-loss penalty of **0.159** in the simulator's arbitrary utility scale.
+The first two are development/calibration tasks, Deployment Rollout has already been inspected, and Access Policy + Event Replay are frozen as prospective evaluation tasks before new real-agent outcomes. See [Publication Evaluation Set](docs/PUBLICATION_EVALUATION_SET.md).
 
-That motivates the next real experiment: measure the actual operational cost of giving the same model a warm versus cold task context.
+The current real-context routing pilot provides narrow real-agent evidence: on Deployment Rollout with five matched pairs, capability+situatedness preserved 5/5 correctness and reduced mean first-recovery Claude execution time from **19.773 s** to **18.183 s** relative to capability-only routing. This is a pilot on one TaskPack/model configuration, not a general superiority claim.
+
+Hoopers Arena also now includes a separate six-shift explanatory catalog: hard trap, switch mismatch, paint collapse, 2–3 zone, drop coverage, and scramble rotation. The original three-shift v1 result remains frozen and unchanged.
 
 The current P4 switching pilot also compares three policies on the same state-change trace. In the synthetic mechanism test, no-switch fails to recover after worker loss, greedy switching recovers with extra churn, and PLH hysteresis recovers with one forced switch and no unnecessary switches.
 
@@ -259,3 +262,4 @@ Each experimental run should carry a machine-readable manifest containing code/c
 ## License
 
 Apache-2.0.
+

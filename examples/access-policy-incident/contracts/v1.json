@@ -1,0 +1,16 @@
+{
+  "contractVersion": 1,
+  "api": "planAccessChanges(current, desired, options)",
+  "requirements": [
+    "Treat missing principal entries as empty permission sets.",
+    "Return one change object per principal whose effective permissions differ.",
+    "Each change object has { principal, add, remove }.",
+    "add contains desired permissions absent from current permissions.",
+    "remove contains current permissions absent from desired permissions.",
+    "Deduplicate and lexicographically sort permission names.",
+    "Sort change objects lexicographically by principal.",
+    "Omit principals with no additions or removals.",
+    "Do not mutate the input objects."
+  ]
+}
+

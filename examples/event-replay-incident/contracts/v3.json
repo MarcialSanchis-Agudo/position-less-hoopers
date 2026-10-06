@@ -1,0 +1,13 @@
+{
+  "contractVersion": 3,
+  "api": "replayEvents(events, options)",
+  "requirements": [
+    "All v2 requirements remain.",
+    "options.dependencies maps an event id to prerequisite event ids.",
+    "An event may be emitted only after all of its prerequisite ids have been emitted.",
+    "If eligible events contain a dependency cycle or a missing eligible prerequisite, throw an error.",
+    "When several events are dependency-ready, preserve the v2 deterministic ordering among ready events.",
+    "Blocked or below-min-sequence prerequisite events make their dependents unresolved and therefore an error."
+  ]
+}
+

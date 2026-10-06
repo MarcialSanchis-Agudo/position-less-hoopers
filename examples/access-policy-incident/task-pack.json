@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "taskPackId": "access-policy-incident",
+  "version": "0.1.0",
+  "domain": "coding/access-control-reconciliation",
+  "seedPath": "seed",
+  "activeContractPath": "contract/access-policy.json",
+  "grader": { "path": "grader/grade.mjs" },
+  "evidenceRefTemplate": "evidence:access-policy-v{version}",
+  "contracts": {
+    "1": "contracts/v1.json",
+    "2": "contracts/v2.json",
+    "3": "contracts/v3.json"
+  },
+  "scenarioFiles": [
+    "scenarios/clean-v2.json",
+    "scenarios/hidden-contract.json",
+    "scenarios/external-mutation.json",
+    "scenarios/worker-loss.json"
+  ]
+}
+

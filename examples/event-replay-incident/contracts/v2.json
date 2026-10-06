@@ -1,0 +1,13 @@
+{
+  "contractVersion": 2,
+  "api": "replayEvents(events, options)",
+  "requirements": [
+    "All v1 requirements remain.",
+    "options.minSequenceByAggregate maps aggregateId to the minimum sequence that is still eligible; lower sequences are skipped.",
+    "options.blockedAggregates lists aggregate ids that must be skipped entirely.",
+    "If two distinct event ids for the same aggregate have the same sequence, keep only the lexicographically smaller event id.",
+    "Duplicate-id filtering occurs before sequence-conflict resolution.",
+    "The result remains deterministic."
+  ]
+}
+

@@ -1,0 +1,13 @@
+{
+  "contractVersion": 3,
+  "api": "planAccessChanges(current, desired, options)",
+  "requirements": [
+    "All v2 requirements remain.",
+    "options.lockedPermissions lists permissions that must never be removed from any principal.",
+    "options.exclusivePermissionGroups is an array of permission-name arrays.",
+    "If a principal's effective desired permissions contain more than one permission from any exclusive group, throw an error.",
+    "Mutual-exclusion validation occurs after requiredPermissions are merged into the effective desired set.",
+    "The result remains deterministic and does not mutate inputs."
+  ]
+}
+

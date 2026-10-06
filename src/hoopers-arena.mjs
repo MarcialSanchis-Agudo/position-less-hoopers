@@ -244,6 +244,215 @@ export function deriveBasketballNeeds(state) {
     ];
   }
 
+  if (state.defense?.mode === "zone_23") {
+    return [
+      {
+        id: "top_reversal",
+        objective: "Move the top line of the zone before it can load to the ball",
+        importance: 0.95,
+        critical: true,
+        target: { x: 3.0, y: 6.7 },
+        capabilityWeights: {
+          pass: 0.42,
+          handle: 0.22,
+          decision: 0.28,
+          shoot: 0.08
+        }
+      },
+      {
+        id: "high_post_flash",
+        objective: "Flash into the high post and become a catch-and-decide hub",
+        importance: 1,
+        critical: true,
+        target: { x: 5.0, y: 4.6 },
+        capabilityWeights: {
+          pass: 0.40,
+          decision: 0.34,
+          finish: 0.14,
+          shoot: 0.12
+        }
+      },
+      {
+        id: "short_corner_occupancy",
+        objective: "Occupy the short corner behind the low zone defender",
+        importance: 0.90,
+        critical: false,
+        target: { x: 2.0, y: 1.8 },
+        capabilityWeights: {
+          finish: 0.40,
+          cut: 0.28,
+          pass: 0.16,
+          decision: 0.16
+        }
+      },
+      {
+        id: "zone_skip_window",
+        objective: "Hold the opposite skip window to punish long zone rotations",
+        importance: 0.90,
+        critical: true,
+        target: { x: 8.4, y: 5.4 },
+        capabilityWeights: {
+          shoot: 0.58,
+          pass: 0.18,
+          decision: 0.18,
+          cut: 0.06
+        }
+      },
+      {
+        id: "zone_glass_balance",
+        objective: "Threaten the weak-side glass while preserving transition balance",
+        importance: 0.82,
+        critical: false,
+        target: { x: 7.0, y: 2.0 },
+        capabilityWeights: {
+          rebound: 0.42,
+          finish: 0.24,
+          decision: 0.20,
+          cut: 0.14
+        }
+      }
+    ];
+  }
+
+  if (state.defense?.mode === "drop") {
+    return [
+      {
+        id: "pocket_pullup",
+        objective: "Punish the drop with a controlled pocket pull-up or paint touch",
+        importance: 1,
+        critical: true,
+        target: { x: 5.0, y: 5.9 },
+        capabilityWeights: {
+          handle: 0.30,
+          shoot: 0.32,
+          decision: 0.24,
+          pass: 0.14
+        }
+      },
+      {
+        id: "screen_reangle",
+        objective: "Re-angle the screen to keep the on-ball defender attached",
+        importance: 0.92,
+        critical: true,
+        target: { x: 5.2, y: 6.3 },
+        capabilityWeights: {
+          screen: 0.52,
+          decision: 0.22,
+          pass: 0.12,
+          finish: 0.14
+        }
+      },
+      {
+        id: "rim_dive",
+        objective: "Dive behind the drop defender and pressure the restricted area",
+        importance: 0.93,
+        critical: false,
+        target: { x: 5.0, y: 1.7 },
+        capabilityWeights: {
+          finish: 0.50,
+          cut: 0.24,
+          screen: 0.12,
+          decision: 0.14
+        }
+      },
+      {
+        id: "slot_lift",
+        objective: "Lift into the slot to occupy the tag defender's passing lane",
+        importance: 0.84,
+        critical: false,
+        target: { x: 8.0, y: 5.2 },
+        capabilityWeights: {
+          shoot: 0.52,
+          pass: 0.18,
+          cut: 0.14,
+          decision: 0.16
+        }
+      },
+      {
+        id: "tag_punish",
+        objective: "Cut or drift behind the low tag when the roller draws help",
+        importance: 0.87,
+        critical: false,
+        target: { x: 2.3, y: 2.2 },
+        capabilityWeights: {
+          cut: 0.38,
+          shoot: 0.30,
+          finish: 0.18,
+          decision: 0.14
+        }
+      }
+    ];
+  }
+
+  if (state.defense?.mode === "scramble") {
+    return [
+      {
+        id: "advance_outlet",
+        objective: "Secure the outlet and advance before the defense can match",
+        importance: 1,
+        critical: true,
+        target: { x: 4.8, y: 7.0 },
+        capabilityWeights: {
+          handle: 0.30,
+          pass: 0.34,
+          decision: 0.28,
+          shoot: 0.08
+        }
+      },
+      {
+        id: "middle_fill",
+        objective: "Fill the middle lane as a passing and decision hub",
+        importance: 0.94,
+        critical: true,
+        target: { x: 5.0, y: 4.8 },
+        capabilityWeights: {
+          pass: 0.34,
+          decision: 0.32,
+          finish: 0.18,
+          cut: 0.16
+        }
+      },
+      {
+        id: "corner_sprint",
+        objective: "Sprint to the weak corner before the defense locates shooters",
+        importance: 0.88,
+        critical: false,
+        target: { x: 8.6, y: 1.5 },
+        capabilityWeights: {
+          shoot: 0.60,
+          cut: 0.22,
+          decision: 0.18
+        }
+      },
+      {
+        id: "rim_run",
+        objective: "Run to the rim and force the deepest defender to collapse",
+        importance: 0.92,
+        critical: false,
+        target: { x: 4.6, y: 1.4 },
+        capabilityWeights: {
+          finish: 0.52,
+          cut: 0.28,
+          rebound: 0.10,
+          decision: 0.10
+        }
+      },
+      {
+        id: "safety_balance",
+        objective: "Stay above the play as the turnover and transition safety valve",
+        importance: 0.80,
+        critical: false,
+        target: { x: 2.2, y: 5.6 },
+        capabilityWeights: {
+          decision: 0.32,
+          pass: 0.22,
+          shoot: 0.18,
+          defend: 0.28
+        }
+      }
+    ];
+  }
+
   return [
     {
       id: "primary_creation",
@@ -459,7 +668,22 @@ const POSITION_FOR_NEED = {
   nail_connector: "PF",
   weak_side_skip: "SG",
   baseline_drift: "SF",
-  crash_balance: "C"
+  crash_balance: "C",
+  top_reversal: "PG",
+  high_post_flash: "PF",
+  short_corner_occupancy: "C",
+  zone_skip_window: "SG",
+  zone_glass_balance: "SF",
+  pocket_pullup: "PG",
+  screen_reangle: "PF",
+  rim_dive: "C",
+  slot_lift: "SG",
+  tag_punish: "SF",
+  advance_outlet: "PG",
+  middle_fill: "PF",
+  corner_sprint: "SG",
+  rim_run: "C",
+  safety_balance: "SF"
 };
 
 const PREDEFINED_FUNCTION_FOR_NEED = {
@@ -482,7 +706,22 @@ const PREDEFINED_FUNCTION_FOR_NEED = {
   nail_connector: "screener",
   weak_side_skip: "shooter",
   baseline_drift: "wing",
-  crash_balance: "big"
+  crash_balance: "big",
+  top_reversal: "creator",
+  high_post_flash: "screener",
+  short_corner_occupancy: "big",
+  zone_skip_window: "shooter",
+  zone_glass_balance: "wing",
+  pocket_pullup: "creator",
+  screen_reangle: "screener",
+  rim_dive: "big",
+  slot_lift: "shooter",
+  tag_punish: "wing",
+  advance_outlet: "creator",
+  middle_fill: "screener",
+  corner_sprint: "shooter",
+  rim_run: "big",
+  safety_balance: "wing"
 };
 
 const PREDEFINED_FUNCTION_PROFILES = {

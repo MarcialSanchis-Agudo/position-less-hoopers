@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "access-policy-external-mutation",
+  "kind": "perturbed",
+  "initialContractVersion": 2,
+  "targetContractVersion": 3,
+  "perturbation": {
+    "type": "external_contract_mutation",
+    "contractVersion": 3,
+    "trigger": {
+      "kind": "semantic_event",
+      "event": "first_public_test_pass"
+    }
+  }
+}
+

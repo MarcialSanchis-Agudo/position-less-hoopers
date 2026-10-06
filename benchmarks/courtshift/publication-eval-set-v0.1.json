@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-paper-eval-set-v0.1",
+  "status": "prospective-freeze-before-new-real-agent-outcomes",
+  "createdAfter": [
+    "claude-sonnet-deployment-heldout-002",
+    "claude-sonnet-orca-ax-assignment-shift-001",
+    "claude-sonnet-orca-ax-context-routing-001"
+  ],
+  "purpose": "Define the minimum multi-domain task population and evidence boundaries needed for a credible first PLH/ORCA AX paper.",
+  "developmentTaskPacks": [
+    {
+      "taskPack": "examples/checkout-incident/task-pack.json",
+      "role": "development-and-calibration-only"
+    },
+    {
+      "taskPack": "examples/config-migration-incident/task-pack.json",
+      "role": "development-and-calibration-only"
+    }
+  ],
+  "previouslyObservedTaskPacks": [
+    {
+      "taskPack": "examples/deployment-rollout-incident/task-pack.json",
+      "role": "prior-heldout-and-post-hoc-mechanism-evidence",
+      "eligibleForNewProspectiveClaim": false
+    }
+  ],
+  "prospectiveEvaluationTaskPacks": [
+    {
+      "taskPack": "examples/access-policy-incident/task-pack.json",
+      "domain": "access-control-reconciliation"
+    },
+    {
+      "taskPack": "examples/event-replay-incident/task-pack.json",
+      "domain": "event-stream-reconciliation"
+    }
+  ],
+  "requiredScenarioClasses": [
+    "clean",
+    "contract_reveal",
+    "external_contract_mutation"
+  ],
+  "deferredScenarioClasses": [
+    {
+      "type": "worker_loss",
+      "reason": "Scientific use requires live executor interruption rather than between-execution simulation."
+    }
+  ],
+  "baselineLadder": [
+    {
+      "id": "B0",
+      "name": "strong_single_agent",
+      "requirement": "same model, tools, grader, and task budget"
+    },
+    {
+      "id": "B1",
+      "name": "static_workflow",
+      "requirement": "fixed routing/workflow with no state-responsive reassignment"
+    },
+    {
+      "id": "B2",
+      "name": "fixed_specialist_team",
+      "requirement": "persistent specialist identities with fixed responsibility ownership"
+    },
+    {
+      "id": "B3",
+      "name": "dynamic_predefined_roles",
+      "requirement": "dynamic assignee changes allowed, but role/function ontology fixed before execution"
+    },
+    {
+      "id": "P",
+      "name": "plh_orca_ax",
+      "requirement": "state-derived Need, temporary Responsibility, guarded wake-up, team-aware allocation, situated matching, authoritative evidence"
+    }
+  ],
+  "primaryEndpoints": [
+    "externally_verified_perturbed_success",
+    "recovery_latency"
+  ],
+  "secondaryEndpoints": [
+    "clean_success",
+    "agent_execution_time",
+    "agent_invocations",
+    "suppressed_execution_count",
+    "context_misaligned_assignment_count",
+    "redundant_execution_time",
+    "switch_churn",
+    "context_reload"
+  ],
+  "analysisPlan": {
+    "unit": "task-paired comparison",
+    "reportAbsoluteOutcomes": true,
+    "reportCleanAndPerturbedSeparately": true,
+    "reportDegradation": true,
+    "uncertainty": "paired bootstrap interval when sample size supports it; otherwise exact paired outcomes plus descriptive intervals",
+    "minimumReplicatesPerTaskCondition": 5
+  },
+  "freezeRules": [
+    "Do not change matcher weights, trigger thresholds, grader semantics, or baseline definitions after inspecting prospective task outcomes.",
+    "Bug fixes that change semantics require a new evaluation-set version and rerun of all affected prospective conditions.",
+    "The two prospective TaskPacks may not be reclassified as development tasks after outcomes are seen.",
+    "No claim of broad superiority may rely on the basketball mechanism catalog or on post-hoc deployment diagnostics."
+  ]
+}
+

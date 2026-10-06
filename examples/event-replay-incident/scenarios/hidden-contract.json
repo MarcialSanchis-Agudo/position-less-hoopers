@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "event-replay-hidden-contract",
+  "kind": "perturbed",
+  "initialContractVersion": 1,
+  "targetContractVersion": 2,
+  "perturbation": {
+    "type": "contract_reveal",
+    "contractVersion": 2,
+    "trigger": {
+      "kind": "semantic_event",
+      "event": "first_implementation_attempt"
+    }
+  }
+}
+

@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "suiteId": "hoopers-arena-state-shifts-expanded-v2",
+  "baseScenario": "examples/hoopers-arena/scenarios/last-possession.json",
+  "status": "post-hoc-expanded-mechanism-catalog",
+  "eligibleForPriorFrozenV1Claim": false,
+  "frozenDesignIntent": "Expand the controlled basketball mechanism catalog across six qualitatively different defensive states while holding the same five offensive capability profiles fixed. This is explanatory mechanism evidence, not real-basketball validation.",
+  "shifts": [
+    {
+      "id": "hard_trap",
+      "sourceState": "trapState"
+    },
+    {
+      "id": "switch_mismatch",
+      "state": {
+        "stateVersion": "possession:switch",
+        "live": true,
+        "possession": "offense",
+        "scoreDiff": 0,
+        "gameClockSeconds": 8,
+        "shotClockSeconds": 8,
+        "ballHandler": "A",
+        "defense": {
+          "mode": "switch",
+          "trappedBallHandler": false,
+          "switchedPair": ["A", "C"]
+        },
+        "goal": {
+          "id": "win-possession",
+          "type": "maximize_expected_possession_value",
+          "constraint": "exploit the mismatch before the defense resets while preserving spacing"
+        },
+        "defenders": [
+          { "id": "X1", "location": { "x": 5.0, "y": 5.7 }, "matchup": "C" },
+          { "id": "X2", "location": { "x": 2.0, "y": 2.2 }, "matchup": "B" },
+          { "id": "X3", "location": { "x": 5.5, "y": 6.4 }, "matchup": "A" },
+          { "id": "X4", "location": { "x": 7.5, "y": 4.0 }, "matchup": "D" },
+          { "id": "X5", "location": { "x": 4.2, "y": 2.0 }, "matchup": "E" }
+        ]
+      },
+      "agentLocations": {
+        "A": { "x": 5.3, "y": 6.9 },
+        "B": { "x": 1.7, "y": 1.6 },
+        "C": { "x": 5.0, "y": 5.7 },
+        "D": { "x": 8.1, "y": 4.0 },
+        "E": { "x": 4.0, "y": 1.7 }
+      }
+    },
+    {
+      "id": "paint_collapse",
+      "state": {
+        "stateVersion": "possession:paint-collapse",
+        "live": true,
+        "possession": "offense",
+        "scoreDiff": 0,
+        "gameClockSeconds": 8,
+        "shotClockSeconds": 8,
+        "ballHandler": "A",
+        "defense": {
+          "mode": "paint_collapse",
+          "trappedBallHandler": false,
+          "collapsedDefenders": 3
+        },
+        "goal": {
+          "id": "win-possession",
+          "type": "maximize_expected_possession_value",
+          "constraint": "move the ball out of the collapsed paint before recovery while maintaining rim and transition balance"
+        },
+        "defenders": [
+          { "id": "X1", "location": { "x": 5.0, "y": 5.8 }, "matchup": "A" },
+          { "id": "X2", "location": { "x": 4.2, "y": 3.3 }, "matchup": "B" },
+          { "id": "X3", "location": { "x": 5.1, "y": 3.0 }, "matchup": "C" },
+          { "id": "X4", "location": { "x": 6.2, "y": 3.5 }, "matchup": "D" },
+          { "id": "X5", "location": { "x": 4.0, "y": 2.0 }, "matchup": "E" }
+        ]
+      },
+      "agentLocations": {
+        "A": { "x": 5.1, "y": 6.6 },
+        "B": { "x": 2.8, "y": 6.0 },
+        "C": { "x": 5.0, "y": 4.8 },
+        "D": { "x": 8.5, "y": 5.0 },
+        "E": { "x": 3.6, "y": 1.5 }
+      }
+    },
+    {
+      "id": "zone_23",
+      "state": {
+        "stateVersion": "possession:zone-23",
+        "live": true,
+        "possession": "offense",
+        "scoreDiff": 0,
+        "gameClockSeconds": 9,
+        "shotClockSeconds": 9,
+        "ballHandler": "A",
+        "defense": {
+          "mode": "zone_23",
+          "topDefenders": 2,
+          "lowDefenders": 3
+        },
+        "goal": {
+          "id": "win-possession",
+          "type": "maximize_expected_possession_value",
+          "constraint": "distort the zone with high-post and short-corner occupation while preserving skip and rebound balance"
+        },
+        "defenders": [
+          { "id": "X1", "location": { "x": 3.7, "y": 6.0 }, "matchup": null },
+          { "id": "X2", "location": { "x": 6.3, "y": 6.0 }, "matchup": null },
+          { "id": "X3", "location": { "x": 2.3, "y": 2.7 }, "matchup": null },
+          { "id": "X4", "location": { "x": 5.0, "y": 2.2 }, "matchup": null },
+          { "id": "X5", "location": { "x": 7.7, "y": 2.7 }, "matchup": null }
+        ]
+      },
+      "agentLocations": {
+        "A": { "x": 4.0, "y": 7.0 },
+        "B": { "x": 8.4, "y": 5.2 },
+        "C": { "x": 5.0, "y": 4.9 },
+        "D": { "x": 2.1, "y": 1.9 },
+        "E": { "x": 6.8, "y": 1.8 }
+      }
+    },
+    {
+      "id": "drop_coverage",
+      "state": {
+        "stateVersion": "possession:drop",
+        "live": true,
+        "possession": "offense",
+        "scoreDiff": 0,
+        "gameClockSeconds": 9,
+        "shotClockSeconds": 9,
+        "ballHandler": "A",
+        "defense": {
+          "mode": "drop",
+          "screenDefenderDepth": "paint",
+          "onBallDefenderAttached": true
+        },
+        "goal": {
+          "id": "win-possession",
+          "type": "maximize_expected_possession_value",
+          "constraint": "force the drop defender to choose between the ball and rim while keeping tag help occupied"
+        },
+        "defenders": [
+          { "id": "X1", "location": { "x": 5.0, "y": 6.2 }, "matchup": "A" },
+          { "id": "X2", "location": { "x": 5.1, "y": 3.2 }, "matchup": "C" },
+          { "id": "X3", "location": { "x": 2.4, "y": 2.7 }, "matchup": "B" },
+          { "id": "X4", "location": { "x": 7.8, "y": 4.6 }, "matchup": "D" },
+          { "id": "X5", "location": { "x": 4.0, "y": 1.8 }, "matchup": "E" }
+        ]
+      },
+      "agentLocations": {
+        "A": { "x": 5.0, "y": 6.2 },
+        "B": { "x": 2.3, "y": 2.0 },
+        "C": { "x": 5.2, "y": 5.9 },
+        "D": { "x": 8.1, "y": 5.0 },
+        "E": { "x": 4.8, "y": 1.6 }
+      }
+    },
+    {
+      "id": "scramble_rotation",
+      "state": {
+        "stateVersion": "possession:scramble",
+        "live": true,
+        "possession": "offense",
+        "scoreDiff": 0,
+        "gameClockSeconds": 7,
+        "shotClockSeconds": 7,
+        "ballHandler": "B",
+        "defense": {
+          "mode": "scramble",
+          "matchedDefenders": 2,
+          "crossMatched": true
+        },
+        "goal": {
+          "id": "win-possession",
+          "type": "maximize_expected_possession_value",
+          "constraint": "attack before the defense can match while retaining one transition-safety player"
+        },
+        "defenders": [
+          { "id": "X1", "location": { "x": 4.7, "y": 5.8 }, "matchup": "B" },
+          { "id": "X2", "location": { "x": 6.4, "y": 4.3 }, "matchup": null },
+          { "id": "X3", "location": { "x": 3.3, "y": 3.7 }, "matchup": null },
+          { "id": "X4", "location": { "x": 7.1, "y": 2.2 }, "matchup": "D" },
+          { "id": "X5", "location": { "x": 4.4, "y": 1.9 }, "matchup": null }
+        ]
+      },
+      "agentLocations": {
+        "A": { "x": 2.4, "y": 5.7 },
+        "B": { "x": 4.7, "y": 7.1 },
+        "C": { "x": 5.0, "y": 4.9 },
+        "D": { "x": 8.5, "y": 1.5 },
+        "E": { "x": 4.5, "y": 1.3 }
+      }
+    }
+  ]
+}
+

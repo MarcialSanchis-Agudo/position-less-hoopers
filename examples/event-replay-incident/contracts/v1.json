@@ -1,0 +1,12 @@
+{
+  "contractVersion": 1,
+  "api": "replayEvents(events, options)",
+  "requirements": [
+    "Events have id, aggregateId, sequence, and payload fields.",
+    "Process events independently per aggregateId in ascending sequence order.",
+    "Ignore exact duplicate event ids after the first occurrence.",
+    "Return an array of processed event ids in deterministic order: aggregateId lexicographically, then sequence ascending, then id lexicographically.",
+    "Do not mutate the input array or event objects."
+  ]
+}
+
