@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "taskPackId": "event-replay-incident",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "domain": "coding/event-stream-reconciliation",
   "seedPath": "seed",
   "activeContractPath": "contract/replay.json",
@@ -16,7 +16,7 @@
     "scenarios/clean-v2.json",
     "scenarios/hidden-contract.json",
     "scenarios/external-mutation.json",
+    "scenarios/workspace-regression.json",
     "scenarios/worker-loss.json"
   ]
 }
-

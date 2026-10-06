@@ -16,7 +16,7 @@ The first two are development/calibration tasks. Deployment Rollout has already 
 
 The machine-readable freeze is:
 
-`benchmarks/courtshift/publication-eval-set-v0.1.json`
+`benchmarks/courtshift/publication-eval-set-v0.2.json`
 
 ## Minimum software evidence for the paper
 
@@ -26,7 +26,8 @@ Required scenario classes:
 
 - clean,
 - hidden contract reveal,
-- external contract mutation.
+- external contract mutation,
+- same-contract workspace regression.
 
 Worker loss remains deferred for paper claims until the runtime can interrupt a live executor.
 
@@ -73,7 +74,7 @@ The expanded catalog is useful for showing that the same five players can face d
 
 Before the paper is ready for a strong main-results section, the repo still needs:
 
-1. implementation of B0/B1/B2/B3/P under a shared real-agent harness;
+1. ✅ B0/B1/B2/B3/P now run through one shared real-agent harness with one fresh invocation per cell;
 2. prospective runs on Access Policy and Event Replay without tuning after outcomes;
 3. clean-vs-perturbed paired results;
 4. a frozen analysis script/table generator;
@@ -82,3 +83,21 @@ Before the paper is ready for a strong main-results section, the repo still need
 
 That is enough for a credible first paper. More domains or UI work are lower priority than finishing this matrix cleanly.
 
+
+## Shared publication harness
+
+The frozen baseline semantics live in `benchmarks/courtshift/publication-baselines-v0.1.json`.
+The prospective evaluation freeze is `benchmarks/courtshift/publication-eval-set-v0.2.json`.
+
+A deterministic smoke run is:
+
+```bash
+npm run paper:matrix -- \\
+  benchmarks/courtshift/publication-eval-set-v0.2.json \\
+  benchmarks/courtshift/publication-baselines-v0.1.json \\
+  results/local/publication-reference-smoke \\
+  examples/adapters/reference-agent.json \\
+  1
+```
+
+The final real-agent run uses the same command with the Claude adapter and five replicates. Perturbed cells are deterministically brought to a verified correct precondition before injection, then every baseline receives exactly one fresh model invocation after the target state becomes incorrect.

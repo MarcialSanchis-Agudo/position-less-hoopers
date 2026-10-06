@@ -23,6 +23,15 @@ const manifest = normalizeTaskPackManifest(
 );
 const workspace = path.join(runRoot, "workspace");
 
+function resolveInside(base, relativePath, label) {
+  const resolved = path.resolve(base, relativePath);
+  const relative = path.relative(base, resolved);
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
+    throw new Error(`${label} must stay inside its declared root`);
+  }
+  return resolved;
+}
+
 if (!meta.perturbation) {
   const output = { applied: false, reason: "clean_scenario" };
   process.stdout.write(JSON.stringify(output) + "\n");
@@ -53,6 +62,27 @@ if (
     contractVersion: perturbation.contractVersion,
     appliedAt: new Date().toISOString()
   };
+} else if (perturbation.type === "workspace_regression") {
+  const source = resolveInside(
+    packRoot,
+    perturbation.source,
+    "workspace_regression.source"
+  );
+  const destination = resolveInside(
+    workspace,
+    perturbation.destination,
+    "workspace_regression.destination"
+  );
+  await fs.mkdir(path.dirname(destination), { recursive: true });
+  await fs.copyFile(source, destination);
+
+  event = {
+    schemaVersion: 1,
+    type: "workspace_regression",
+    source: perturbation.source,
+    destination: perturbation.destination,
+    appliedAt: new Date().toISOString()
+  };
 } else if (perturbation.type === "worker_loss") {
   event = {
     schemaVersion: 1,
@@ -70,4 +100,3 @@ await fs.writeFile(
 );
 
 process.stdout.write(JSON.stringify({ applied: true, ...event }) + "\n");
-

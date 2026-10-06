@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "baselineSetId": "plh-publication-baselines-v0.1",
+  "evaluationSetId": "plh-paper-eval-set-v0.2",
+  "status": "frozen-before-prospective-real-agent-outcomes",
+  "baselineOrder": ["B0", "B1", "B2", "B3", "P"],
+  "resourceRule": "Each evaluation cell receives exactly one fresh model invocation after deterministic precondition preparation. All baselines use the same adapter, model settings, tools, workspace seed, active contract, grader, and mutation authority.",
+  "contextRule": "Worker context packages may differ only according to the frozen worker identity selected by the coordination law. Every executor may still inspect the authoritative workspace and active contract.",
+  "strongSingleAgentId": "generalist",
+  "staticWorkflowWorkerId": "worker-implementation",
+  "specialistPoolIds": ["worker-implementation", "worker-contract"],
+  "workerProfiles": [
+    {
+      "id": "generalist",
+      "capabilities": ["implement", "analyze_contract"],
+      "permissions": ["workspace-write"],
+      "capabilityScores": {
+        "implement": 0.95,
+        "analyze_contract": 0.95
+      },
+      "contextRefs": ["contract", "implementation"],
+      "contextKinds": ["implementation", "contract"],
+      "available": true
+    },
+    {
+      "id": "worker-implementation",
+      "capabilities": ["implement", "analyze_contract"],
+      "permissions": ["workspace-write"],
+      "capabilityScores": {
+        "implement": 0.95,
+        "analyze_contract": 0.72
+      },
+      "contextRefs": ["implementation"],
+      "contextKinds": ["implementation"],
+      "available": true
+    },
+    {
+      "id": "worker-contract",
+      "capabilities": ["implement", "analyze_contract"],
+      "permissions": ["workspace-write"],
+      "capabilityScores": {
+        "implement": 0.84,
+        "analyze_contract": 0.98
+      },
+      "contextRefs": ["contract"],
+      "contextKinds": ["contract"],
+      "available": true
+    }
+  ],
+  "predefinedRoles": {
+    "implementer": {
+      "objective": "Modify the implementation to satisfy the currently declared task behavior.",
+      "requiredCapabilities": ["implement"],
+      "contextRefs": ["implementation"]
+    },
+    "contract_specialist": {
+      "objective": "Interpret the changed contract and modify the implementation to satisfy it.",
+      "requiredCapabilities": ["implement", "analyze_contract"],
+      "contextRefs": ["contract"]
+    }
+  },
+  "phaseRoleMap": {
+    "clean_implementation": "implementer",
+    "contract_change": "contract_specialist",
+    "implementation_regression": "implementer"
+  },
+  "fixedRoleOwners": {
+    "implementer": "worker-implementation",
+    "contract_specialist": "worker-contract"
+  },
+  "matcherOptions": {
+    "mode": "capability_situated",
+    "weights": {
+      "capability": 1,
+      "situatedness": 0.35,
+      "continuity": 0.15,
+      "expectedCost": 0.05,
+      "switchCost": 0.1
+    }
+  },
+  "needSelectionWeights": {
+    "urgency": 0.25,
+    "importance": 0.25,
+    "informationGain": 0.15,
+    "uncertainty": 0.05,
+    "marginalCoverage": 0.3,
+    "independentVerification": 0.15,
+    "accidentalOverlap": 0.2,
+    "mutationRisk": 0.35
+  },
+  "taskProfiles": {
+    "access-policy-incident": {
+      "implementationPath": "src/access.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs"
+    },
+    "event-replay-incident": {
+      "implementationPath": "src/replay.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs"
+    }
+  },
+  "baselineDefinitions": {
+    "B0": "One strong generalist executor with warm bounded context for both current implementation and active contract.",
+    "B1": "One fixed implementation owner for all states; responsibility ownership never changes.",
+    "B2": "A fixed specialist-role team with persistent owners for the frozen implementer and contract-specialist roles.",
+    "B3": "Dynamic worker assignment is allowed, but only into the frozen implementer/contract-specialist role ontology.",
+    "P": "PLH/ORCA AX derives a Need from authoritative state, uses team-aware Need allocation, then capability+situatedness matching to issue a temporary Responsibility."
+  },
+  "claimBoundary": "B3 and P intentionally share the same worker pool and situated matcher. If they tie on simple prospective tasks, that is a valid result. The experiment tests whether state-derived Needs add value beyond strong dynamic predefined roles; it is not constructed to force a PLH win."
+}

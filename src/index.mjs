@@ -175,4 +175,8 @@ export {
   createExperimentCellExecution,
   finalizeExperimentCell
 } from "./experiment-cell.mjs";
-
+export {
+  PUBLICATION_BASELINE_IDS,
+  classifyPublicationScenario,
+  planPublicationResponsibility
+} from "./publication-baseline.mjs";

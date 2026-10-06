@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "taskPackId": "access-policy-incident",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "domain": "coding/access-control-reconciliation",
   "seedPath": "seed",
   "activeContractPath": "contract/access-policy.json",
@@ -16,7 +16,7 @@
     "scenarios/clean-v2.json",
     "scenarios/hidden-contract.json",
     "scenarios/external-mutation.json",
+    "scenarios/workspace-regression.json",
     "scenarios/worker-loss.json"
   ]
 }
-

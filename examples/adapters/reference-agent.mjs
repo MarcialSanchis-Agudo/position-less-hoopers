@@ -33,6 +33,14 @@ if (taskPackId === "checkout-incident") {
   contractPath = path.join(workspace, "contract/rollout.json");
   destination = path.join(workspace, "src/rollout.mjs");
   referenceRoot = path.join(repoRoot, "examples/deployment-rollout-incident/reference-solution");
+} else if (taskPackId === "access-policy-incident") {
+  contractPath = path.join(workspace, "contract/access-policy.json");
+  destination = path.join(workspace, "src/access.mjs");
+  referenceRoot = path.join(repoRoot, "examples/access-policy-incident/reference-solution");
+} else if (taskPackId === "event-replay-incident") {
+  contractPath = path.join(workspace, "contract/replay.json");
+  destination = path.join(workspace, "src/replay.mjs");
+  referenceRoot = path.join(repoRoot, "examples/event-replay-incident/reference-solution");
 } else {
   await fs.writeFile(resultPath, JSON.stringify({
     schemaVersion: 1,
@@ -62,4 +70,3 @@ await fs.writeFile(resultPath, JSON.stringify({
 }, null, 2) + "\n");
 
 process.stdout.write(`reference-agent aligned ${taskPackId} to v${version}\n`);
-

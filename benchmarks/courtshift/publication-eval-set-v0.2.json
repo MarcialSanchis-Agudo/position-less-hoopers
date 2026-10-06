@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-paper-eval-set-v0.2",
+  "supersedes": "plh-paper-eval-set-v0.1",
+  "status": "prospective-freeze-before-new-real-agent-outcomes",
+  "createdAfter": [
+    "claude-sonnet-deployment-heldout-002",
+    "claude-sonnet-orca-ax-assignment-shift-001",
+    "claude-sonnet-orca-ax-context-routing-001"
+  ],
+  "changeFromV0_1": "Adds same-contract workspace regression so the prospective evaluation distinguishes contract-change recovery from implementation-local recovery, and binds the comparison to the shared B0/B1/B2/B3/P baseline harness.",
+  "baselineConfig": "benchmarks/courtshift/publication-baselines-v0.1.json",
+  "sharedHarness": "scripts/run-publication-baseline-matrix.mjs",
+  "purpose": "Define the minimum multi-domain task population and evidence boundaries needed for a credible first PLH/ORCA AX paper.",
+  "developmentTaskPacks": [
+    {
+      "taskPack": "examples/checkout-incident/task-pack.json",
+      "role": "development-and-calibration-only"
+    },
+    {
+      "taskPack": "examples/config-migration-incident/task-pack.json",
+      "role": "development-and-calibration-only"
+    }
+  ],
+  "previouslyObservedTaskPacks": [
+    {
+      "taskPack": "examples/deployment-rollout-incident/task-pack.json",
+      "role": "prior-heldout-and-post-hoc-mechanism-evidence",
+      "eligibleForNewProspectiveClaim": false
+    }
+  ],
+  "prospectiveEvaluationTaskPacks": [
+    {
+      "taskPack": "examples/access-policy-incident/task-pack.json",
+      "domain": "access-control-reconciliation"
+    },
+    {
+      "taskPack": "examples/event-replay-incident/task-pack.json",
+      "domain": "event-stream-reconciliation"
+    }
+  ],
+  "requiredScenarioClasses": [
+    "clean",
+    "contract_reveal",
+    "external_contract_mutation",
+    "workspace_regression"
+  ],
+  "deferredScenarioClasses": [
+    {
+      "type": "worker_loss",
+      "reason": "Scientific use requires live executor interruption rather than between-execution simulation."
+    }
+  ],
+  "baselineLadder": [
+    {
+      "id": "B0",
+      "name": "strong_single_agent",
+      "requirement": "same model, tools, grader, mutation authority, and one fresh invocation per cell"
+    },
+    {
+      "id": "B1",
+      "name": "static_workflow",
+      "requirement": "fixed implementation owner with no state-responsive ownership change"
+    },
+    {
+      "id": "B2",
+      "name": "fixed_specialist_team",
+      "requirement": "persistent owners for a frozen specialist-role ontology"
+    },
+    {
+      "id": "B3",
+      "name": "dynamic_predefined_roles",
+      "requirement": "dynamic assignee changes allowed, but role/function ontology fixed before execution"
+    },
+    {
+      "id": "P",
+      "name": "plh_orca_ax",
+      "requirement": "state-derived Need, temporary Responsibility, team-aware Need allocation, situated matching, authoritative evidence"
+    }
+  ],
+  "preconditionRule": "Perturbed cells begin from a deterministically verified correct initial contract state. If the seed does not satisfy that state, the frozen reference solution establishes the precondition before the perturbation. This setup is identical across baselines and is not counted as agent execution.",
+  "executionRule": "After the target state becomes incorrect, each baseline receives exactly one fresh model invocation. Baseline differences are coordination semantics and bounded worker context only.",
+  "primaryEndpoints": [
+    "externally_verified_perturbed_success",
+    "recovery_latency"
+  ],
+  "secondaryEndpoints": [
+    "clean_success",
+    "agent_execution_time",
+    "selected_worker",
+    "coordination_ontology",
+    "context_package_kind"
+  ],
+  "analysisPlan": {
+    "unit": "task-scenario-replicate paired comparison",
+    "reportAbsoluteOutcomes": true,
+    "reportCleanAndPerturbedSeparately": true,
+    "reportDegradation": true,
+    "uncertainty": "paired bootstrap interval when sample size supports it; otherwise exact paired outcomes plus descriptive intervals",
+    "minimumReplicatesPerTaskCondition": 5,
+    "counterbalance": "cyclic baseline order rotation across replicate, task, and scenario"
+  },
+  "freezeRules": [
+    "Do not change worker profiles, matcher weights, role ontology, Need derivation, graders, contracts, or baseline definitions after inspecting prospective task outcomes.",
+    "Bug fixes that change semantics require a new evaluation-set version and rerun of all affected prospective conditions.",
+    "The two prospective TaskPacks may not be reclassified as development tasks after outcomes are seen.",
+    "B3 and P must use the same specialist worker pool and situated matcher.",
+    "No claim of broad superiority may rely on the basketball mechanism catalog or on post-hoc deployment diagnostics."
+  ]
+}

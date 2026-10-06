@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "access-policy-workspace-regression",
+  "kind": "perturbed",
+  "initialContractVersion": 2,
+  "targetContractVersion": 2,
+  "perturbation": {
+    "type": "workspace_regression",
+    "source": "seed/src/access.mjs",
+    "destination": "src/access.mjs",
+    "trigger": {
+      "kind": "semantic_event",
+      "event": "verified_v2_implementation_replaced"
+    }
+  }
+}
