@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-paper-eval-set-v0.2",
+  "baselineSetId": "plh-publication-baselines-v0.1",
+  "adapter": "examples/adapters/claude-code.json",
+  "repeats": 5,
+  "taskCount": 2,
+  "runCount": 200,
+  "analyzableRunCount": 200,
+  "failedCellCount": 0,
+  "successByBaseline": {
+    "B0": "40/40",
+    "B1": "40/40",
+    "B2": "40/40",
+    "B3": "40/40",
+    "P": "40/40"
+  },
+  "perturbedMeanRecoveryLatencyMs": {
+    "B0": 22733.166666666668,
+    "B1": 22710.666666666668,
+    "B2": 22877.933333333334,
+    "B3": 22290.9,
+    "P": 21355.033333333333
+  },
+  "B3vsP": {
+    "meanB3MinusPRecoveryLatencyMs": 935.8666666666667,
+    "pFasterPairs": 17,
+    "b3FasterPairs": 13,
+    "sameSelectedWorkerPairs": 40,
+    "interpretation": "No demonstrated state-derived Need advantage because B3 and P routed identically across the prospective task population."
+  },
+  "claimBoundary": "Prospective null/ceiling result for Need-first vs strong dynamic predefined roles; supports no broad superiority claim."
+}
