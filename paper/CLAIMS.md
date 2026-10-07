@@ -73,6 +73,17 @@ We may say, only with the stated scope:
 - the effect was localized to the episode where routing differed: the second recovery selected the same worker under both policies and had effectively identical mean execution time;
 - this is a positive context-routing pilot signal, not evidence that situatedness generally improves real-agent efficiency across tasks, models, providers, or workloads.
 
+
+## Prospective multi-domain evidence
+
+We may say, only with the stated scope:
+
+- in the frozen v0.2 publication matrix, 200/200 cells were analyzable and all B0/B1/B2/B3/P conditions achieved externally verified correctness across two prospective TaskPacks and four scenario classes;
+- P had the lowest aggregate perturbed mean recovery latency (21.355 s), but its 0.936 s mean advantage over B3 was not a reliable paired effect;
+- B3 and P selected the same worker in every prospective cell, showing that the frozen predefined-role ontology fully covered this evaluation population;
+- therefore v0.2 does not demonstrate that state-derived Needs outperform strong dynamic predefined-role assignment;
+- v0.2 is a prospective null/ceiling result for the stronger ontology-emergence claim and should remain visible in the paper.
+
 ## Claims under test
 
 Do not state as findings yet:
