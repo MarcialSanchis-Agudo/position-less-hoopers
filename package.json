@@ -23,7 +23,8 @@
     "orca:context": "node ./scripts/run-orca-ax-context-routing-comparison.mjs",
     "hoopers:suite": "node ./scripts/run-hoopers-arena-suite.mjs",
     "paper:cell": "node ./scripts/run-publication-baseline-cell.mjs",
-    "paper:matrix": "node ./scripts/run-publication-baseline-matrix.mjs"
+    "paper:matrix": "node ./scripts/run-publication-baseline-matrix.mjs",
+    "paper:ontology-stress": "node ./scripts/run-ontology-stress-matrix.mjs"
   },
   "engines": {
     "node": ">=20"
