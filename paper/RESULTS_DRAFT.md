@@ -88,6 +88,29 @@ Mean total agent execution was 39.810 s for capability-only and 38.188 s for cap
 
 This supports a narrow mechanism claim: on this one post-hoc TaskPack/model pilot, routing the first Need to the worker with matching prior context reduced mean real-agent execution time while preserving correctness. It does not establish general situatedness superiority across tasks, models, providers, or context regimes.
 
+
+## Prospective publication evaluation v0.2 — 200 real-agent cells
+
+Frozen before any Access Policy Incident or Event Replay Incident Claude outcomes were inspected. The matrix used Claude Sonnet 5.5, medium effort, five replicates, two prospective TaskPacks, four scenario classes, and five frozen coordination baselines (B0/B1/B2/B3/P), for 200 analyzable cells and zero infrastructure failures.
+
+All five baselines achieved 40/40 externally verified success. The prospective primary success endpoint therefore saturated and does not support a PLH success-rate advantage.
+
+Perturbed mean recovery latency was:
+
+- B0 strong single agent: 22.733 s;
+- B1 static workflow: 22.711 s;
+- B2 fixed specialist team: 22.878 s;
+- B3 dynamic predefined roles: 22.291 s;
+- P / PLH-ORCA AX: 21.355 s.
+
+P had the lowest aggregate perturbed mean, 0.936 s lower than B3, but the paired B3-minus-P recovery difference across 30 perturbed task/scenario/replicate pairs was noisy and crossed zero under paired resampling. P was faster in 17/30 pairs and B3 in 13/30.
+
+Most importantly, B3 and P selected the same worker identity in every prospective cell. The frozen implementer/contract-specialist ontology was sufficient to express every state in this task set. Therefore this matrix does not demonstrate an advantage for state-derived Need emergence over strong dynamic predefined-role assignment. The B3↔P timing differences should be treated as execution/prompt variation under matched routing, not as evidence for emergent-function superiority.
+
+A narrower routing signal remains: under external contract mutation, state-responsive contract-specialist routing was faster than the static implementation-owner condition. This supports continued study of situated specialization, while leaving the stronger Need-first-vs-predefined-role claim unresolved.
+
+This v0.2 result is retained as a prospective null/ceiling result and will not be tuned or rerun until it favors PLH.
+
 ## Invalidated held-out run
 
 `claude-sonnet-deployment-heldout-001` is excluded from all scientific analysis because benchmark revision r1 contained a contradiction between the public v1 compatibility test and the external v2 zone-diversity grader.
