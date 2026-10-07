@@ -180,3 +180,8 @@ export {
   classifyPublicationScenario,
   planPublicationResponsibility
 } from "./publication-baseline.mjs";
+export {
+  DEFAULT_ONTOLOGY_ROLE_SELECTION_WEIGHTS,
+  rankPredefinedRoles,
+  choosePredefinedRole
+} from "./ontology-role-selector.mjs";
