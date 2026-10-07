@@ -5,8 +5,15 @@
   "initialContractVersion": 2,
   "targetContractVersion": 3,
   "stateRequirements": {
-    "capabilities": ["implement", "diagnose", "verify"],
-    "contextRefs": ["contract", "provenance", "audit_log"]
+    "capabilities": [
+      "implement",
+      "diagnose",
+      "verify"
+    ],
+    "contextRefs": [
+      "provenance",
+      "audit_log"
+    ]
   },
   "perturbation": {
     "type": "ontology_stress_contract_mutation",
@@ -23,5 +30,7 @@
         "destination": "state/audit.log"
       }
     ]
-  }
+  },
+  "stateObjective": "Diagnose the provenance-state change and repair artifact resolution using the authoritative lineage evidence.",
+  "stateRationale": "The code was correct for v2, but the new state introduces source aliases, rejection evidence, and provenance ordering not represented by the frozen predefined-role contexts."
 }
