@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "artifact-lineage-covered-contract-change",
+  "kind": "perturbed",
+  "initialContractVersion": 1,
+  "targetContractVersion": 2,
+  "stateRequirements": {
+    "capabilities": ["implement", "analyze_contract"],
+    "contextRefs": ["contract"]
+  },
+  "perturbation": {
+    "type": "contract_reveal",
+    "contractVersion": 2
+  }
+}

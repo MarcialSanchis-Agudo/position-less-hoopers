@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "schema-bridge-schema-history-stress",
+  "kind": "perturbed",
+  "initialContractVersion": 2,
+  "targetContractVersion": 3,
+  "stateRequirements": {
+    "capabilities": ["implement", "diagnose", "reconcile"],
+    "contextRefs": ["contract", "schema_history", "external_signal"]
+  },
+  "perturbation": {
+    "type": "ontology_stress_contract_mutation",
+    "contractVersion": 3,
+    "workspaceMutations": [
+      {
+        "type": "copy_taskpack_file",
+        "source": "states/schema-history-stress.json",
+        "destination": "state/schema-history.json"
+      },
+      {
+        "type": "copy_taskpack_file",
+        "source": "states/external-signal-stress.json",
+        "destination": "state/external-signal.json"
+      }
+    ]
+  }
+}

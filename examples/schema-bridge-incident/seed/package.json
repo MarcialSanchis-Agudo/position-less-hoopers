@@ -1,0 +1,6 @@
+{
+  "name": "schema-bridge-incident-seed",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test" }
+}

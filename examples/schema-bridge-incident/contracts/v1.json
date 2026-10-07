@@ -1,0 +1,11 @@
+{
+  "contractVersion": 1,
+  "api": "normalizePartnerRecords(records, options)",
+  "requirements": [
+    "Input records use id and value fields.",
+    "Ignore records with missing id.",
+    "Return { id, value } records sorted lexicographically by id.",
+    "Coerce non-null values to strings.",
+    "Do not mutate inputs."
+  ]
+}

@@ -1,0 +1,5 @@
+2026-10-07 provenance incident:
+legacy-east was renamed to prod-east after certificate rotation.
+edge is the historical alias for prod-edge.
+unknown sources are quarantined.
+prod-east outranks prod-edge; backup is last-resort provenance.

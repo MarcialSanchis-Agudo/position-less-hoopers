@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "schema-bridge-clean-v2",
+  "kind": "clean",
+  "initialContractVersion": 2,
+  "targetContractVersion": 2,
+  "stateRequirements": {
+    "capabilities": ["implement"],
+    "contextRefs": ["implementation"]
+  },
+  "perturbation": null
+}

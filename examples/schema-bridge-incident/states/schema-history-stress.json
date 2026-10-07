@@ -1,0 +1,7 @@
+{
+  "idField": "externalId",
+  "valueField": "amount",
+  "statusField": "state",
+  "activeStatuses": ["open", "ready"],
+  "valueCoercion": "number_to_string"
+}

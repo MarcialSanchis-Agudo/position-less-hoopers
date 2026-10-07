@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "taskPackId": "artifact-lineage-incident",
+  "version": "0.1.0",
+  "domain": "coding/artifact-provenance-reconciliation",
+  "seedPath": "seed",
+  "activeContractPath": "contract/artifact-lineage.json",
+  "grader": { "path": "grader/grade.mjs" },
+  "evidenceRefTemplate": "evidence:artifact-lineage-v{version}",
+  "contracts": {
+    "1": "contracts/v1.json",
+    "2": "contracts/v2.json",
+    "3": "contracts/v3.json"
+  },
+  "scenarioFiles": [
+    "scenarios/clean-v2.json",
+    "scenarios/covered-contract-change.json",
+    "scenarios/provenance-stress.json"
+  ]
+}

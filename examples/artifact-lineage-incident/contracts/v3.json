@@ -1,0 +1,14 @@
+{
+  "contractVersion": 3,
+  "api": "resolveArtifacts(records, options)",
+  "requirements": [
+    "All v2 requirements remain.",
+    "The authoritative provenance state is state/provenance.json.",
+    "provenance.aliases maps observed source names to canonical source names.",
+    "Canonicalize record sources before blocked/rejected filtering and priority comparison.",
+    "provenance.rejectedSources excludes canonical sources regardless of options.",
+    "provenance.sourcePriority is authoritative and is evaluated before any remaining option sourcePriority entries.",
+    "Returned source names are canonical.",
+    "The result remains deterministic and does not mutate inputs."
+  ]
+}

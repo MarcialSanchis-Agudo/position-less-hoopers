@@ -1,0 +1,12 @@
+{
+  "contractVersion": 2,
+  "api": "resolveArtifacts(records, options)",
+  "requirements": [
+    "All v1 requirements remain.",
+    "options.blockedSources excludes matching source names before winner selection.",
+    "options.sourcePriority is ordered highest priority first.",
+    "When duplicate artifactIds remain, prefer the record whose source appears earliest in sourcePriority.",
+    "Sources absent from sourcePriority rank after all listed sources and then fall back to v1 createdAt/source ordering.",
+    "The result remains deterministic."
+  ]
+}

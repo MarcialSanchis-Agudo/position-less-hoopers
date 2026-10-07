@@ -1,0 +1,11 @@
+{
+  "contractVersion": 2,
+  "api": "normalizePartnerRecords(records, options)",
+  "requirements": [
+    "All v1 requirements remain.",
+    "options.blockedIds excludes matching ids.",
+    "options.defaultValue supplies a value when value is null or undefined.",
+    "When duplicate ids occur, keep the last eligible input record.",
+    "The result remains deterministic."
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "aliases": {
+    "legacy-east": "prod-east",
+    "edge": "prod-edge"
+  },
+  "rejectedSources": ["unknown"],
+  "sourcePriority": ["prod-east", "prod-edge", "backup"]
+}

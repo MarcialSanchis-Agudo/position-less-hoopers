@@ -1,0 +1,7 @@
+{
+  "idField": "id",
+  "valueField": "value",
+  "statusField": "status",
+  "activeStatuses": ["active"],
+  "valueCoercion": "string"
+}

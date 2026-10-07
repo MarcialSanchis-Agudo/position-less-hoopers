@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "artifact-lineage-provenance-stress",
+  "kind": "perturbed",
+  "initialContractVersion": 2,
+  "targetContractVersion": 3,
+  "stateRequirements": {
+    "capabilities": ["implement", "diagnose", "verify"],
+    "contextRefs": ["contract", "provenance", "audit_log"]
+  },
+  "perturbation": {
+    "type": "ontology_stress_contract_mutation",
+    "contractVersion": 3,
+    "workspaceMutations": [
+      {
+        "type": "copy_taskpack_file",
+        "source": "states/provenance-stress.json",
+        "destination": "state/provenance.json"
+      },
+      {
+        "type": "copy_taskpack_file",
+        "source": "states/audit-stress.log",
+        "destination": "state/audit.log"
+      }
+    ]
+  }
+}

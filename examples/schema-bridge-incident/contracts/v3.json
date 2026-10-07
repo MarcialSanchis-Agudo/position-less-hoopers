@@ -1,0 +1,14 @@
+{
+  "contractVersion": 3,
+  "api": "normalizePartnerRecords(records, options)",
+  "requirements": [
+    "All v2 semantic requirements remain after mapping the current partner schema.",
+    "The authoritative external schema history is state/schema-history.json.",
+    "schema.idField, schema.valueField, and schema.statusField identify the current partner field names.",
+    "Only records whose status is in schema.activeStatuses are eligible.",
+    "Map the partner id/value fields into the stable { id, value } output.",
+    "If schema.valueCoercion is number_to_string, numeric values must be returned as strings.",
+    "state/external-signal.json is diagnostic context describing the current partner cutover.",
+    "The result remains deterministic and does not mutate inputs."
+  ]
+}

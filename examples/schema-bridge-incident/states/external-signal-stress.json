@@ -1,0 +1,5 @@
+{
+  "partner": "northstar",
+  "cutover": "2026-10-07",
+  "summary": "Partner v4 replaced id/value/status with externalId/amount/state during the live cutover."
+}

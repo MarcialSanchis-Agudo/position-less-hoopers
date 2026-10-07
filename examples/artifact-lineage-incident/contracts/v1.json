@@ -1,0 +1,12 @@
+{
+  "contractVersion": 1,
+  "api": "resolveArtifacts(records, options)",
+  "requirements": [
+    "Each record has artifactId, source, checksum, and createdAt.",
+    "Ignore records missing artifactId, source, or checksum.",
+    "Return one record per artifactId.",
+    "Without source priority, choose the earliest createdAt record; break ties by source lexicographically.",
+    "Return { artifactId, source, checksum } objects sorted by artifactId.",
+    "Do not mutate inputs."
+  ]
+}
