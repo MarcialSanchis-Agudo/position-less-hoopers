@@ -41,6 +41,14 @@ if (taskPackId === "checkout-incident") {
   contractPath = path.join(workspace, "contract/replay.json");
   destination = path.join(workspace, "src/replay.mjs");
   referenceRoot = path.join(repoRoot, "examples/event-replay-incident/reference-solution");
+} else if (taskPackId === "artifact-lineage-incident") {
+  contractPath = path.join(workspace, "contract/artifact-lineage.json");
+  destination = path.join(workspace, "src/artifacts.mjs");
+  referenceRoot = path.join(repoRoot, "examples/artifact-lineage-incident/reference-solution");
+} else if (taskPackId === "schema-bridge-incident") {
+  contractPath = path.join(workspace, "contract/schema-bridge.json");
+  destination = path.join(workspace, "src/bridge.mjs");
+  referenceRoot = path.join(repoRoot, "examples/schema-bridge-incident/reference-solution");
 } else {
   await fs.writeFile(resultPath, JSON.stringify({
     schemaVersion: 1,
