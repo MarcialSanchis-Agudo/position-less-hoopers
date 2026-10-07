@@ -185,3 +185,7 @@ export {
   rankPredefinedRoles,
   choosePredefinedRole
 } from "./ontology-role-selector.mjs";
+export {
+  ONTOLOGY_STRESS_BASELINE_IDS,
+  planOntologyStressResponsibility
+} from "./ontology-stress-baseline.mjs";
