@@ -456,7 +456,7 @@ const output = {
     status: execution.result.status,
     agentExecutionMs: execution.telemetry.durationMs,
     recoveryLatencyMs: scenario.kind === "perturbed"
-      ? recoveryCompletedMs - perturbationAppliedMs
+      ? completedMs - perturbationAppliedMs
       : null
   },
   final: {
