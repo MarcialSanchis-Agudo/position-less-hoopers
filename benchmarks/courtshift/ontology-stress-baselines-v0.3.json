@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 1,
+  "ontologySetId": "plh-ontology-stress-baselines-v0.3",
+  "status": "frozen-before-ontology-stress-task-authoring",
+  "createdAfter": "plh-paper-eval-set-v0.2",
+  "purpose": "Freeze a strong predefined-role ontology and candidate worker pool before authoring the new ontology-stress TaskPacks.",
+  "baselineIds": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "P"
+  ],
+  "baselineDefinitions": {
+    "B0": "One strong generalist with broad bounded context.",
+    "B1": "One fixed implementation owner for every state.",
+    "B2": "Fixed specialist-role owners under the frozen role ontology.",
+    "B3": "Dynamic worker assignment, but the Need/function must be expressed as one role from the frozen ontology.",
+    "P": "State-derived Need may reference any authoritative context dimensions exposed by the task state, then uses the same candidate pool and matcher as B3."
+  },
+  "predefinedRoles": {
+    "implementer": {
+      "objective": "Modify implementation code to satisfy known behavior.",
+      "requiredCapabilities": [
+        "implement"
+      ],
+      "contextRefs": [
+        "implementation"
+      ]
+    },
+    "contract_interpreter": {
+      "objective": "Interpret changed requirements and adapt implementation.",
+      "requiredCapabilities": [
+        "implement",
+        "analyze_contract"
+      ],
+      "contextRefs": [
+        "contract"
+      ]
+    },
+    "verifier": {
+      "objective": "Diagnose failed evidence and verify a candidate repair.",
+      "requiredCapabilities": [
+        "verify"
+      ],
+      "contextRefs": [
+        "evidence",
+        "tests"
+      ]
+    },
+    "runtime_investigator": {
+      "objective": "Diagnose behavior from runtime traces and operational symptoms.",
+      "requiredCapabilities": [
+        "diagnose"
+      ],
+      "contextRefs": [
+        "runtime_trace"
+      ]
+    },
+    "dependency_diagnostician": {
+      "objective": "Diagnose ordering or dependency failures.",
+      "requiredCapabilities": [
+        "diagnose"
+      ],
+      "contextRefs": [
+        "dependency_graph"
+      ]
+    },
+    "recovery_planner": {
+      "objective": "Plan a safe recovery or rollback from a known bad state.",
+      "requiredCapabilities": [
+        "recover"
+      ],
+      "contextRefs": [
+        "rollback_history"
+      ]
+    },
+    "conflict_resolver": {
+      "objective": "Resolve known concurrent-state conflicts.",
+      "requiredCapabilities": [
+        "reconcile"
+      ],
+      "contextRefs": [
+        "concurrent_state"
+      ]
+    }
+  },
+  "workerProfiles": [
+    {
+      "id": "generalist",
+      "capabilities": [
+        "implement",
+        "analyze_contract",
+        "verify",
+        "diagnose",
+        "recover",
+        "reconcile"
+      ],
+      "capabilityScores": {
+        "implement": 0.95,
+        "analyze_contract": 0.95,
+        "verify": 0.92,
+        "diagnose": 0.9,
+        "recover": 0.9,
+        "reconcile": 0.9
+      },
+      "contextRefs": [
+        "implementation",
+        "contract",
+        "tests",
+        "evidence"
+      ],
+      "contextKinds": [
+        "implementation",
+        "contract",
+        "tests",
+        "evidence"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    },
+    {
+      "id": "worker-implementation",
+      "capabilities": [
+        "implement",
+        "diagnose"
+      ],
+      "capabilityScores": {
+        "implement": 0.97,
+        "diagnose": 0.78
+      },
+      "contextRefs": [
+        "implementation"
+      ],
+      "contextKinds": [
+        "implementation"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    },
+    {
+      "id": "worker-contract",
+      "capabilities": [
+        "implement",
+        "analyze_contract"
+      ],
+      "capabilityScores": {
+        "implement": 0.86,
+        "analyze_contract": 0.99
+      },
+      "contextRefs": [
+        "contract"
+      ],
+      "contextKinds": [
+        "contract"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    },
+    {
+      "id": "worker-verification",
+      "capabilities": [
+        "implement",
+        "verify",
+        "diagnose"
+      ],
+      "capabilityScores": {
+        "implement": 0.82,
+        "verify": 0.99,
+        "diagnose": 0.91
+      },
+      "contextRefs": [
+        "tests",
+        "evidence"
+      ],
+      "contextKinds": [
+        "tests",
+        "evidence"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    },
+    {
+      "id": "worker-runtime",
+      "capabilities": [
+        "implement",
+        "diagnose"
+      ],
+      "capabilityScores": {
+        "implement": 0.84,
+        "diagnose": 0.99
+      },
+      "contextRefs": [
+        "runtime_trace"
+      ],
+      "contextKinds": [
+        "runtime_trace"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    },
+    {
+      "id": "worker-dependency",
+      "capabilities": [
+        "implement",
+        "diagnose",
+        "recover"
+      ],
+      "capabilityScores": {
+        "implement": 0.84,
+        "diagnose": 0.97,
+        "recover": 0.9
+      },
+      "contextRefs": [
+        "dependency_graph"
+      ],
+      "contextKinds": [
+        "dependency_graph"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    },
+    {
+      "id": "worker-recovery",
+      "capabilities": [
+        "implement",
+        "recover"
+      ],
+      "capabilityScores": {
+        "implement": 0.83,
+        "recover": 0.99
+      },
+      "contextRefs": [
+        "rollback_history"
+      ],
+      "contextKinds": [
+        "rollback_history"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    },
+    {
+      "id": "worker-conflict",
+      "capabilities": [
+        "implement",
+        "reconcile"
+      ],
+      "capabilityScores": {
+        "implement": 0.84,
+        "reconcile": 0.99
+      },
+      "contextRefs": [
+        "concurrent_state"
+      ],
+      "contextKinds": [
+        "concurrent_state"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    },
+    {
+      "id": "worker-forensics",
+      "capabilities": [
+        "implement",
+        "diagnose",
+        "verify"
+      ],
+      "capabilityScores": {
+        "implement": 0.88,
+        "diagnose": 0.94,
+        "verify": 0.93
+      },
+      "contextRefs": [
+        "provenance",
+        "audit_log"
+      ],
+      "contextKinds": [
+        "provenance",
+        "audit_log"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    },
+    {
+      "id": "worker-external-state",
+      "capabilities": [
+        "implement",
+        "diagnose",
+        "reconcile"
+      ],
+      "capabilityScores": {
+        "implement": 0.87,
+        "diagnose": 0.92,
+        "reconcile": 0.94
+      },
+      "contextRefs": [
+        "external_signal",
+        "schema_history"
+      ],
+      "contextKinds": [
+        "external_signal",
+        "schema_history"
+      ],
+      "permissions": [
+        "workspace-write"
+      ],
+      "available": true
+    }
+  ],
+  "matcherOptions": {
+    "mode": "capability_situated",
+    "weights": {
+      "capability": 1,
+      "situatedness": 0.35,
+      "continuity": 0.15,
+      "expectedCost": 0.05,
+      "switchCost": 0.1
+    }
+  },
+  "fixedRoleOwners": {
+    "implementer": "worker-implementation",
+    "contract_interpreter": "worker-contract",
+    "verifier": "worker-verification",
+    "runtime_investigator": "worker-runtime",
+    "dependency_diagnostician": "worker-dependency",
+    "recovery_planner": "worker-recovery",
+    "conflict_resolver": "worker-conflict"
+  },
+  "freezeRules": [
+    "Do not add, remove, rename, or change predefined B3 roles after ontology-stress TaskPacks are authored.",
+    "Do not change worker contextRefs, capability scores, matcher weights, or fixed role owners after TaskPack authoring.",
+    "The worker pool intentionally contains worker-forensics and worker-external-state, whose context dimensions are not represented by a dedicated predefined B3 role.",
+    "B3 may still select any feasible worker through the same matcher; it is not prohibited from using workers lacking a named role.",
+    "P and B3 must use the same candidate pool, matcher, model, tools, grader, and one fresh invocation per cell."
+  ]
+}
