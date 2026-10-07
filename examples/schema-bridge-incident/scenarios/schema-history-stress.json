@@ -5,8 +5,15 @@
   "initialContractVersion": 2,
   "targetContractVersion": 3,
   "stateRequirements": {
-    "capabilities": ["implement", "diagnose", "reconcile"],
-    "contextRefs": ["contract", "schema_history", "external_signal"]
+    "capabilities": [
+      "implement",
+      "diagnose",
+      "reconcile"
+    ],
+    "contextRefs": [
+      "schema_history",
+      "external_signal"
+    ]
   },
   "perturbation": {
     "type": "ontology_stress_contract_mutation",
@@ -23,5 +30,7 @@
         "destination": "state/external-signal.json"
       }
     ]
-  }
+  },
+  "stateObjective": "Reconcile the implementation with the partner's newly observed schema state.",
+  "stateRationale": "The partner cutover changed field names and status semantics; the authoritative schema history and external cutover signal define the new operational state."
 }
