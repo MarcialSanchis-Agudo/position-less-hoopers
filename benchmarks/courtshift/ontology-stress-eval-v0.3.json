@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-ontology-stress-eval-v0.3",
+  "status": "prospective-freeze-before-real-agent-outcomes",
+  "ontologyFreezeCommit": "034bacccf594269c984a0d3225e3d7b8ea15ecc6",
+  "roleSelectorFreezeCommit": "41aa88f193927a266a31b0e26d2b25405cecccfb",
+  "taskAuthoringCommit": "1b8652406a2cae9a34d6f085cac5f2af7ba6bf09",
+  "preOutcomeDesignRepairs": [
+    "698144e03a898bdf3d55289a97ecb8eb1b1ba8c0",
+    "7730ecb1b6db523e280c98e0161666d26c831f7b",
+    "2da64dc5cacfac2f450cdba38d94a5065e475de2",
+    "08068da8d7f7f7f6e0e35c1095e37fbbb9a4ca70",
+    "3c69ea7613cecc324ca2ff39ba155bfdcc7a1164",
+    "e190071a57d470ca67d0cc8f1c9b7e3a7bf46a14"
+  ],
+  "ontologyConfig": "benchmarks/courtshift/ontology-stress-baselines-v0.3.json",
+  "baselineOrder": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "P"
+  ],
+  "prospectiveTaskPacks": [
+    {
+      "taskPack": "examples/artifact-lineage-incident/task-pack.json",
+      "domain": "artifact-provenance-reconciliation"
+    },
+    {
+      "taskPack": "examples/schema-bridge-incident/task-pack.json",
+      "domain": "external-schema-reconciliation"
+    }
+  ],
+  "scenarioClasses": [
+    "clean",
+    "contract_reveal",
+    "ontology_stress_contract_mutation"
+  ],
+  "taskProfiles": {
+    "artifact-lineage-incident": {
+      "implementationPath": "src/artifacts.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/artifacts.test.mjs",
+        "evidence": "state/audit.log",
+        "provenance": "state/provenance.json",
+        "audit_log": "state/audit.log"
+      }
+    },
+    "schema-bridge-incident": {
+      "implementationPath": "src/bridge.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/bridge.test.mjs",
+        "evidence": "state/external-signal.json",
+        "schema_history": "state/schema-history.json",
+        "external_signal": "state/external-signal.json"
+      }
+    }
+  },
+  "resourceRule": "One fresh model invocation per cell after deterministic precondition preparation; B0/B1/B2/B3/P share model, tools, grader, mutation authority, and workspace state.",
+  "specialistPoolRule": "B2/B3/P use the same non-generalist worker pool frozen in ontology-stress-baselines-v0.3. B0 alone uses the strong generalist.",
+  "hypotheses": [
+    "On covered contract-change controls, B3 and P should usually route similarly because the frozen ontology contains contract_interpreter.",
+    "On ontology-stress scenarios, the frozen B3 role selector should have zero direct context coverage for the novel state dimensions, while P may route to worker-forensics or worker-external-state through those dimensions.",
+    "Any performance or correctness difference must be reported together with actual worker-selection divergence; timing differences without routing divergence are not evidence for Need emergence."
+  ],
+  "primaryEndpoints": [
+    "externally_verified_success",
+    "recovery_latency"
+  ],
+  "mechanismEndpoints": [
+    "selected_role",
+    "role_context_coverage",
+    "selected_worker",
+    "context_kinds",
+    "B3_P_worker_divergence"
+  ],
+  "analysisPlan": {
+    "minimumReplicatesPerTaskCondition": 5,
+    "unit": "task-scenario-replicate paired comparison",
+    "counterbalance": "cyclic baseline order rotation across replicate, task, and scenario",
+    "uncertainty": "paired bootstrap interval for latency deltas; exact paired outcomes for success"
+  },
+  "freezeRules": [
+    "No task, grader, stateRequirement, role, worker profile, matcher weight, context mapping, or role-selector semantics may change after the first real-agent v0.3 outcome is inspected.",
+    "Any semantic bug fix creates v0.3.1 and requires rerunning every affected cell.",
+    "v0.2 remains a separate prospective null/ceiling result and is never replaced by v0.3.",
+    "B3 and P must use the same specialist worker pool and capability+situatedness matcher.",
+    "A v0.3 claim about Need emergence requires observed B3/P worker-selection divergence in the stress cells."
+  ]
+}
