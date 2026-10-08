@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "adapterId": "synthetic-openai-codex-infrastructure-failure",
+  "command": "node",
+  "args": [
+    "./failing-codex-agent.mjs"
+  ],
+  "timeoutMs": 30000
+}
