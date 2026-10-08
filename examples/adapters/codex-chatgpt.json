@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "adapterId": "openai-codex-chatgpt",
+  "command": "node",
+  "args": [
+    "./codex-chatgpt-agent.mjs"
+  ],
+  "timeoutMs": 600000
+}

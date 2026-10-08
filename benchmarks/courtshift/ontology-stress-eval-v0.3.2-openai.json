@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-ontology-stress-eval-v0.3.2-openai",
+  "supersedes": "plh-ontology-stress-eval-v0.3.1",
+  "status": "prospective-executor-portability-revision-before-openai-outcomes",
+  "scientificSemanticsUnchanged": true,
+  "ontologyConfig": "benchmarks/courtshift/ontology-stress-baselines-v0.3.json",
+  "scientificDesignSource": "benchmarks/courtshift/ontology-stress-eval-v0.3.json",
+  "runner": "scripts/run-ontology-stress-matrix-v0.3.2.mjs",
+  "cellRunner": "scripts/run-ontology-stress-cell-v0.3.2.mjs",
+  "invalidatedAttempt": {
+    "resultId": "claude-sonnet-ontology-stress-v0.3-001",
+    "reason": "Executor infrastructure collapsed after 60 successful cells. The next 90 cells all returned failed Claude invocations with approximately 2-4 second durations rather than normal task execution.",
+    "scientificOutcomeEligible": false,
+    "routingTraceEligible": true,
+    "observedExample": {
+      "claudeExitCode": 1,
+      "claudeSignal": null,
+      "claudeStderr": "",
+      "publicTestExitCode": 0,
+      "durationMs": 2173
+    }
+  },
+  "prospectiveTaskPacks": [
+    {
+      "taskPack": "examples/artifact-lineage-incident/task-pack.json",
+      "domain": "artifact-provenance-reconciliation"
+    },
+    {
+      "taskPack": "examples/schema-bridge-incident/task-pack.json",
+      "domain": "external-schema-reconciliation"
+    }
+  ],
+  "baselineOrder": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "P"
+  ],
+  "taskProfiles": {
+    "artifact-lineage-incident": {
+      "implementationPath": "src/artifacts.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/artifacts.test.mjs",
+        "evidence": "state/audit.log",
+        "provenance": "state/provenance.json",
+        "audit_log": "state/audit.log"
+      }
+    },
+    "schema-bridge-incident": {
+      "implementationPath": "src/bridge.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/bridge.test.mjs",
+        "evidence": "state/external-signal.json",
+        "schema_history": "state/schema-history.json",
+        "external_signal": "state/external-signal.json"
+      }
+    }
+  },
+  "scenarioClasses": [
+    "clean",
+    "contract_reveal",
+    "ontology_stress_contract_mutation"
+  ],
+  "primaryEndpoints": [
+    "externally_verified_success",
+    "recovery_latency"
+  ],
+  "mechanismEndpoints": [
+    "selected_role",
+    "role_context_coverage",
+    "selected_worker",
+    "context_kinds",
+    "B3_P_worker_divergence"
+  ],
+  "analysisPlan": {
+    "minimumReplicatesPerTaskCondition": 5,
+    "unit": "task-scenario-replicate paired comparison",
+    "counterbalance": "same frozen cyclic baseline order as v0.3",
+    "uncertainty": "paired bootstrap interval for latency deltas; exact paired outcomes for success"
+  },
+  "infrastructureRules": [
+    "A Claude wrapper telemetry record with claudeExitCode != 0 is an executor infrastructure failure and is excluded from scientific outcomes.",
+    "A timed-out command agent is an executor infrastructure failure and is excluded from scientific outcomes.",
+    "The matrix must stop immediately on the first infrastructure failure.",
+    "The failed cell index is not advanced; rerunning the same command retries exactly that scheduled cell.",
+    "Successful prior cells remain checkpointed and are not rerun during infrastructure resume.",
+    "The frozen schedule and baseline order do not change across resume operations.",
+    "The final scientific summary is emitted only after every scheduled cell has produced an analyzable outcome."
+  ],
+  "freezeRules": [
+    "v0.3.1 changes execution accounting/checkpointing only; ontology, TaskPacks, graders, stateRequirements, worker profiles, matcher weights, context mappings, and role-selector semantics are unchanged from v0.3.",
+    "No scientific design parameter may change after a valid v0.3.1 real-agent outcome is inspected.",
+    "v0.2 remains a separate prospective null/ceiling result.",
+    "The aborted v0.3 attempt remains visible as infrastructure-invalid rather than being silently deleted.",
+    "v0.3.2 changes only executor portability/infrastructure telemetry. Scientific tasks, graders, ontology, role selector, worker profiles, matcher weights, context mappings, and hypotheses remain identical.",
+    "OpenAI/Codex outcomes are reported as a separate executor-family replication and are not pooled with Claude outcomes."
+  ],
+  "executorFamily": {
+    "provider": "OpenAI",
+    "client": "Codex CLI",
+    "auth": "ChatGPT account",
+    "requestedModel": "gpt-5.6-terra",
+    "requestedEffort": "medium",
+    "adapter": "examples/adapters/codex-chatgpt.json"
+  }
+}
