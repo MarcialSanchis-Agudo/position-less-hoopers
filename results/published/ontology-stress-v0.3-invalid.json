@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "resultId": "claude-sonnet-ontology-stress-v0.3-001",
+  "status": "infrastructure-invalid-for-outcome-claims",
+  "scheduledCells": 150,
+  "completedBeforeFailureBoundary": 60,
+  "invalidAfterFailureBoundary": 90,
+  "mechanismTrace": {
+    "stressPairCount": 10,
+    "workerDivergenceCount": 10,
+    "zeroB3RoleContextCoverageCount": 10,
+    "eligibleAsMechanismEvidence": true
+  },
+  "observedFailureExample": {
+    "durationMs": 2173,
+    "claudeExitCode": 1,
+    "claudeSignal": null,
+    "claudeStderr": "",
+    "publicTestExitCode": 0
+  },
+  "outcomeClaimsEligible": false,
+  "reason": "Abrupt persistent executor failure boundary across all later baselines/tasks makes post-boundary task outcomes non-scientific."
+}

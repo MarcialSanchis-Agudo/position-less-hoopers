@@ -111,6 +111,10 @@ A narrower routing signal remains: under external contract mutation, state-respo
 
 This v0.2 result is retained as a prospective null/ceiling result and will not be tuned or rerun until it favors PLH.
 
+## Infrastructure-invalid v0.3 ontology-stress attempt
+
+The first real-agent v0.3 ontology-stress matrix is excluded from performance and success-rate claims because executor behavior collapsed after 60 successful cells: all remaining 90 scheduled cells returned failed Claude invocations with approximately 2–4 s durations. An inspected failure had Claude exit code 1, no signal, empty stderr, and public tests exit code 0. The routing traces remain useful mechanism evidence: all 10 stress pairs had zero B3 role-context coverage and B3/P selected different workers. v0.3.1 preserves the scientific design and changes only infrastructure accounting, fail-fast behavior, and checkpointed resume.
+
 ## Invalidated held-out run
 
 `claude-sonnet-deployment-heldout-001` is excluded from all scientific analysis because benchmark revision r1 contained a contradiction between the public v1 compatibility test and the external v2 zone-diversity grader.

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "adapterId": "synthetic-claude-infrastructure-failure",
+  "command": "node",
+  "args": [
+    "./failing-claude-agent.mjs"
+  ],
+  "timeoutMs": 30000
+}
