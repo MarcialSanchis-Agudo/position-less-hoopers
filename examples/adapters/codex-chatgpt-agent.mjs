@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { buildCodexExecArgs } from "./codex-cli-args.mjs";
 
 const requestPath = process.env.PLH_EXECUTION_REQUEST;
 const resultPath = process.env.PLH_EXECUTION_RESULT;
@@ -34,39 +35,16 @@ const prompt = `${instructions}
 - The PLH wrapper owns execution-request.json and execution-result.json.
 `;
 
-const codexArgs = [
-  "exec",
-  "--ephemeral",
-  "--ignore-user-config",
-  "--ignore-rules",
-  "--skip-git-repo-check",
-  "--sandbox",
-  "workspace-write",
-  "--ask-for-approval",
-  "never"
-];
-
 const requestedModel =
   process.env.PLH_CODEX_MODEL || "gpt-5.6-terra";
 const requestedEffort =
   process.env.PLH_CODEX_EFFORT || "medium";
 
-if (requestedModel) {
-  codexArgs.push("--model", requestedModel);
-}
-if (requestedEffort) {
-  codexArgs.push(
-    "-c",
-    `model_reasoning_effort="${requestedEffort}"`
-  );
-}
-
-codexArgs.push(
-  "-c",
-  "sandbox_workspace_write.network_access=false"
-);
-
-codexArgs.push(prompt);
+const codexArgs = buildCodexExecArgs({
+  prompt,
+  model: requestedModel,
+  effort: requestedEffort
+});
 
 const versionResult = spawnSync(
   codexBin,

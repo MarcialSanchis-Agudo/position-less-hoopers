@@ -27,7 +27,8 @@
     "paper:ontology-stress": "node ./scripts/run-ontology-stress-matrix.mjs",
     "paper:ontology-stress:v0.3.1": "node ./scripts/run-ontology-stress-matrix-v0.3.1.mjs",
     "paper:ontology-stress:v0.3.2-openai": "node ./scripts/run-ontology-stress-matrix-v0.3.2.mjs",
-    "paper:ontology-stress:v0.3.2.1-openai": "node ./scripts/run-ontology-stress-matrix-v0.3.2.mjs"
+    "paper:ontology-stress:v0.3.2.1-openai": "node ./scripts/run-ontology-stress-matrix-v0.3.2.mjs",
+    "paper:ontology-stress:v0.3.2.2-openai": "node ./scripts/run-ontology-stress-matrix-v0.3.2.mjs"
   },
   "engines": {
     "node": ">=20"
