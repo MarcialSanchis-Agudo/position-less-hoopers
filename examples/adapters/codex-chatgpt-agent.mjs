@@ -36,8 +36,14 @@ const prompt = `${instructions}
 
 const codexArgs = [
   "exec",
-  "--full-auto",
-  "--ephemeral"
+  "--ephemeral",
+  "--ignore-user-config",
+  "--ignore-rules",
+  "--skip-git-repo-check",
+  "--sandbox",
+  "workspace-write",
+  "--ask-for-approval",
+  "never"
 ];
 
 const requestedModel =
@@ -54,6 +60,11 @@ if (requestedEffort) {
     `model_reasoning_effort="${requestedEffort}"`
   );
 }
+
+codexArgs.push(
+  "-c",
+  "sandbox_workspace_write.network_access=false"
+);
 
 codexArgs.push(prompt);
 
