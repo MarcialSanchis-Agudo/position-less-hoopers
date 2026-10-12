@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "studyId": "plh-local-capability-frontier-v0.1",
+  "model": "qwen3.5:4b",
+  "runCount": 30,
+  "failureStageCounts": {
+    "external_grader_only": 30
+  },
+  "byBaseline": {
+    "B0": {"external_grader_only": 6},
+    "B1": {"external_grader_only": 6},
+    "B2": {"external_grader_only": 6},
+    "B3": {"external_grader_only": 6},
+    "P": {"external_grader_only": 6}
+  },
+  "publicTestPassCount": 30,
+  "agentProcessSuccessCount": 30,
+  "failedGraderCheckCounts": {
+    "v2-source-priority": 10,
+    "v2-blocked-source": 10,
+    "v3-provenance-alias-and-priority": 5,
+    "v3-state-priority-precedes-option-priority": 5,
+    "v2-blocked-and-last-wins": 10,
+    "v2-default-value": 10,
+    "v3-current-partner-schema": 5,
+    "v3-blocked-and-last-wins-after-mapping": 5,
+    "v3-default-after-schema-map": 5,
+    "v3-inactive-status-excluded": 5
+  },
+  "interpretation": {
+    "publicationClaimEligible": false,
+    "note": "Exploratory development evidence. Every local Qwen 3.5 4B agent invocation completed and passed the public npm test suite, but every implementation failed the authoritative grader. This isolates a stopping/evidence-quality failure mode: public-test success was not sufficient evidence of Need satisfaction."
+  }
+}
