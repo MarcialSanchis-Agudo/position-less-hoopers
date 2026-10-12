@@ -42,3 +42,35 @@ export function buildCodexExecArgs({
 
   return args;
 }
+
+export function buildCodexLocalExecArgs({
+  prompt,
+  model = "qwen3.5:4b",
+  localProvider = "ollama"
+} = {}) {
+  if (typeof prompt !== "string" || prompt.length === 0) {
+    throw new TypeError("prompt must be a non-empty string");
+  }
+
+  const args = [
+    "exec",
+    "--oss",
+    "--local-provider",
+    localProvider,
+    "--ephemeral",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--skip-git-repo-check",
+    "--sandbox",
+    "workspace-write",
+    "--model",
+    model,
+    "-c",
+    'approval_policy="never"',
+    "-c",
+    "sandbox_workspace_write.network_access=false",
+    prompt
+  ];
+
+  return args;
+}

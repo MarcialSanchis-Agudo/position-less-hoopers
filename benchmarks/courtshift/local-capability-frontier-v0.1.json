@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "studyId": "plh-local-capability-frontier-v0.1",
+  "status": "development",
+  "centralQuestion": "Can Need-first coordination increase the fraction of a small model's existing capability that is effectively deployable by aligning responsibility and bounded context with the current state?",
+  "invariant": "same model weights/provider/tools per worker identity within each run",
+  "defaultModel": "qwen3.5:4b",
+  "modelLadder": [
+    {
+      "model": "qwen3.5:4b",
+      "role": "first frontier point",
+      "rationale": "small enough for common Apple Silicon machines while retaining a large context window"
+    },
+    {
+      "model": "qwen3.5:9b",
+      "role": "second frontier point",
+      "rationale": "tests whether coordination gains shrink as raw model capability increases"
+    },
+    {
+      "model": "gpt-oss:20b",
+      "role": "optional larger local point",
+      "rationale": "only after hardware feasibility is established"
+    }
+  ],
+  "primaryMetrics": [
+    "externally_verified_success",
+    "recovery_latency",
+    "success_by_scenario_class"
+  ],
+  "mechanismMetrics": [
+    "selected_worker",
+    "context_kinds",
+    "role_context_coverage",
+    "B3_P_worker_divergence"
+  ],
+  "interpretationBoundaries": [
+    "PLH cannot create capabilities absent from the underlying model.",
+    "A gain supports improved accessibility/deployment of existing capability, not increased model intelligence.",
+    "Failure of every policy indicates the task lies outside the tested model's capability envelope.",
+    "Convergence of all policies at high success indicates a ceiling where coordination is not discriminating."
+  ]
+}
