@@ -4,7 +4,8 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import {
   buildLocalModelLock,
-  validateLocalModelLock
+  validateLocalModelLock,
+  resolvePinnedLocalModel
 } from "../src/local-model-lock.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -31,8 +32,13 @@ const repeats = repeatsArg == null
   ? Number(evalSet.analysisPlan?.minimumReplicatesPerTaskCondition ?? 5)
   : Number(repeatsArg);
 
+const pinnedModel = resolvePinnedLocalModel({
+  expectedModel: evalSet.executorFamily?.defaultModel,
+  requestedModel: process.env.PLH_LOCAL_MODEL
+});
+
 const expectedLock = buildLocalModelLock({
-  model: process.env.PLH_LOCAL_MODEL,
+  model: pinnedModel,
   localProvider: process.env.PLH_LOCAL_PROVIDER || "ollama",
   evalSetArg,
   ontologyArg,
@@ -81,7 +87,10 @@ const proc = spawnSync(
   [runner, ...forwarded],
   {
     cwd: root,
-    env: process.env,
+    env: {
+      ...process.env,
+      PLH_LOCAL_MODEL: pinnedModel
+    },
     encoding: "utf8"
   }
 );
