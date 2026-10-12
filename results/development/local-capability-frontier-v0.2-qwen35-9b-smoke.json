@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "studyId": "plh-local-capability-frontier-v0.2-qwen35-9b",
+  "scheduledRunCount": 30,
+  "completedScientificRunCount": 30,
+  "infrastructureFailureCount": 0,
+  "complete": true,
+  "byBaseline": [
+    {"baselineId":"B0","runCount":6,"successCount":0},
+    {"baselineId":"B1","runCount":6,"successCount":0},
+    {"baselineId":"B2","runCount":6,"successCount":0},
+    {"baselineId":"B3","runCount":6,"successCount":0},
+    {"baselineId":"P","runCount":6,"successCount":0}
+  ],
+  "mechanismComparison": {
+    "stressPairCount": 2,
+    "workerDivergenceCount": 2,
+    "zeroB3RoleContextCoverageCount": 2
+  },
+  "interpretation": {
+    "outcome": "all_fail_at_9b",
+    "publicationClaimEligible": false,
+    "note": "Exploratory smoke result. Qwen 3.5 9B produced zero externally verified successes across B0/B1/B2/B3/P, with no infrastructure failures. Both ontology-stress B3/P pairs preserved the frozen routing divergence. Failure stage requires post-hoc diagnostic of cell artifacts before further model scaling."
+  }
+}
