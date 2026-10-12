@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   buildLocalModelLock,
-  validateLocalModelLock
+  validateLocalModelLock,
+  resolvePinnedLocalModel
 } from "../src/local-model-lock.mjs";
 
 const base = buildLocalModelLock({
@@ -26,5 +27,27 @@ test("local model lock rejects changing model mid-checkpoint", () => {
         base
       ),
     /local model lock mismatch for model/
+  );
+});
+
+
+test("pinned local model uses evaluation-set model when env is unset", () => {
+  assert.equal(
+    resolvePinnedLocalModel({
+      expectedModel: "qwen3.5:9b",
+      requestedModel: undefined
+    }),
+    "qwen3.5:9b"
+  );
+});
+
+test("pinned local model rejects stale env from another model", () => {
+  assert.throws(
+    () =>
+      resolvePinnedLocalModel({
+        expectedModel: "qwen3.5:9b",
+        requestedModel: "qwen3.5:4b"
+      }),
+    /PLH_LOCAL_MODEL mismatch/
   );
 });
