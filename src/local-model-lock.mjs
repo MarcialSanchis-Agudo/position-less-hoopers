@@ -22,3 +22,33 @@ export function validateLocalModelLock(actual, expected) {
   }
   return true;
 }
+
+
+export function resolvePinnedLocalModel({
+  expectedModel,
+  requestedModel
+}) {
+  if (
+    typeof expectedModel !== "string" ||
+    expectedModel.trim() === ""
+  ) {
+    throw new TypeError(
+      "evaluation set must declare executorFamily.defaultModel"
+    );
+  }
+
+  const expected = expectedModel.trim();
+  const requested =
+    typeof requestedModel === "string" &&
+    requestedModel.trim() !== ""
+      ? requestedModel.trim()
+      : null;
+
+  if (requested != null && requested !== expected) {
+    throw new Error(
+      `PLH_LOCAL_MODEL mismatch: requested ${requested} but evaluation set pins ${expected}`
+    );
+  }
+
+  return expected;
+}
