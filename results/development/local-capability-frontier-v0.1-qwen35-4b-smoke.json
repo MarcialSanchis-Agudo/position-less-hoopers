@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "studyId": "plh-local-capability-frontier-v0.1",
+  "executor": {
+    "adapter": "examples/adapters/codex-ollama.json",
+    "repeats": 1,
+    "model": "qwen3.5:4b"
+  },
+  "scheduledRunCount": 30,
+  "completedScientificRunCount": 30,
+  "infrastructureFailureCount": 0,
+  "complete": true,
+  "byBaseline": [
+    {"baselineId":"B0","runCount":6,"successCount":0},
+    {"baselineId":"B1","runCount":6,"successCount":0},
+    {"baselineId":"B2","runCount":6,"successCount":0},
+    {"baselineId":"B3","runCount":6,"successCount":0},
+    {"baselineId":"P","runCount":6,"successCount":0}
+  ],
+  "mechanismComparison": {
+    "stressPairCount": 2,
+    "workerDivergenceCount": 2,
+    "zeroB3RoleContextCoverageCount": 2,
+    "artifactLineage": {
+      "b3WorkerId": "worker-contract",
+      "pWorkerId": "worker-forensics",
+      "b3Success": false,
+      "pSuccess": false
+    },
+    "schemaBridge": {
+      "b3WorkerId": "worker-conflict",
+      "pWorkerId": "worker-external-state",
+      "b3Success": false,
+      "pSuccess": false
+    }
+  },
+  "interpretation": {
+    "outcome": "lower_bound_all_fail",
+    "publicationClaimEligible": false,
+    "note": "Exploratory smoke result. Qwen 3.5 4B produced zero externally verified successes across B0/B1/B2/B3/P. The frozen B3/P ontology-stress routing divergence still occurred in both stress pairs."
+  }
+}
