@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "resultId": "local-capability-frontier-v0.2-qwen35-9b-attempt-001",
+  "status": "configuration_invalid_for_9b_condition",
+  "expectedModel": "qwen3.5:9b",
+  "observedModelLock": "qwen3.5:4b",
+  "evaluationSetId": "plh-local-capability-frontier-v0.2-qwen35-9b",
+  "scheduledRunCount": 30,
+  "completedScientificRunCount": 30,
+  "infrastructureFailureCount": 0,
+  "eligibleAs9bEvidence": false,
+  "eligibleAsExploratory4bReplication": true,
+  "reason": "The v0.2 wrapper pinned the model value supplied through PLH_LOCAL_MODEL but did not verify it matched executorFamily.defaultModel in the evaluation set. A stale qwen3.5:4b environment variable therefore executed a second 4B run under a 9B-labeled evaluation set.",
+  "repair": "The local frontier wrapper now takes executorFamily.defaultModel as the model source of truth, rejects a conflicting PLH_LOCAL_MODEL before cell 0, and propagates the pinned model to the adapter."
+}
