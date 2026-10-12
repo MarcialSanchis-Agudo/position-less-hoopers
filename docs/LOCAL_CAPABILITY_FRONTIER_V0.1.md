@@ -29,3 +29,20 @@ Suggested model ladder after the 4B point:
 3. optional `gpt-oss:20b` if the machine has enough memory/headroom.
 
 Do not pool results across model tags or hosted providers.
+
+## Observed 4B smoke result
+
+Executor: `qwen3.5:4b` through Codex CLI + Ollama.
+
+- 30/30 scheduled cells completed and were scientifically analyzable.
+- 0 infrastructure failures.
+- B0/B1/B2/B3/P each achieved 0/6 externally verified success.
+- Both ontology-stress B3/P pairs preserved the frozen mechanism distinction: B3 role-context coverage was 0 in 2/2 pairs and selected workers diverged in 2/2 pairs.
+- Artifact lineage stress routed B3 to `worker-contract` and P to `worker-forensics`.
+- Schema bridge stress routed B3 to `worker-conflict` and P to `worker-external-state`.
+- Execution-time differences are descriptive only because every run failed the external grader.
+
+Interpretation: this is a lower-bound capability point for the tested local agent stack. Qwen 3.5 4B is below the task-success envelope on these TaskPacks even when PLH supplies the intended situated worker/context. This does not show that coordination is ineffective; it shows that the tested model point contains insufficient usable capability for this benchmark.
+
+Next development step: test the next same-family capacity point before adding repetitions.
+
