@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "feedbackSetId": "plh-local-evidence-feedback-v0.1",
+  "policy": "Expose only unsatisfied obligation identifiers/descriptions and derived capability/context requirements. Never expose grader expected outputs, assertion diffs, or hidden test source.",
+  "checks": {
+    "v2-source-priority": {
+      "obligationId": "artifact.v2.source_priority",
+      "description": "Active-contract source-priority semantics remain unsatisfied.",
+      "capabilities": [
+        "implement",
+        "analyze_contract"
+      ],
+      "contextRefs": [
+        "contract"
+      ]
+    },
+    "v2-blocked-source": {
+      "obligationId": "artifact.v2.blocked_source",
+      "description": "Active-contract blocked-source semantics remain unsatisfied.",
+      "capabilities": [
+        "implement",
+        "analyze_contract"
+      ],
+      "contextRefs": [
+        "contract"
+      ]
+    },
+    "v3-provenance-alias-and-priority": {
+      "obligationId": "artifact.v3.provenance_alias_priority",
+      "description": "Authoritative provenance alias and ordering semantics remain unsatisfied.",
+      "capabilities": [
+        "implement",
+        "diagnose",
+        "verify"
+      ],
+      "contextRefs": [
+        "provenance",
+        "audit_log"
+      ]
+    },
+    "v3-state-priority-precedes-option-priority": {
+      "obligationId": "artifact.v3.state_priority_precedence",
+      "description": "Authoritative state-priority precedence remains unsatisfied.",
+      "capabilities": [
+        "implement",
+        "diagnose",
+        "verify"
+      ],
+      "contextRefs": [
+        "provenance",
+        "audit_log"
+      ]
+    },
+    "v2-blocked-and-last-wins": {
+      "obligationId": "schema.v2.blocked_last_wins",
+      "description": "Active-contract blocking and last-write semantics remain unsatisfied.",
+      "capabilities": [
+        "implement",
+        "analyze_contract"
+      ],
+      "contextRefs": [
+        "contract"
+      ]
+    },
+    "v2-default-value": {
+      "obligationId": "schema.v2.default_value",
+      "description": "Active-contract default-value semantics remain unsatisfied.",
+      "capabilities": [
+        "implement",
+        "analyze_contract"
+      ],
+      "contextRefs": [
+        "contract"
+      ]
+    },
+    "v3-current-partner-schema": {
+      "obligationId": "schema.v3.current_partner_schema",
+      "description": "Authoritative current partner-schema mapping remains unsatisfied.",
+      "capabilities": [
+        "implement",
+        "diagnose",
+        "reconcile"
+      ],
+      "contextRefs": [
+        "schema_history",
+        "external_signal"
+      ]
+    },
+    "v3-blocked-and-last-wins-after-mapping": {
+      "obligationId": "schema.v3.blocked_last_wins_after_mapping",
+      "description": "Post-mapping blocking and last-write semantics remain unsatisfied.",
+      "capabilities": [
+        "implement",
+        "diagnose",
+        "reconcile"
+      ],
+      "contextRefs": [
+        "schema_history",
+        "external_signal"
+      ]
+    },
+    "v3-default-after-schema-map": {
+      "obligationId": "schema.v3.default_after_mapping",
+      "description": "Default-value behavior after authoritative schema mapping remains unsatisfied.",
+      "capabilities": [
+        "implement",
+        "diagnose",
+        "reconcile"
+      ],
+      "contextRefs": [
+        "schema_history",
+        "external_signal"
+      ]
+    },
+    "v3-inactive-status-excluded": {
+      "obligationId": "schema.v3.inactive_status_exclusion",
+      "description": "Inactive-status exclusion under the authoritative schema remains unsatisfied.",
+      "capabilities": [
+        "implement",
+        "diagnose",
+        "reconcile"
+      ],
+      "contextRefs": [
+        "schema_history",
+        "external_signal"
+      ]
+    }
+  }
+}
