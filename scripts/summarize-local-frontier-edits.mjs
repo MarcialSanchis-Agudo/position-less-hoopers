@@ -66,6 +66,16 @@ for (const cellFile of cellFiles) {
 
   const targetVersion =
     cell?.final?.grade?.contractVersion ?? null;
+
+  const preActionPath =
+    cell?.initialPreparation?.referenceApplied === true &&
+    typeof cell?.initialPreparation?.referenceSource === "string"
+      ? path.join(
+          task.packRoot,
+          cell.initialPreparation.referenceSource
+        )
+      : seedPath;
+
   const referencePath =
     targetVersion == null
       ? null
@@ -77,10 +87,11 @@ for (const cellFile of cellFiles) {
           )
         );
 
-  const [finalText, seedText, referenceText] =
+  const [finalText, seedText, preActionText, referenceText] =
     await Promise.all([
       fs.readFile(finalPath, "utf8"),
       fs.readFile(seedPath, "utf8"),
+      fs.readFile(preActionPath, "utf8"),
       referencePath == null
         ? Promise.resolve(null)
         : fs.readFile(referencePath, "utf8")
@@ -96,12 +107,19 @@ for (const cellFile of cellFiles) {
       cell?.coordination?.selectedWorkerId ?? null,
     contextKinds:
       cell?.coordination?.contextKinds ?? [],
+    preActionSource:
+      path.relative(task.packRoot, preActionPath)
+        .split(path.sep)
+        .join("/"),
+    finalEqualsPreAction:
+      finalText === preActionText,
     finalEqualsSeed: finalText === seedText,
     finalEqualsReference:
       referenceText == null
         ? null
         : finalText === referenceText,
     finalLength: finalText.length,
+    preActionLength: preActionText.length,
     seedLength: seedText.length,
     referenceLength:
       referenceText == null ? null : referenceText.length
@@ -116,6 +134,10 @@ const summary = {
   schemaVersion: 1,
   runDir: runArg,
   runCount: rows.length,
+  finalEqualsPreActionCount:
+    count((row) => row.finalEqualsPreAction),
+  finalChangedFromPreActionCount:
+    count((row) => !row.finalEqualsPreAction),
   finalEqualsSeedCount: count((row) => row.finalEqualsSeed),
   finalChangedFromSeedCount: count((row) => !row.finalEqualsSeed),
   finalEqualsReferenceCount: count(
@@ -132,6 +154,14 @@ const summary = {
           baselineId,
           {
             runCount: subset.length,
+            finalEqualsPreActionCount:
+              subset.filter(
+                (row) => row.finalEqualsPreAction
+              ).length,
+            finalChangedFromPreActionCount:
+              subset.filter(
+                (row) => !row.finalEqualsPreAction
+              ).length,
             finalEqualsSeedCount:
               subset.filter((row) => row.finalEqualsSeed).length,
             finalChangedFromSeedCount:
