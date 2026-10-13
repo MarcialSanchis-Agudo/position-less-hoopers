@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-local-evidence-loop-v0.1-qwen35-9b",
+  "supersedes": "plh-local-capability-frontier-v0.2-qwen35-9b",
+  "status": "exploratory-development-authoritative-evidence-loop",
+  "scientificSemanticsUnchanged": true,
+  "ontologyConfig": "benchmarks/courtshift/ontology-stress-baselines-v0.3.json",
+  "scientificDesignSource": "benchmarks/courtshift/ontology-stress-eval-v0.3.json",
+  "runner": "scripts/run-local-capability-frontier-v0.2.mjs",
+  "cellRunner": "scripts/run-local-evidence-loop-cell-v0.1.mjs",
+  "invalidatedAttempt": {
+    "resultId": "claude-sonnet-ontology-stress-v0.3-001",
+    "reason": "Executor infrastructure collapsed after 60 successful cells. The next 90 cells all returned failed Claude invocations with approximately 2-4 second durations rather than normal task execution.",
+    "scientificOutcomeEligible": false,
+    "routingTraceEligible": true,
+    "observedExample": {
+      "claudeExitCode": 1,
+      "claudeSignal": null,
+      "claudeStderr": "",
+      "publicTestExitCode": 0,
+      "durationMs": 2173
+    }
+  },
+  "prospectiveTaskPacks": [
+    {
+      "taskPack": "examples/artifact-lineage-incident/task-pack.json",
+      "domain": "artifact-provenance-reconciliation"
+    },
+    {
+      "taskPack": "examples/schema-bridge-incident/task-pack.json",
+      "domain": "external-schema-reconciliation"
+    }
+  ],
+  "baselineOrder": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "P"
+  ],
+  "taskProfiles": {
+    "artifact-lineage-incident": {
+      "implementationPath": "src/artifacts.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/artifacts.test.mjs",
+        "evidence": "state/audit.log",
+        "provenance": "state/provenance.json",
+        "audit_log": "state/audit.log"
+      }
+    },
+    "schema-bridge-incident": {
+      "implementationPath": "src/bridge.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/bridge.test.mjs",
+        "evidence": "state/external-signal.json",
+        "schema_history": "state/schema-history.json",
+        "external_signal": "state/external-signal.json"
+      }
+    }
+  },
+  "scenarioClasses": [
+    "clean",
+    "contract_reveal",
+    "ontology_stress_contract_mutation"
+  ],
+  "primaryEndpoints": [
+    "externally_verified_success",
+    "recovery_latency"
+  ],
+  "mechanismEndpoints": [
+    "selected_role",
+    "role_context_coverage",
+    "selected_worker",
+    "context_kinds",
+    "B3_P_worker_divergence"
+  ],
+  "analysisPlan": {
+    "minimumReplicatesPerTaskCondition": 1,
+    "unit": "task-scenario-replicate paired comparison",
+    "counterbalance": "same frozen cyclic baseline order as v0.3",
+    "uncertainty": "paired bootstrap interval for latency deltas; exact paired outcomes for success",
+    "primaryEndpoints": [
+      "externally_verified_success_within_attempt_budget",
+      "attempts_to_authoritative_success",
+      "cumulative_agent_execution_ms"
+    ],
+    "mechanismEndpoints": [
+      "worker_sequence",
+      "role_sequence",
+      "context_sequence",
+      "unsatisfied_obligation_sequence",
+      "B3_P_worker_divergence_after_feedback"
+    ]
+  },
+  "infrastructureRules": [
+    "A Claude wrapper telemetry record with claudeExitCode != 0 is an executor infrastructure failure and is excluded from scientific outcomes.",
+    "A timed-out command agent is an executor infrastructure failure and is excluded from scientific outcomes.",
+    "The matrix must stop immediately on the first infrastructure failure.",
+    "The failed cell index is not advanced; rerunning the same command retries exactly that scheduled cell.",
+    "Successful prior cells remain checkpointed and are not rerun during infrastructure resume.",
+    "The frozen schedule and baseline order do not change across resume operations.",
+    "The final scientific summary is emitted only after every scheduled cell has produced an analyzable outcome."
+  ],
+  "freezeRules": [
+    "v0.3.1 changes execution accounting/checkpointing only; ontology, TaskPacks, graders, stateRequirements, worker profiles, matcher weights, context mappings, and role-selector semantics are unchanged from v0.3.",
+    "No scientific design parameter may change after a valid v0.3.1 real-agent outcome is inspected.",
+    "v0.2 remains a separate prospective null/ceiling result.",
+    "The aborted v0.3 attempt remains visible as infrastructure-invalid rather than being silently deleted.",
+    "v0.3.2 changes only executor portability/infrastructure telemetry. Scientific tasks, graders, ontology, role selector, worker profiles, matcher weights, context mappings, and hypotheses remain identical.",
+    "OpenAI/Codex outcomes are reported as a separate executor-family replication and are not pooled with Claude outcomes."
+  ],
+  "executorFamily": {
+    "provider": "Local",
+    "client": "Codex CLI + Ollama",
+    "auth": "none",
+    "defaultModel": "qwen3.5:9b",
+    "adapter": "examples/adapters/codex-ollama.json"
+  },
+  "executorSyntaxRepair": {
+    "reason": "Codex CLI 0.162.0 exposes --ask-for-approval only on the interactive TUI, not on codex exec.",
+    "scientificCellsObserved": 0,
+    "changes": [
+      "remove --ask-for-approval never from codex exec arguments",
+      "set approval_policy=\"never\" through the -c config override",
+      "retain --sandbox workspace-write",
+      "retain --skip-git-repo-check, --ignore-user-config, --ignore-rules, and network-disabled workspace sandbox"
+    ],
+    "scientificSemanticsUnchanged": true
+  },
+  "studyPurpose": "Test whether authoritative evidence-aware re-execution unlocks useful Qwen 3.5 9B behavior after the one-shot local frontier showed 30/30 public-test passes, 30/30 authoritative failures, and 30/30 no implementation changes from the pre-action state.",
+  "hypotheses": [
+    "Public-test completion is an insufficient stopping condition for the tested small local model.",
+    "Authoritative evidence feedback can induce implementation changes without revealing hidden expected outputs.",
+    "With equal attempt budgets, differences among B0/B1/B2/B3/P can be attributed to their frozen replanning and context-allocation semantics rather than unequal retries.",
+    "On ontology-stress retries, B3 remains constrained by the predefined role ontology while P can allocate the state-derived Need to workers situated in provenance/audit or schema-history/external-signal context."
+  ],
+  "developmentOnly": true,
+  "publicationClaimEligible": false,
+  "recommendedStages": [
+    {
+      "stage": "smoke",
+      "repeats": 1,
+      "scheduledCells": 30,
+      "purpose": "Confirm the local model can use Codex tools and produce nontrivial task outcomes."
+    },
+    {
+      "stage": "frontier",
+      "repeats": 3,
+      "scheduledCells": 90,
+      "purpose": "Estimate success and latency by coordination condition without API cost."
+    },
+    {
+      "stage": "model-ladder",
+      "models": [
+        "qwen3.5:4b",
+        "qwen3.5:9b",
+        "gpt-oss:20b"
+      ],
+      "repeats": 3,
+      "purpose": "Measure how coordination effects change with local model capability, conditional on hardware feasibility."
+    }
+  ],
+  "localRunRules": [
+    "The evaluation set pins qwen3.5:9b and the model-locked runner rejects conflicting PLH_LOCAL_MODEL values before cell 0.",
+    "Each baseline receives at most three executor attempts per cell.",
+    "Every attempt is followed by the same authoritative external grader.",
+    "Feedback excludes hidden expected outputs and assertion diffs.",
+    "All baselines receive the same feedback obligations; their only difference is frozen coordination/replanning semantics.",
+    "Do not pool these evidence-loop outcomes with the prior one-shot 4B/9B frontier runs."
+  ],
+  "evidenceFeedbackConfig": "benchmarks/courtshift/local-evidence-feedback-v0.1.json",
+  "evidenceLoop": {
+    "maxAttempts": 3,
+    "stoppingRule": "stop only when authoritative external-grader evidence satisfies the frozen evidence obligation or the equal attempt budget is exhausted",
+    "feedbackPolicy": "expose frozen unsatisfied obligation identifiers/descriptions and derived context/capability requirements only; never expose assertion diffs, expected outputs, or grader source",
+    "replanRule": "after each unsatisfied authoritative grade, all baselines are replanned using the same derived state requirements under their frozen coordination semantics",
+    "equalBudgetAcrossBaselines": true
+  }
+}
