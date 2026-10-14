@@ -1,3 +1,4 @@
+import { isRetryableOllamaParserFailure } from "../src/ollama-tool-loop.mjs";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
@@ -37,5 +38,40 @@ test("direct Ollama adapter config is valid command-adapter shape", () => {
   assert.deepEqual(
     adapter.args,
     ["./direct-ollama-tool-agent.mjs"]
+  );
+});
+
+
+test("Ollama Qwen parser EOF failures are retryable", () => {
+  assert.equal(
+    isRetryableOllamaParserFailure(
+      500,
+      '{"error":"XML syntax error on line 298: unexpected EOF"}'
+    ),
+    true
+  );
+  assert.equal(
+    isRetryableOllamaParserFailure(
+      500,
+      '{"error":"EOF"}'
+    ),
+    true
+  );
+});
+
+test("ordinary Ollama failures are not hidden by parser retries", () => {
+  assert.equal(
+    isRetryableOllamaParserFailure(
+      500,
+      '{"error":"model not found"}'
+    ),
+    false
+  );
+  assert.equal(
+    isRetryableOllamaParserFailure(
+      404,
+      '{"error":"unexpected EOF"}'
+    ),
+    false
   );
 });
