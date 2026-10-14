@@ -229,19 +229,41 @@ export function isRetryableOllamaParserFailure(status, text) {
 async function ollamaChat(
   baseUrl,
   body,
-  { maxParserRetries = 2 } = {}
+  {
+    maxParserRetries = 2,
+    timeoutMs = 180000
+  } = {}
 ) {
   let parserRetries = 0;
 
   for (let attempt = 0; ; attempt += 1) {
-    const response = await fetch(
-      `${baseUrl.replace(/\/$/, "")}/api/chat`,
-      {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(body)
-      }
+    const controller = new AbortController();
+    const timer = setTimeout(
+      () => controller.abort(),
+      timeoutMs
     );
+
+    let response;
+    try {
+      response = await fetch(
+        `${baseUrl.replace(/\/$/, "")}/api/chat`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(body),
+          signal: controller.signal
+        }
+      );
+    } catch (error) {
+      if (controller.signal.aborted) {
+        throw new Error(
+          `Ollama chat timeout after ${timeoutMs}ms`
+        );
+      }
+      throw error;
+    } finally {
+      clearTimeout(timer);
+    }
 
     const text = await response.text();
 
@@ -275,7 +297,10 @@ export async function runOllamaWorkspaceAgent({
   prompt,
   baseUrl = "http://127.0.0.1:11434",
   maxTurns = 24,
-  numCtx = 32768
+  numCtx = 32768,
+  chatTimeoutMs = 180000,
+  totalTimeoutMs = 600000,
+  onProgress = null
 }) {
   const messages = [
     {
@@ -302,14 +327,57 @@ export async function runOllamaWorkspaceAgent({
   let testToolCallCount = 0;
   let finalContent = "";
   let parserRetryCount = 0;
+  const startedMs = Date.now();
+
+  async function emitProgress(extra = {}) {
+    if (typeof onProgress !== "function") return;
+    await onProgress({
+      turns: extra.turns ?? transcript
+        .filter((item) => item?.message)
+        .length,
+      toolCallCount,
+      writeToolCallCount,
+      testToolCallCount,
+      parserRetryCount,
+      transcript,
+      ...extra
+    });
+  }
 
   for (let turn = 1; turn <= maxTurns; turn += 1) {
+    const elapsedMs = Date.now() - startedMs;
+    const remainingMs = totalTimeoutMs - elapsedMs;
+
+    if (remainingMs <= 0) {
+      await emitProgress({
+        completed: false,
+        turns: turn - 1,
+        failure: "agent_deadline_exhausted"
+      });
+      return {
+        completed: false,
+        turns: turn - 1,
+        toolCallCount,
+        writeToolCallCount,
+        testToolCallCount,
+        finalContent,
+        parserRetryCount,
+        transcript,
+        failure: "agent_deadline_exhausted"
+      };
+    }
+
     const chat = await ollamaChat(baseUrl, {
       model,
       messages,
       tools: OLLAMA_WORKSPACE_TOOLS,
       stream: false,
       options: { num_ctx: numCtx }
+    }, {
+      timeoutMs: Math.min(
+        chatTimeoutMs,
+        remainingMs
+      )
     });
     parserRetryCount += chat.parserRetries;
 
@@ -321,10 +389,21 @@ export async function runOllamaWorkspaceAgent({
       };
     messages.push(message);
     transcript.push({ turn, message });
+    await emitProgress({
+      completed: false,
+      turns: turn,
+      phase: "assistant_message"
+    });
 
     const toolCalls = message.tool_calls ?? [];
     if (toolCalls.length === 0) {
       finalContent = String(message.content ?? "");
+      await emitProgress({
+        completed: true,
+        turns: turn,
+        phase: "completed",
+        finalContent
+      });
       return {
         completed: true,
         turns: turn,
@@ -376,8 +455,21 @@ export async function runOllamaWorkspaceAgent({
         tool: name,
         result
       });
+      await emitProgress({
+        completed: false,
+        turns: turn,
+        phase: "tool_result",
+        lastTool: name
+      });
     }
   }
+
+  await emitProgress({
+    completed: false,
+    turns: maxTurns,
+    phase: "max_turns",
+    failure: "max_turns_exhausted"
+  });
 
   return {
     completed: false,
