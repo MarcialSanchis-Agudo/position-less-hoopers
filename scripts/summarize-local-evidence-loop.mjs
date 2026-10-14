@@ -58,10 +58,15 @@ for (const entry of evalSet.prospectiveTaskPacks ?? []) {
   });
 }
 
-const files = await walk(path.join(runRoot, "cells"));
-const cellFiles = files.filter((file) =>
-  file.endsWith("ontology-stress-cell-result.json")
-);
+const cellsRoot = path.join(runRoot, "cells");
+const files = await walk(cellsRoot);
+const cellFiles = files.filter((file) => {
+  if (!file.endsWith("ontology-stress-cell-result.json")) {
+    return false;
+  }
+  const relative = path.relative(cellsRoot, file);
+  return relative.split(path.sep).length === 2;
+});
 
 const records = [];
 
