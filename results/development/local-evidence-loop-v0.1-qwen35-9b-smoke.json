@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "studyId": "plh-local-evidence-loop-v0.1-qwen35-9b",
+  "model": "qwen3.5:9b",
+  "scheduledRunCount": 30,
+  "completedScientificRunCount": 30,
+  "infrastructureFailureCount": 0,
+  "successByBaseline": {
+    "B0": "0/6",
+    "B1": "0/6",
+    "B2": "0/6",
+    "B3": "0/6",
+    "P": "0/6"
+  },
+  "mechanismComparison": {
+    "stressPairCount": 2,
+    "workerDivergenceCount": 2,
+    "zeroB3RoleContextCoverageCount": 2
+  },
+  "interpretation": {
+    "publicationClaimEligible": false,
+    "primaryOutcome": "null_success_under_three_attempt_authoritative_evidence_loop",
+    "note": "Exploratory development result. Authoritative evidence-aware re-execution with an equal maximum of three attempts did not produce externally verified success for any baseline. Coordination remained discriminating on both ontology-stress pairs. Attempt-level trajectory analysis is preserved separately and should be inspected before changing the experimental condition."
+  }
+}
