@@ -31,7 +31,8 @@
     "paper:ontology-stress:v0.3.2.2-openai": "node ./scripts/run-ontology-stress-matrix-v0.3.2.mjs",
     "dev:local-frontier": "node ./scripts/run-ontology-stress-matrix-v0.3.2.mjs",
     "dev:local-frontier:v0.2": "node ./scripts/run-local-capability-frontier-v0.2.mjs",
-    "dev:local-evidence-loop:v0.1": "node ./scripts/run-local-capability-frontier-v0.2.mjs"
+    "dev:local-evidence-loop:v0.1": "node ./scripts/run-local-capability-frontier-v0.2.mjs",
+    "dev:local-tool-preflight": "node ./scripts/check-local-codex-tool-use.mjs"
   },
   "engines": {
     "node": ">=20"
