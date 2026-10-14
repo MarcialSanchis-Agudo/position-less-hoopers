@@ -45,7 +45,7 @@ const files = await walk(cellsRoot);
 const cellFiles = files.filter((file) => {
   if (!file.endsWith("ontology-stress-cell-result.json")) return false;
   const relative = path.relative(cellsRoot, file);
-  return relative.split(path.sep).length === 2;
+  return relative.split(path.sep).length === 5;
 });
 
 const records = [];
