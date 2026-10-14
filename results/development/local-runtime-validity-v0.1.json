@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "assessmentId": "plh-local-runtime-validity-v0.1",
+  "assessedRuntime": {
+    "cli": "OpenAI Codex",
+    "cliVersion": "0.162.0",
+    "provider": "ollama",
+    "model": "qwen3.5:9b"
+  },
+  "preflight": {
+    "test": "create PROBE.txt with exact contents PLH_TOOL_USE_OK and read it back",
+    "codexExitCode": 0,
+    "probeExists": false,
+    "probeContentMatches": false,
+    "passed": false,
+    "observedFailure": "The model attempted an unsupported mcp__codex_apps__sites call and the Codex process completed without modifying the workspace."
+  },
+  "validityDecision": {
+    "coordinationTraceEvidence": "retained",
+    "modelExecutionCapabilityEvidence": "invalid",
+    "capabilityAmplificationEvidence": "invalid",
+    "reason": "The local Codex/Ollama execution surface cannot be shown to execute even a trivial workspace mutation. A null task outcome therefore cannot distinguish model incapability from runtime tool-dispatch failure."
+  },
+  "affectedDevelopmentStudies": [
+    "plh-local-capability-frontier-v0.1",
+    "plh-local-capability-frontier-v0.2-qwen35-9b",
+    "plh-local-evidence-loop-v0.1-qwen35-9b"
+  ],
+  "nextGate": "No further local capability experiment is eligible until a replacement executor passes an isolated workspace-mutation tool-use preflight.",
+  "publicationClaimEligible": false
+}
