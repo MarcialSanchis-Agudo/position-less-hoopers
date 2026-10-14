@@ -115,6 +115,8 @@ for (const cellFile of cellFiles) {
     toolCallCount: telemetry?.toolCallCount ?? null,
     writeToolCallCount:
       telemetry?.writeToolCallCount ?? null,
+    parserRetryCount:
+      telemetry?.parserRetryCount ?? 0,
     testToolCallCount:
       telemetry?.testToolCallCount ?? null,
     agentTurns: telemetry?.agentTurns ?? null,
@@ -142,6 +144,11 @@ const totalWriteToolCalls = records.reduce(
     sum + (record.writeToolCallCount ?? 0),
   0
 );
+const totalParserRetries = records.reduce(
+  (sum, record) =>
+    sum + (record.parserRetryCount ?? 0),
+  0
+);
 const changedCells = records.filter(
   (record) => record.finalEqualsPreAction === false
 ).length;
@@ -166,6 +173,7 @@ const summary = {
   runCount: records.length,
   totalToolCalls,
   totalWriteToolCalls,
+  totalParserRetries,
   changedFromPreActionCells: changedCells,
   externallyVerifiedSuccessCount:
     records.filter(
