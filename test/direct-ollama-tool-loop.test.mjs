@@ -1,4 +1,8 @@
-import { isRetryableOllamaParserFailure } from "../src/ollama-tool-loop.mjs";
+import {
+  DEFAULT_OLLAMA_CHAT_TIMEOUT_MS,
+  DEFAULT_OLLAMA_TOTAL_TIMEOUT_MS,
+  isRetryableOllamaParserFailure
+} from "../src/ollama-tool-loop.mjs";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
@@ -73,5 +77,32 @@ test("ordinary Ollama failures are not hidden by parser retries", () => {
       '{"error":"unexpected EOF"}'
     ),
     false
+  );
+});
+
+
+test("direct Ollama time budgets are frozen below the outer adapter timeout", () => {
+  const adapter = JSON.parse(
+    fs.readFileSync(
+      new URL(
+        "../examples/adapters/direct-ollama-tools.json",
+        import.meta.url
+      ),
+      "utf8"
+    )
+  );
+
+  assert.equal(
+    DEFAULT_OLLAMA_CHAT_TIMEOUT_MS,
+    180000
+  );
+  assert.equal(
+    DEFAULT_OLLAMA_TOTAL_TIMEOUT_MS,
+    600000
+  );
+  assert.equal(adapter.timeoutMs, 780000);
+  assert.ok(
+    DEFAULT_OLLAMA_TOTAL_TIMEOUT_MS + 120000 <
+      adapter.timeoutMs
   );
 });
