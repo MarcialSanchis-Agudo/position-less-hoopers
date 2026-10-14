@@ -215,22 +215,58 @@ async function executeTool(workspace, call) {
   throw new Error(`unsupported tool: ${name}`);
 }
 
-async function ollamaChat(baseUrl, body) {
-  const response = await fetch(
-    `${baseUrl.replace(/\/$/, "")}/api/chat`,
-    {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(body)
-    }
+export function isRetryableOllamaParserFailure(status, text) {
+  if (status !== 500) return false;
+  const value = String(text ?? "").toLowerCase();
+  return (
+    value.includes("xml syntax error") ||
+    value.includes("unexpected eof") ||
+    value.includes('"error":"eof"') ||
+    value.includes('"error": "eof"')
   );
-  const text = await response.text();
-  if (!response.ok) {
+}
+
+async function ollamaChat(
+  baseUrl,
+  body,
+  { maxParserRetries = 2 } = {}
+) {
+  let parserRetries = 0;
+
+  for (let attempt = 0; ; attempt += 1) {
+    const response = await fetch(
+      `${baseUrl.replace(/\/$/, "")}/api/chat`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body)
+      }
+    );
+
+    const text = await response.text();
+
+    if (response.ok) {
+      return {
+        payload: JSON.parse(text),
+        parserRetries
+      };
+    }
+
+    if (
+      attempt < maxParserRetries &&
+      isRetryableOllamaParserFailure(
+        response.status,
+        text
+      )
+    ) {
+      parserRetries += 1;
+      continue;
+    }
+
     throw new Error(
       `Ollama HTTP ${response.status}: ${text.slice(0, 2000)}`
     );
   }
-  return JSON.parse(text);
 }
 
 export async function runOllamaWorkspaceAgent({
@@ -265,16 +301,19 @@ export async function runOllamaWorkspaceAgent({
   let writeToolCallCount = 0;
   let testToolCallCount = 0;
   let finalContent = "";
+  let parserRetryCount = 0;
 
   for (let turn = 1; turn <= maxTurns; turn += 1) {
-    const response = await ollamaChat(baseUrl, {
+    const chat = await ollamaChat(baseUrl, {
       model,
       messages,
       tools: OLLAMA_WORKSPACE_TOOLS,
       stream: false,
       options: { num_ctx: numCtx }
     });
+    parserRetryCount += chat.parserRetries;
 
+    const response = chat.payload;
     const message =
       response.message ?? {
         role: "assistant",
@@ -293,6 +332,7 @@ export async function runOllamaWorkspaceAgent({
         writeToolCallCount,
         testToolCallCount,
         finalContent,
+        parserRetryCount,
         transcript
       };
     }
@@ -346,6 +386,7 @@ export async function runOllamaWorkspaceAgent({
     writeToolCallCount,
     testToolCallCount,
     finalContent,
+    parserRetryCount,
     transcript,
     failure: "max_turns_exhausted"
   };
