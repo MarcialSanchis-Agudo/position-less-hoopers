@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-local-direct-runtime-validation-v0.1.1-qwen35-9b",
+  "supersedes": "plh-local-direct-runtime-validation-v0.1-qwen35-9b",
+  "status": "exploratory-development-direct-ollama-runtime-validation-parser-retry",
+  "scientificSemanticsUnchanged": true,
+  "ontologyConfig": "benchmarks/courtshift/ontology-stress-baselines-v0.3.json",
+  "scientificDesignSource": "benchmarks/courtshift/ontology-stress-eval-v0.3.json",
+  "runner": "scripts/run-local-capability-frontier-v0.2.mjs",
+  "cellRunner": "scripts/run-ontology-stress-cell-v0.3.2.mjs",
+  "invalidatedAttempt": {
+    "resultId": "claude-sonnet-ontology-stress-v0.3-001",
+    "reason": "Executor infrastructure collapsed after 60 successful cells. The next 90 cells all returned failed Claude invocations with approximately 2-4 second durations rather than normal task execution.",
+    "scientificOutcomeEligible": false,
+    "routingTraceEligible": true,
+    "observedExample": {
+      "claudeExitCode": 1,
+      "claudeSignal": null,
+      "claudeStderr": "",
+      "publicTestExitCode": 0,
+      "durationMs": 2173
+    }
+  },
+  "prospectiveTaskPacks": [
+    {
+      "taskPack": "examples/artifact-lineage-incident/task-pack.json",
+      "domain": "artifact-provenance-reconciliation"
+    },
+    {
+      "taskPack": "examples/schema-bridge-incident/task-pack.json",
+      "domain": "external-schema-reconciliation"
+    }
+  ],
+  "baselineOrder": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "P"
+  ],
+  "taskProfiles": {
+    "artifact-lineage-incident": {
+      "implementationPath": "src/artifacts.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/artifacts.test.mjs",
+        "evidence": "state/audit.log",
+        "provenance": "state/provenance.json",
+        "audit_log": "state/audit.log"
+      }
+    },
+    "schema-bridge-incident": {
+      "implementationPath": "src/bridge.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/bridge.test.mjs",
+        "evidence": "state/external-signal.json",
+        "schema_history": "state/schema-history.json",
+        "external_signal": "state/external-signal.json"
+      }
+    }
+  },
+  "scenarioClasses": [
+    "clean",
+    "contract_reveal",
+    "ontology_stress_contract_mutation"
+  ],
+  "primaryEndpoints": [
+    "executor_tool_calls",
+    "executor_write_tool_calls",
+    "workspace_changed_from_pre_action",
+    "externally_verified_success"
+  ],
+  "mechanismEndpoints": [
+    "selected_role",
+    "role_context_coverage",
+    "selected_worker",
+    "context_kinds"
+  ],
+  "analysisPlan": {
+    "minimumReplicatesPerTaskCondition": 5,
+    "unit": "task-scenario-replicate paired comparison",
+    "counterbalance": "same frozen cyclic baseline order as v0.3",
+    "uncertainty": "paired bootstrap interval for latency deltas; exact paired outcomes for success"
+  },
+  "infrastructureRules": [
+    "A Claude wrapper telemetry record with claudeExitCode != 0 is an executor infrastructure failure and is excluded from scientific outcomes.",
+    "A timed-out command agent is an executor infrastructure failure and is excluded from scientific outcomes.",
+    "The matrix must stop immediately on the first infrastructure failure.",
+    "The failed cell index is not advanced; rerunning the same command retries exactly that scheduled cell.",
+    "Successful prior cells remain checkpointed and are not rerun during infrastructure resume.",
+    "The frozen schedule and baseline order do not change across resume operations.",
+    "The final scientific summary is emitted only after every scheduled cell has produced an analyzable outcome."
+  ],
+  "freezeRules": [
+    "v0.3.1 changes execution accounting/checkpointing only; ontology, TaskPacks, graders, stateRequirements, worker profiles, matcher weights, context mappings, and role-selector semantics are unchanged from v0.3.",
+    "No scientific design parameter may change after a valid v0.3.1 real-agent outcome is inspected.",
+    "v0.2 remains a separate prospective null/ceiling result.",
+    "The aborted v0.3 attempt remains visible as infrastructure-invalid rather than being silently deleted.",
+    "v0.3.2 changes only executor portability/infrastructure telemetry. Scientific tasks, graders, ontology, role selector, worker profiles, matcher weights, context mappings, and hypotheses remain identical.",
+    "OpenAI/Codex outcomes are reported as a separate executor-family replication and are not pooled with Claude outcomes."
+  ],
+  "executorFamily": {
+    "provider": "Local",
+    "client": "Direct Ollama API tool loop",
+    "auth": "none",
+    "defaultModel": "qwen3.5:9b",
+    "adapter": "examples/adapters/direct-ollama-tools.json"
+  },
+  "studyPurpose": "Fresh five-cell validation of Qwen 3.5 9B through the direct Ollama native-tool runtime after a narrowly scoped retry for known Ollama/Qwen XML/EOF tool-parser 500 failures. Do not mix outcomes with v0.1.",
+  "hypotheses": [
+    "The direct Ollama tool runtime produces actual filesystem tool calls and implementation edits on nontrivial PLH tasks.",
+    "If the previous 0/30 one-shot result was dominated by Codex/Ollama tool-routing failure, at least some direct-runtime cells should differ from their pre-action implementation even if authoritative success remains below ceiling.",
+    "Coordination outcomes are not interpreted as PLH superiority until the executor validation passes."
+  ],
+  "developmentOnly": true,
+  "publicationClaimEligible": false,
+  "recommendedStages": [
+    {
+      "stage": "smoke",
+      "repeats": 1,
+      "scheduledCells": 30,
+      "purpose": "Confirm the local model can use Codex tools and produce nontrivial task outcomes."
+    },
+    {
+      "stage": "frontier",
+      "repeats": 3,
+      "scheduledCells": 90,
+      "purpose": "Estimate success and latency by coordination condition without API cost."
+    },
+    {
+      "stage": "model-ladder",
+      "models": [
+        "qwen3.5:4b",
+        "qwen3.5:9b",
+        "gpt-oss:20b"
+      ],
+      "repeats": 3,
+      "purpose": "Measure how coordination effects change with local model capability, conditional on hardware feasibility."
+    }
+  ],
+  "localRunRules": [
+    "Run in a fresh output directory; do not resume the v0.1 validation checkpoint.",
+    "The evaluation set pins qwen3.5:9b.",
+    "Use examples/adapters/direct-ollama-tools.json only.",
+    "Run exactly the first 5 scheduled cells before inspecting outcomes.",
+    "Ollama parser retries are allowed only for the frozen XML/EOF HTTP 500 class and are recorded in telemetry.",
+    "Do not pool v0.1.1 outcomes with prior Codex/Ollama runs or the interrupted v0.1 direct-runtime validation.",
+    "Treat this as executor validation before any new capability-frontier claim."
+  ],
+  "runtimeValidation": {
+    "firstBatchCells": 5,
+    "firstBatchScope": "artifact-lineage-clean-v2 across B0/B1/B2/B3/P in frozen schedule order",
+    "passSignals": [
+      "provider telemetry shows one or more real tool calls",
+      "at least one cell has writeToolCallCount > 0 or final implementation differs from pre-action",
+      "no executor infrastructure failure"
+    ],
+    "continueRule": "Do not continue the remaining 25 cells until the first five cells are inspected for real workspace action.",
+    "repairVersion": "v0.1.1",
+    "repairReason": "The v0.1 five-cell validation completed four cells, then Ollama returned HTTP 500 before agent turn 1 on P with XML syntax error: unexpected EOF. This matches known Qwen tool-call parser failures in Ollama.",
+    "repairScope": [
+      "retry at most two times when and only when Ollama HTTP 500 reports XML syntax error, unexpected EOF, or EOF",
+      "record parserRetryCount in provider telemetry",
+      "fix the post-hoc direct-runtime summary path-depth bug"
+    ],
+    "observedScientificCellsBeforeRepair": 4,
+    "observedFailedCellBeforeRepair": {
+      "scheduleIndex": 4,
+      "taskPackId": "artifact-lineage-incident",
+      "scenarioId": "artifact-lineage-clean-v2",
+      "baselineId": "P",
+      "agentTurns": 0,
+      "toolCallCount": 0,
+      "writeToolCallCount": 0,
+      "publicTestExitCode": 0,
+      "infrastructureFailure": true
+    },
+    "freshRunRequired": true
+  }
+}
