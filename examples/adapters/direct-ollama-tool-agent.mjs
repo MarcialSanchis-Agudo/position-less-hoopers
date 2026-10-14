@@ -1,7 +1,11 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { runOllamaWorkspaceAgent } from "../../src/ollama-tool-loop.mjs";
+import {
+  DEFAULT_OLLAMA_CHAT_TIMEOUT_MS,
+  DEFAULT_OLLAMA_TOTAL_TIMEOUT_MS,
+  runOllamaWorkspaceAgent
+} from "../../src/ollama-tool-loop.mjs";
 
 const requestPath = process.env.PLH_EXECUTION_REQUEST;
 const resultPath = process.env.PLH_EXECUTION_RESULT;
@@ -22,10 +26,12 @@ const baseUrl =
 const maxTurns = Number(process.env.PLH_OLLAMA_MAX_TURNS || 24);
 const numCtx = Number(process.env.PLH_OLLAMA_NUM_CTX || 32768);
 const chatTimeoutMs = Number(
-  process.env.PLH_OLLAMA_CHAT_TIMEOUT_MS || 180000
+  process.env.PLH_OLLAMA_CHAT_TIMEOUT_MS ||
+    DEFAULT_OLLAMA_CHAT_TIMEOUT_MS
 );
 const totalTimeoutMs = Number(
-  process.env.PLH_OLLAMA_TOTAL_TIMEOUT_MS || 600000
+  process.env.PLH_OLLAMA_TOTAL_TIMEOUT_MS ||
+    DEFAULT_OLLAMA_TOTAL_TIMEOUT_MS
 );
 
 const prompt = [
