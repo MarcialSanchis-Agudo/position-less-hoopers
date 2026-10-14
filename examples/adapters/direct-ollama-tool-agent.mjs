@@ -114,6 +114,7 @@ const telemetry = {
   agentTurns: agent.turns,
   toolCallCount: agent.toolCallCount,
   writeToolCallCount: agent.writeToolCallCount,
+  parserRetryCount: agent.parserRetryCount ?? 0,
   testToolCallCount: agent.testToolCallCount,
   publicTestExitCode: tests.status,
   publicTestStdout: tests.stdout ?? "",
