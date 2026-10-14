@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "adapterId": "local-direct-ollama-tools",
+  "command": "node",
+  "args": [
+    "./direct-ollama-tool-agent.mjs"
+  ],
+  "timeoutMs": 900000
+}
