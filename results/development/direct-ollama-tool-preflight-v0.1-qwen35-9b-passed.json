@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "resultId": "direct-ollama-tool-preflight-v0.1-qwen35-9b",
+  "runtime": "direct-ollama-api-tool-loop",
+  "model": "qwen3.5:9b",
+  "toolCallCount": 2,
+  "writeToolCallCount": 1,
+  "probeExists": true,
+  "probeContentMatches": true,
+  "passed": true,
+  "interpretation": {
+    "workspaceToolUseOperational": true,
+    "codingExecutorValidationStatus": "preflight_passed",
+    "note": "The direct Ollama runtime produced real tool calls and created the required workspace file. This establishes a usable local action path independent of Codex CLI."
+  }
+}
