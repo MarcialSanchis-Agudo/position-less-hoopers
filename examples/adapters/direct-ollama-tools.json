@@ -5,5 +5,5 @@
   "args": [
     "./direct-ollama-tool-agent.mjs"
   ],
-  "timeoutMs": 900000
+  "timeoutMs": 780000
 }
