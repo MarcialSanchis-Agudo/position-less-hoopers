@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "studyId": "plh-local-direct-runtime-validation-v0.1.1-qwen35-9b",
+  "status": "infrastructure_interrupted",
+  "completedScientificRunCount": 3,
+  "failedScheduleIndex": 3,
+  "failedBaselineId": "B3",
+  "failedTaskPackId": "artifact-lineage-incident",
+  "failedScenarioId": "artifact-lineage-clean-v2",
+  "failure": {
+    "class": "opaque_outer_adapter_timeout",
+    "adapterSignal": "SIGTERM",
+    "timedOut": true,
+    "durationMs": 900058,
+    "executionResultProduced": false,
+    "providerTelemetryProduced": false
+  },
+  "scientificInterpretation": {
+    "b3OutcomeEligible": false,
+    "threePriorCellsDevelopmentEvidenceRetained": true,
+    "freshValidationRequiredAfterRuntimeRepair": true,
+    "doNotPoolWithV0_1_2": true
+  }
+}
