@@ -21,6 +21,12 @@ const baseUrl =
   process.env.PLH_OLLAMA_BASE_URL || "http://127.0.0.1:11434";
 const maxTurns = Number(process.env.PLH_OLLAMA_MAX_TURNS || 24);
 const numCtx = Number(process.env.PLH_OLLAMA_NUM_CTX || 32768);
+const chatTimeoutMs = Number(
+  process.env.PLH_OLLAMA_CHAT_TIMEOUT_MS || 180000
+);
+const totalTimeoutMs = Number(
+  process.env.PLH_OLLAMA_TOTAL_TIMEOUT_MS || 600000
+);
 
 const prompt = [
   instructions.trim(),
@@ -37,6 +43,68 @@ const prompt = [
 
 const startedAt = new Date().toISOString();
 const startedMs = Date.now();
+const telemetryPath = path.join(
+  runRoot,
+  "provider-wrapper-telemetry.json"
+);
+
+await fs.mkdir(runRoot, { recursive: true });
+
+async function persistTelemetry(
+  snapshot = {},
+  extra = {}
+) {
+  const telemetry = {
+    schemaVersion: 1,
+    provider: "Local",
+    cli: "Direct Ollama API tool loop",
+    requestedModel: model,
+    localProvider: "ollama",
+    baseUrl,
+    freshSession: true,
+    startedAt,
+    finishedAt: extra.finishedAt ?? null,
+    durationMs: Date.now() - startedMs,
+    agentExitCode: extra.agentExitCode ?? null,
+    agentSignal: null,
+    agentError: extra.agentError ?? null,
+    agentCompleted: snapshot.completed ?? false,
+    agentTurns: snapshot.turns ?? 0,
+    toolCallCount: snapshot.toolCallCount ?? 0,
+    writeToolCallCount:
+      snapshot.writeToolCallCount ?? 0,
+    parserRetryCount:
+      snapshot.parserRetryCount ?? 0,
+    testToolCallCount:
+      snapshot.testToolCallCount ?? 0,
+    publicTestExitCode:
+      extra.publicTestExitCode ?? null,
+    publicTestStdout:
+      extra.publicTestStdout ?? "",
+    publicTestStderr:
+      extra.publicTestStderr ?? "",
+    finalContent:
+      snapshot.finalContent ?? "",
+    failure:
+      snapshot.failure ?? null,
+    phase:
+      snapshot.phase ?? extra.phase ?? null,
+    lastTool:
+      snapshot.lastTool ?? null,
+    transcript:
+      snapshot.transcript ?? []
+  };
+
+  await fs.writeFile(
+    telemetryPath,
+    JSON.stringify(telemetry, null, 2) + "\n"
+  );
+}
+
+await persistTelemetry({
+  completed: false,
+  phase: "starting"
+});
 
 let agent;
 let agentError = null;
@@ -47,7 +115,12 @@ try {
     prompt,
     baseUrl,
     maxTurns,
-    numCtx
+    numCtx,
+    chatTimeoutMs,
+    totalTimeoutMs,
+    onProgress: async (snapshot) => {
+      await persistTelemetry(snapshot);
+    }
   });
 } catch (error) {
   agentError =
@@ -59,17 +132,29 @@ try {
     writeToolCallCount: 0,
     testToolCallCount: 0,
     finalContent: "",
+    parserRetryCount: 0,
     transcript: [],
     failure: agentError
   };
+  await persistTelemetry(agent, {
+    agentExitCode: 1,
+    agentError,
+    phase: "agent_error"
+  });
 }
 
-const tests = spawnSync("npm", ["test"], {
-  cwd: workspace,
-  encoding: "utf8",
-  env: process.env,
-  timeout: 120000
-});
+const tests = agent.completed === true
+  ? spawnSync("npm", ["test"], {
+      cwd: workspace,
+      encoding: "utf8",
+      env: process.env,
+      timeout: 120000
+    })
+  : {
+      status: null,
+      stdout: "",
+      stderr: ""
+    };
 
 const finishedMs = Date.now();
 const status =
@@ -96,38 +181,21 @@ await fs.writeFile(
   JSON.stringify(result, null, 2) + "\n"
 );
 
-const telemetry = {
-  schemaVersion: 1,
-  provider: "Local",
-  cli: "Direct Ollama API tool loop",
-  requestedModel: model,
-  localProvider: "ollama",
-  baseUrl,
-  freshSession: true,
-  startedAt,
+await persistTelemetry(agent, {
   finishedAt: new Date().toISOString(),
-  durationMs: finishedMs - startedMs,
-  agentExitCode: agentError == null ? 0 : 1,
-  agentSignal: null,
+  agentExitCode:
+    agent.completed === true &&
+    agentError == null
+      ? 0
+      : 1,
   agentError,
-  agentCompleted: agent.completed,
-  agentTurns: agent.turns,
-  toolCallCount: agent.toolCallCount,
-  writeToolCallCount: agent.writeToolCallCount,
-  parserRetryCount: agent.parserRetryCount ?? 0,
-  testToolCallCount: agent.testToolCallCount,
   publicTestExitCode: tests.status,
   publicTestStdout: tests.stdout ?? "",
   publicTestStderr: tests.stderr ?? "",
-  finalContent: agent.finalContent,
-  transcript: agent.transcript
-};
-
-await fs.mkdir(runRoot, { recursive: true });
-await fs.writeFile(
-  path.join(runRoot, "provider-wrapper-telemetry.json"),
-  JSON.stringify(telemetry, null, 2) + "\n"
-);
+  phase: status === "completed"
+    ? "completed"
+    : "failed"
+});
 
 if (agent.finalContent) {
   process.stdout.write(agent.finalContent + "\n");
