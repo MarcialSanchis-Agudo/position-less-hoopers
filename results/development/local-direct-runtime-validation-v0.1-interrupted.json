@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "studyId": "plh-local-direct-runtime-validation-v0.1-qwen35-9b",
+  "status": "infrastructure_interrupted",
+  "completedScientificRunCount": 4,
+  "failedScheduleIndex": 4,
+  "failedBaselineId": "P",
+  "failedTaskPackId": "artifact-lineage-incident",
+  "failedScenarioId": "artifact-lineage-clean-v2",
+  "failure": {
+    "class": "ollama_qwen_tool_parser_http_500",
+    "agentTurns": 0,
+    "toolCallCount": 0,
+    "writeToolCallCount": 0,
+    "publicTestExitCode": 0,
+    "error": "Ollama HTTP 500: XML syntax error on line 298: unexpected EOF"
+  },
+  "scientificInterpretation": {
+    "pOutcomeEligible": false,
+    "fourPriorCellsDevelopmentEvidenceRetained": true,
+    "freshValidationRequiredAfterRuntimeRepair": true,
+    "doNotPoolWithV0_1_1": true
+  }
+}
