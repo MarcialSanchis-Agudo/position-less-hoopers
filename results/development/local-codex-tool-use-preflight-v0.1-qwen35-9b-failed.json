@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "resultId": "local-codex-tool-use-preflight-v0.1-qwen35-9b",
+  "model": "qwen3.5:9b",
+  "provider": "ollama",
+  "codexVersion": "0.162.0",
+  "codexExitCode": 0,
+  "probeExists": false,
+  "probeContentMatches": false,
+  "passed": false,
+  "observedFailure": {
+    "class": "executor_tool_use_failure",
+    "summary": "Codex returned exit code 0 but the model did not create the required workspace file. The transcript shows the model attempting an unsupported MCP Sites call instead of using a working local filesystem edit path.",
+    "toolRouterError": "unsupported call: mcp__codex_apps__sites",
+    "modelMetadataWarning": "Model metadata for qwen3.5:9b not found; Codex used fallback metadata."
+  },
+  "scientificConsequence": {
+    "localCodingCapabilityInferenceValid": false,
+    "localCapabilityAmplificationInferenceValid": false,
+    "coordinationTraceEvidenceStillUsable": true,
+    "routingMechanismEvidenceStillUsable": true,
+    "latencyAsExecutorPerformanceEvidenceValid": false,
+    "authoritativeSuccessRateAsModelCapabilityEvidenceValid": false
+  },
+  "note": "This preflight is independent of PLH task complexity. It requires only creating and reading back one trivial file. Failure therefore isolates the local Codex/Ollama executor surface before the PLH coordination policy can be meaningfully evaluated for coding capability."
+}
