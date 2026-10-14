@@ -4,6 +4,9 @@ import { spawnSync } from "node:child_process";
 
 const MAX_FILE_BYTES = 200000;
 
+export const DEFAULT_OLLAMA_CHAT_TIMEOUT_MS = 180000;
+export const DEFAULT_OLLAMA_TOTAL_TIMEOUT_MS = 600000;
+
 function inside(workspace, relativePath) {
   if (typeof relativePath !== "string" || relativePath.trim() === "") {
     throw new TypeError("path must be a non-empty string");
@@ -231,7 +234,7 @@ async function ollamaChat(
   body,
   {
     maxParserRetries = 2,
-    timeoutMs = 180000
+    timeoutMs = DEFAULT_OLLAMA_CHAT_TIMEOUT_MS
   } = {}
 ) {
   let parserRetries = 0;
@@ -298,8 +301,8 @@ export async function runOllamaWorkspaceAgent({
   baseUrl = "http://127.0.0.1:11434",
   maxTurns = 24,
   numCtx = 32768,
-  chatTimeoutMs = 180000,
-  totalTimeoutMs = 600000,
+  chatTimeoutMs = DEFAULT_OLLAMA_CHAT_TIMEOUT_MS,
+  totalTimeoutMs = DEFAULT_OLLAMA_TOTAL_TIMEOUT_MS,
   onProgress = null
 }) {
   const messages = [
