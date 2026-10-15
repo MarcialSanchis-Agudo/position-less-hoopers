@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "adapterId": "local-direct-ollama-json-actions",
+  "command": "node",
+  "args": [
+    "./direct-ollama-json-action-agent.mjs"
+  ],
+  "timeoutMs": 660000
+}
