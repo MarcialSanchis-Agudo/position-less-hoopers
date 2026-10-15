@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "resultId": "direct-ollama-existing-file-edit-preflight-v0.1-qwen35-9b",
+  "runtime": "direct-ollama-api-tool-loop",
+  "model": "qwen3.5:9b",
+  "agentCompleted": true,
+  "agentTurns": 6,
+  "toolCallCount": 5,
+  "writeToolCallCount": 1,
+  "lineRangeToolCalls": 1,
+  "testToolCallCount": 2,
+  "parserRetryCount": 0,
+  "failure": null,
+  "finalSource": "export const value = 2;\n",
+  "hostTestExitCode": 0,
+  "passed": true,
+  "interpretation": {
+    "existingFileReadWithLineNumbersValidated": true,
+    "existingFileLineRangeEditValidated": true,
+    "publicTestFailureThenSuccessLoopValidated": true,
+    "cleanTerminationValidated": true,
+    "note": "Qwen 3.5 9B directly edited an existing implementation file with replace_line_range, verified the repair with public tests, and terminated normally."
+  }
+}
