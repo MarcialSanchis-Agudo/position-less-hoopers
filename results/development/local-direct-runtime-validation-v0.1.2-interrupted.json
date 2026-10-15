@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "studyId": "plh-local-direct-runtime-validation-v0.1.2-qwen35-9b",
+  "status": "infrastructure_interrupted",
+  "completedScientificRunCount": 0,
+  "failedScheduleIndex": 0,
+  "failedBaselineId": "B0",
+  "failedTaskPackId": "artifact-lineage-incident",
+  "failedScenarioId": "artifact-lineage-clean-v2",
+  "failure": {
+    "class": "agent_max_turns_exhausted",
+    "agentCompleted": false,
+    "agentTurns": 24,
+    "toolCallCount": 30,
+    "writeToolCallCount": 13,
+    "testToolCallCount": 0,
+    "parserRetryCount": 0,
+    "durationMs": 577621,
+    "workspaceChangedFromPreAction": true
+  },
+  "diagnosticInterpretation": {
+    "directWorkspaceToolUseOperational": true,
+    "directExistingFileMutationOperational": true,
+    "agentTerminationValidated": false,
+    "publicTestLoopValidated": false,
+    "scientificOutcomeEligible": false,
+    "note": "The model performed many real reads/writes and changed the implementation, but repeatedly attempted brittle exact-text repairs after leaving the source truncated, never reached public tests, and exhausted the frozen turn budget. This isolates the next runtime issue to edit ergonomics/termination rather than absence of tool use."
+  }
+}
