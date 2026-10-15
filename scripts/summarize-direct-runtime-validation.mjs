@@ -112,14 +112,24 @@ for (const cellFile of cellFiles) {
       cell?.coordination?.selectedWorkerId ?? null,
     selectedRoleId:
       cell?.coordination?.selectedRoleId ?? null,
-    toolCallCount: telemetry?.toolCallCount ?? null,
+    toolCallCount:
+      telemetry?.toolCallCount ??
+      telemetry?.actionCount ??
+      null,
     writeToolCallCount:
-      telemetry?.writeToolCallCount ?? null,
+      telemetry?.writeToolCallCount ??
+      telemetry?.writeActionCount ??
+      null,
     parserRetryCount:
       telemetry?.parserRetryCount ?? 0,
     testToolCallCount:
-      telemetry?.testToolCallCount ?? null,
-    agentTurns: telemetry?.agentTurns ?? null,
+      telemetry?.testToolCallCount ??
+      telemetry?.testActionCount ??
+      null,
+    agentTurns:
+      telemetry?.agentTurns ??
+      telemetry?.agentSteps ??
+      null,
     agentCompleted:
       telemetry?.agentCompleted ?? null,
     publicTestExitCode:
