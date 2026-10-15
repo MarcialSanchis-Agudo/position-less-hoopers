@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-local-json-action-runtime-validation-v0.1.1-qwen35-9b",
+  "status": "exploratory-development-structured-json-action-runtime-validation",
+  "developmentOnly": true,
+  "publicationClaimEligible": false,
+  "scientificSemanticsUnchanged": true,
+  "scientificDesignSource": "benchmarks/courtshift/ontology-stress-eval-v0.3.json",
+  "scheduleSource": "benchmarks/courtshift/local-direct-runtime-validation-eval-v0.1.3-qwen35-9b.json",
+  "ontologyConfig": "benchmarks/courtshift/ontology-stress-baselines-v0.3.json",
+  "runner": "scripts/run-local-capability-frontier-v0.2.mjs",
+  "cellRunner": "scripts/run-ontology-stress-cell-v0.3.2.mjs",
+  "prospectiveTaskPacks": [
+    {
+      "taskPack": "examples/artifact-lineage-incident/task-pack.json",
+      "domain": "artifact-provenance-reconciliation"
+    },
+    {
+      "taskPack": "examples/schema-bridge-incident/task-pack.json",
+      "domain": "external-schema-reconciliation"
+    }
+  ],
+  "baselineOrder": ["B0", "B1", "B2", "B3", "P"],
+  "taskProfiles": {
+    "artifact-lineage-incident": {
+      "implementationPath": "src/artifacts.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/artifacts.test.mjs",
+        "evidence": "state/audit.log",
+        "provenance": "state/provenance.json",
+        "audit_log": "state/audit.log"
+      }
+    },
+    "schema-bridge-incident": {
+      "implementationPath": "src/bridge.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/bridge.test.mjs",
+        "evidence": "state/external-signal.json",
+        "schema_history": "state/schema-history.json",
+        "external_signal": "state/external-signal.json"
+      }
+    }
+  },
+  "scenarioClasses": ["clean", "contract_reveal", "ontology_stress_contract_mutation"],
+  "analysisPlan": {
+    "minimumReplicatesPerTaskCondition": 5,
+    "unit": "task-scenario-replicate paired comparison",
+    "counterbalance": "same frozen cyclic baseline order as v0.3",
+    "uncertainty": "paired bootstrap interval for latency deltas; exact paired outcomes for success"
+  },
+  "executorFamily": {
+    "provider": "Local",
+    "client": "Direct Ollama structured JSON action loop",
+    "runtime": "direct-ollama-structured-json-action-loop",
+    "auth": "none",
+    "defaultModel": "qwen3.5:9b",
+    "adapter": "examples/adapters/direct-ollama-json-actions.json",
+    "runtimeSourceCommit": "f34f8b03e5f18770e82998186c9e372fb5250a89",
+    "runtimeBlobs": {
+      "src/ollama-json-action-loop.mjs": "fc885fc29ad78f80cab5911ac5e1d67d35fcade3",
+      "src/ollama-tool-loop.mjs": "618443aa100d7eddacc146b22c2a784e6849d8ac",
+      "examples/adapters/direct-ollama-json-action-agent.mjs": "74e61a181694524fd540cdfb25dc40b4d448e826",
+      "examples/adapters/direct-ollama-json-actions.json": "e39e26c121ce51a345a1956ac0155148e945aadf"
+    },
+    "settings": {
+      "maxSteps": 20,
+      "numCtx": 32768,
+      "requestTimeoutMs": 120000,
+      "totalTimeoutMs": 480000,
+      "outerTimeoutMs": 660000,
+      "think": false,
+      "temperature": 0,
+      "nativeTools": false,
+      "parserRetries": 0
+    }
+  },
+  "studyPurpose": "Run only the first five existing PLH schedule cells with the live-preflighted JSON-action runtime. Validate real host actions, edits, bounded completion, and external grading; this is not a PLH superiority test.",
+  "primaryEndpoints": [
+    "executor_json_actions",
+    "successful_host_actions",
+    "successful_write_actions",
+    "workspace_changed_from_pre_action",
+    "externally_verified_success"
+  ],
+  "runtimeValidation": {
+    "firstBatchCells": 5,
+    "taskPackId": "artifact-lineage-incident",
+    "scenarioId": "artifact-lineage-clean-v2",
+    "repeats": 1,
+    "freshRunRequired": true,
+    "passSignals": [
+      "Exactly schedule indices 0-4, paired with B0/B1/B2/B3/P, are present and analyzable.",
+      "All five agents completed, with matching JSON runtime/model telemetry and at least one successful host action per cell.",
+      "At least one successful write action or a final implementation different from its pre-action version is observed.",
+      "No infrastructure failure in any cell or in the checkpoint history."
+    ],
+    "successGate": "External correctness and evidence satisfaction are reported separately, not required for executor validation. A completed but incorrect solution remains an analyzable task failure.",
+    "continueRule": "Inspect this batch before authorizing any remaining cells. Do not rerun the same output directory or pool native-tool, one-shot, or interrupted attempts.",
+    "preflightEvidence": {
+      "source": "User-supplied console summary, 2026-10-15; full local transcript not independently retrieved.",
+      "commit": "f34f8b03e5f18770e82998186c9e372fb5250a89",
+      "model": "qwen3.5:9b",
+      "runtime": "direct-ollama-structured-json-action-loop",
+      "durationMs": 39848,
+      "agentCompleted": true,
+      "agentSteps": 5,
+      "actionCount": 5,
+      "writeActionCount": 1,
+      "testActionCount": 2,
+      "requestCount": 5,
+      "actions": ["read_text_file", "run_public_tests", "replace_line_range", "run_public_tests", "finish"],
+      "failure": null,
+      "error": null,
+      "hostTestExitCode": 0,
+      "passed": true,
+      "settings": {"maxSteps": 12, "numCtx": 16384, "requestTimeoutMs": 90000, "totalTimeoutMs": 300000}
+    }
+  },
+  "freezeRules": [
+    "Runtime source, adapter, native-tool conditions, TaskPacks, graders, ontology, profiles, context mappings, and policy selection are unchanged from the runtime source commit.",
+    "The new launcher pins the existing PLH adapter defaults; these are larger budgets/context than the tiny preflight, not another observed success.",
+    "Only this new condition, launcher, summary, and regression tests are added. Never edit a frozen condition after inspecting its cells.",
+    "Do not mix JSON-action outcomes with native-tool or other executor families. All results remain development-only.",
+    "The model tag is pinned; no immutable model-weight digest was supplied in the preflight evidence."
+  ]
+}
