@@ -530,11 +530,23 @@ if (executorInfrastructureFailure) {
             agentTurns:
               providerWrapperTelemetry.agentTurns ?? null,
             toolCallCount:
-              providerWrapperTelemetry.toolCallCount ?? null,
+              providerWrapperTelemetry.toolCallCount ??
+              providerWrapperTelemetry.actionCount ??
+              null,
             writeToolCallCount:
-              providerWrapperTelemetry.writeToolCallCount ?? null,
+              providerWrapperTelemetry.writeToolCallCount ??
+              providerWrapperTelemetry.writeActionCount ??
+              null,
             testToolCallCount:
-              providerWrapperTelemetry.testToolCallCount ?? null,
+              providerWrapperTelemetry.testToolCallCount ??
+              providerWrapperTelemetry.testActionCount ??
+              null,
+            actionCount:
+              providerWrapperTelemetry.actionCount ?? null,
+            writeActionCount:
+              providerWrapperTelemetry.writeActionCount ?? null,
+            testActionCount:
+              providerWrapperTelemetry.testActionCount ?? null,
             parserRetryCount:
               providerWrapperTelemetry.parserRetryCount ?? null,
             phase:
