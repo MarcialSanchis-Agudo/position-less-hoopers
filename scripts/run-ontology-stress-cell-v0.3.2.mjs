@@ -525,6 +525,30 @@ if (executorInfrastructureFailure) {
               providerWrapperTelemetry.agentSignal ?? null,
             publicTestExitCode:
               providerWrapperTelemetry.publicTestExitCode,
+            agentCompleted:
+              providerWrapperTelemetry.agentCompleted ?? null,
+            agentTurns:
+              providerWrapperTelemetry.agentTurns ?? null,
+            toolCallCount:
+              providerWrapperTelemetry.toolCallCount ?? null,
+            writeToolCallCount:
+              providerWrapperTelemetry.writeToolCallCount ?? null,
+            testToolCallCount:
+              providerWrapperTelemetry.testToolCallCount ?? null,
+            parserRetryCount:
+              providerWrapperTelemetry.parserRetryCount ?? null,
+            phase:
+              providerWrapperTelemetry.phase ?? null,
+            failure:
+              providerWrapperTelemetry.failure ?? null,
+            agentError:
+              providerWrapperTelemetry.agentError ?? null,
+            lastTool:
+              providerWrapperTelemetry.lastTool ?? null,
+            transcriptTail:
+              Array.isArray(providerWrapperTelemetry.transcript)
+                ? providerWrapperTelemetry.transcript.slice(-8)
+                : [],
             agentStdoutTail:
               tail(providerWrapperTelemetry.agentStdout),
             agentStderrTail:
