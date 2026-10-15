@@ -42,9 +42,22 @@ async function readTextFile(workspace, args) {
   if (stat.size > MAX_FILE_BYTES) {
     throw new Error(`file exceeds ${MAX_FILE_BYTES} bytes`);
   }
+
+  const content = await fs.readFile(full, "utf8");
+  const lines = content.split("\n");
+  const withLineNumbers = args.withLineNumbers === true;
+
   return {
     path: args.path,
-    content: await fs.readFile(full, "utf8")
+    lineCount: lines.length,
+    content: withLineNumbers
+      ? lines
+          .map(
+            (line, index) =>
+              `${String(index + 1).padStart(4, " ")}| ${line}`
+          )
+          .join("\n")
+      : content
   };
 }
 
@@ -73,12 +86,96 @@ async function writeTextFile(workspace, args) {
   if (Buffer.byteLength(args.content, "utf8") > MAX_FILE_BYTES) {
     throw new Error(`content exceeds ${MAX_FILE_BYTES} bytes`);
   }
+
   const full = inside(workspace, args.path);
+
+  try {
+    await fs.access(full);
+    throw new Error(
+      "file already exists; use replace_line_range or replace_text_in_file"
+    );
+  } catch (error) {
+    if (
+      error?.code !== "ENOENT" &&
+      !String(error?.message ?? "").includes("file already exists")
+    ) {
+      throw error;
+    }
+    if (
+      String(error?.message ?? "").includes("file already exists")
+    ) {
+      throw error;
+    }
+  }
+
   await fs.mkdir(path.dirname(full), { recursive: true });
   await fs.writeFile(full, args.content, "utf8");
   return {
     path: args.path,
     bytes: Buffer.byteLength(args.content, "utf8")
+  };
+}
+
+async function replaceLineRange(workspace, args) {
+  if (protectedWritePath(args.path)) {
+    throw new Error("writing task, contract, state, or test files is prohibited");
+  }
+
+  const startLine = Number(args.startLine);
+  const endLine = Number(args.endLine);
+
+  if (
+    !Number.isInteger(startLine) ||
+    !Number.isInteger(endLine) ||
+    startLine < 1 ||
+    endLine < startLine
+  ) {
+    throw new TypeError(
+      "startLine and endLine must be positive integers with endLine >= startLine"
+    );
+  }
+
+  if (typeof args.newText !== "string") {
+    throw new TypeError("newText must be a string");
+  }
+
+  const full = inside(workspace, args.path);
+  const original = await fs.readFile(full, "utf8");
+  const hadTrailingNewline = original.endsWith("\n");
+  const lines = original.split("\n");
+
+  if (hadTrailingNewline) {
+    lines.pop();
+  }
+
+  if (endLine > lines.length) {
+    throw new Error(
+      `endLine ${endLine} exceeds file line count ${lines.length}`
+    );
+  }
+
+  const replacementLines =
+    args.newText.length === 0
+      ? []
+      : args.newText.split("\n");
+
+  lines.splice(
+    startLine - 1,
+    endLine - startLine + 1,
+    ...replacementLines
+  );
+
+  const updated =
+    lines.join("\n") +
+    (hadTrailingNewline ? "\n" : "");
+
+  await fs.writeFile(full, updated, "utf8");
+
+  return {
+    path: args.path,
+    replacedStartLine: startLine,
+    replacedEndLine: endLine,
+    newLineCount: lines.length
   };
 }
 
@@ -138,6 +235,10 @@ export const OLLAMA_WORKSPACE_TOOLS = Object.freeze([
           path: {
             type: "string",
             description: "Workspace-relative file path"
+          },
+          withLineNumbers: {
+            type: "boolean",
+            description: "When true, prefix every returned line with a 1-based line number"
           }
         }
       }
@@ -164,13 +265,31 @@ export const OLLAMA_WORKSPACE_TOOLS = Object.freeze([
     function: {
       name: "write_text_file",
       description:
-        "Create or replace an implementation text file inside the workspace. Task, contract, state, and test files are protected.",
+        "Create a NEW implementation text file inside the workspace. Fails if the file already exists. Use replace_line_range for existing files.",
       parameters: {
         type: "object",
         required: ["path", "content"],
         properties: {
           path: { type: "string" },
           content: { type: "string" }
+        }
+      }
+    }
+  },
+  {
+    type: "function",
+    function: {
+      name: "replace_line_range",
+      description:
+        "Replace an inclusive 1-based line range in an existing implementation file. Read the file with withLineNumbers=true immediately before using this tool.",
+      parameters: {
+        type: "object",
+        required: ["path", "startLine", "endLine", "newText"],
+        properties: {
+          path: { type: "string" },
+          startLine: { type: "integer" },
+          endLine: { type: "integer" },
+          newText: { type: "string" }
         }
       }
     }
@@ -213,6 +332,7 @@ async function executeTool(workspace, call) {
   if (name === "read_text_file") return readTextFile(workspace, args);
   if (name === "list_directory") return listDirectory(workspace, args);
   if (name === "write_text_file") return writeTextFile(workspace, args);
+  if (name === "replace_line_range") return replaceLineRange(workspace, args);
   if (name === "replace_text_in_file") return replaceTextInFile(workspace, args);
   if (name === "run_public_tests") return runPublicTests(workspace);
   throw new Error(`unsupported tool: ${name}`);
@@ -315,7 +435,9 @@ export async function runOllamaWorkspaceAgent({
         "Do not use or request MCP tools.",
         "Do not access the network, grader source, hidden tests, parent directories, or sibling directories.",
         "Do not modify TASK.md, contract files, state files, or test files.",
-        "When implementation changes are needed, use write_text_file or replace_text_in_file.",
+        "For existing implementation files, first read with withLineNumbers=true and prefer replace_line_range.",
+        "write_text_file is only for creating new files and will reject overwriting an existing file.",
+        "If replace_text_in_file fails once, re-read with line numbers and switch to replace_line_range.",
         "Run run_public_tests before concluding.",
         "A green public test is useful evidence but may not satisfy the full authoritative task contract.",
         "Finish with a concise summary after you have completed the requested work or are genuinely blocked."
@@ -424,6 +546,7 @@ export async function runOllamaWorkspaceAgent({
       const name = call?.function?.name;
       if (
         name === "write_text_file" ||
+        name === "replace_line_range" ||
         name === "replace_text_in_file"
       ) {
         writeToolCallCount += 1;
