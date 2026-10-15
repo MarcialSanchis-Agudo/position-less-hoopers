@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-local-direct-runtime-validation-v0.1.3-qwen35-9b",
+  "supersedes": "plh-local-direct-runtime-validation-v0.1.2-qwen35-9b",
+  "status": "exploratory-development-direct-ollama-runtime-validation-line-range-edit",
+  "scientificSemanticsUnchanged": true,
+  "ontologyConfig": "benchmarks/courtshift/ontology-stress-baselines-v0.3.json",
+  "scientificDesignSource": "benchmarks/courtshift/ontology-stress-eval-v0.3.json",
+  "runner": "scripts/run-local-capability-frontier-v0.2.mjs",
+  "cellRunner": "scripts/run-ontology-stress-cell-v0.3.2.mjs",
+  "invalidatedAttempt": {
+    "resultId": "claude-sonnet-ontology-stress-v0.3-001",
+    "reason": "Executor infrastructure collapsed after 60 successful cells. The next 90 cells all returned failed Claude invocations with approximately 2-4 second durations rather than normal task execution.",
+    "scientificOutcomeEligible": false,
+    "routingTraceEligible": true,
+    "observedExample": {
+      "claudeExitCode": 1,
+      "claudeSignal": null,
+      "claudeStderr": "",
+      "publicTestExitCode": 0,
+      "durationMs": 2173
+    }
+  },
+  "prospectiveTaskPacks": [
+    {
+      "taskPack": "examples/artifact-lineage-incident/task-pack.json",
+      "domain": "artifact-provenance-reconciliation"
+    },
+    {
+      "taskPack": "examples/schema-bridge-incident/task-pack.json",
+      "domain": "external-schema-reconciliation"
+    }
+  ],
+  "baselineOrder": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "P"
+  ],
+  "taskProfiles": {
+    "artifact-lineage-incident": {
+      "implementationPath": "src/artifacts.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/artifacts.test.mjs",
+        "evidence": "state/audit.log",
+        "provenance": "state/provenance.json",
+        "audit_log": "state/audit.log"
+      }
+    },
+    "schema-bridge-incident": {
+      "implementationPath": "src/bridge.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {
+        "tests": "test/bridge.test.mjs",
+        "evidence": "state/external-signal.json",
+        "schema_history": "state/schema-history.json",
+        "external_signal": "state/external-signal.json"
+      }
+    }
+  },
+  "scenarioClasses": [
+    "clean",
+    "contract_reveal",
+    "ontology_stress_contract_mutation"
+  ],
+  "primaryEndpoints": [
+    "executor_tool_calls",
+    "executor_write_tool_calls",
+    "workspace_changed_from_pre_action",
+    "externally_verified_success"
+  ],
+  "mechanismEndpoints": [
+    "selected_role",
+    "role_context_coverage",
+    "selected_worker",
+    "context_kinds"
+  ],
+  "analysisPlan": {
+    "minimumReplicatesPerTaskCondition": 5,
+    "unit": "task-scenario-replicate paired comparison",
+    "counterbalance": "same frozen cyclic baseline order as v0.3",
+    "uncertainty": "paired bootstrap interval for latency deltas; exact paired outcomes for success"
+  },
+  "infrastructureRules": [
+    "A Claude wrapper telemetry record with claudeExitCode != 0 is an executor infrastructure failure and is excluded from scientific outcomes.",
+    "A timed-out command agent is an executor infrastructure failure and is excluded from scientific outcomes.",
+    "The matrix must stop immediately on the first infrastructure failure.",
+    "The failed cell index is not advanced; rerunning the same command retries exactly that scheduled cell.",
+    "Successful prior cells remain checkpointed and are not rerun during infrastructure resume.",
+    "The frozen schedule and baseline order do not change across resume operations.",
+    "The final scientific summary is emitted only after every scheduled cell has produced an analyzable outcome."
+  ],
+  "freezeRules": [
+    "v0.3.1 changes execution accounting/checkpointing only; ontology, TaskPacks, graders, stateRequirements, worker profiles, matcher weights, context mappings, and role-selector semantics are unchanged from v0.3.",
+    "No scientific design parameter may change after a valid v0.3.1 real-agent outcome is inspected.",
+    "v0.2 remains a separate prospective null/ceiling result.",
+    "The aborted v0.3 attempt remains visible as infrastructure-invalid rather than being silently deleted.",
+    "v0.3.2 changes only executor portability/infrastructure telemetry. Scientific tasks, graders, ontology, role selector, worker profiles, matcher weights, context mappings, and hypotheses remain identical.",
+    "OpenAI/Codex outcomes are reported as a separate executor-family replication and are not pooled with Claude outcomes."
+  ],
+  "executorFamily": {
+    "provider": "Local",
+    "client": "Direct Ollama API tool loop",
+    "auth": "none",
+    "defaultModel": "qwen3.5:9b",
+    "adapter": "examples/adapters/direct-ollama-tools.json"
+  },
+  "studyPurpose": "Fresh five-cell validation of Qwen 3.5 9B on the PLH Artifact Lineage clean-v2 schedule using the direct Ollama runtime after validating safe existing-file line-range editing, public-test recovery, and clean termination. Do not mix outcomes with v0.1-v0.1.2.",
+  "hypotheses": [
+    "The direct Ollama tool runtime produces actual filesystem tool calls and implementation edits on nontrivial PLH tasks.",
+    "If the previous 0/30 one-shot result was dominated by Codex/Ollama tool-routing failure, at least some direct-runtime cells should differ from their pre-action implementation even if authoritative success remains below ceiling.",
+    "Coordination outcomes are not interpreted as PLH superiority until the executor validation passes."
+  ],
+  "developmentOnly": true,
+  "publicationClaimEligible": false,
+  "recommendedStages": [
+    {
+      "stage": "smoke",
+      "repeats": 1,
+      "scheduledCells": 30,
+      "purpose": "Confirm the local model can use Codex tools and produce nontrivial task outcomes."
+    },
+    {
+      "stage": "frontier",
+      "repeats": 3,
+      "scheduledCells": 90,
+      "purpose": "Estimate success and latency by coordination condition without API cost."
+    },
+    {
+      "stage": "model-ladder",
+      "models": [
+        "qwen3.5:4b",
+        "qwen3.5:9b",
+        "gpt-oss:20b"
+      ],
+      "repeats": 3,
+      "purpose": "Measure how coordination effects change with local model capability, conditional on hardware feasibility."
+    }
+  ],
+  "localRunRules": [
+    "Run in a fresh output directory; do not resume v0.1, v0.1.1, or v0.1.2 validation checkpoints.",
+    "The evaluation set pins qwen3.5:9b.",
+    "Use examples/adapters/direct-ollama-tools.json only.",
+    "Run exactly the first 5 scheduled cells before inspecting outcomes.",
+    "Existing implementation files must be edited through replace_line_range or exact text replacement; write_text_file cannot overwrite them.",
+    "Each Ollama chat request remains bounded to 180000ms and the total agent loop to 600000ms.",
+    "Provider telemetry remains incremental.",
+    "Ollama parser retries remain limited to the frozen XML/EOF HTTP 500 class.",
+    "Do not pool v0.1.3 outcomes with prior Codex/Ollama runs or interrupted direct-runtime validations.",
+    "Treat this as executor validation before any PLH capability-frontier claim."
+  ],
+  "runtimeValidation": {
+    "firstBatchCells": 5,
+    "firstBatchScope": "artifact-lineage-clean-v2 across B0/B1/B2/B3/P in frozen schedule order",
+    "passSignals": [
+      "provider telemetry shows one or more real tool calls",
+      "at least one cell has writeToolCallCount > 0 or final implementation differs from pre-action",
+      "no executor infrastructure failure"
+    ],
+    "continueRule": "Do not continue the remaining 25 cells until the first five cells are inspected for real workspace action.",
+    "repairVersion": "v0.1.3",
+    "repairReason": "The v0.1.2 B0 cell proved real tool use and workspace mutation but exhausted 24 turns after repeated brittle exact-text repair attempts on a partially truncated implementation. A dedicated existing-file preflight then validated line-numbered reads, replace_line_range editing, public-test recovery, and clean termination.",
+    "repairScope": [
+      "read_text_file can return 1-based line numbers",
+      "write_text_file is restricted to creating new files and refuses to overwrite existing files",
+      "replace_line_range edits inclusive 1-based line ranges in existing implementation files",
+      "direct-runtime instructions prefer replace_line_range for existing files and switch to it after one failed exact-text replacement",
+      "no TaskPack, grader, ontology, worker profile, matcher, baseline, or model changes"
+    ],
+    "observedScientificCellsBeforeRepair": 0,
+    "observedFailedCellBeforeRepair": {
+      "scheduleIndex": 3,
+      "taskPackId": "artifact-lineage-incident",
+      "scenarioId": "artifact-lineage-clean-v2",
+      "baselineId": "B3",
+      "adapterSignal": "SIGTERM",
+      "outerTimedOut": true,
+      "durationMs": 900058,
+      "executionResultProduced": false,
+      "providerTelemetryProduced": false,
+      "infrastructureFailure": true
+    },
+    "freshRunRequired": true,
+    "preflightEvidence": {
+      "model": "qwen3.5:9b",
+      "agentCompleted": true,
+      "agentTurns": 6,
+      "toolCallCount": 5,
+      "writeToolCallCount": 1,
+      "lineRangeToolCalls": 1,
+      "testToolCallCount": 2,
+      "parserRetryCount": 0,
+      "hostTestExitCode": 0,
+      "passed": true
+    }
+  }
+}
