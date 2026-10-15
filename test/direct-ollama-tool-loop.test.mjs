@@ -11,7 +11,8 @@ import test from "node:test";
 for (const relative of [
   "../src/ollama-tool-loop.mjs",
   "../examples/adapters/direct-ollama-tool-agent.mjs",
-  "../scripts/check-direct-ollama-tool-use.mjs"
+  "../scripts/check-direct-ollama-tool-use.mjs",
+  "../scripts/check-direct-ollama-existing-file-edit.mjs"
 ]) {
   test(`${relative} parses`, () => {
     const result = spawnSync(
