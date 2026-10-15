@@ -326,7 +326,7 @@ export const OLLAMA_WORKSPACE_TOOLS = Object.freeze([
   }
 ]);
 
-async function executeTool(workspace, call) {
+export async function executeOllamaWorkspaceTool(workspace, call) {
   const name = call?.function?.name;
   const args = call?.function?.arguments ?? {};
   if (name === "read_text_file") return readTextFile(workspace, args);
@@ -559,7 +559,7 @@ export async function runOllamaWorkspaceAgent({
       try {
         result = {
           ok: true,
-          result: await executeTool(workspace, call)
+          result: await executeOllamaWorkspaceTool(workspace, call)
         };
       } catch (error) {
         result = {
