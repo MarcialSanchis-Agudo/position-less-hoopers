@@ -39,9 +39,12 @@ const prompt = [
   "",
   "## Direct Ollama tool-loop rules",
   "",
-  "- You have explicit workspace tools for reading, listing, writing, exact text replacement, and running public tests.",
+  "- You have explicit workspace tools for reading, listing, line-range editing, exact text replacement, creating new files, and running public tests.",
   "- Use those tools directly. Do not request MCP, shell, browser, web, or Codex tools.",
   "- Inspect TASK.md and the active workspace state required by the assignment.",
+  "- For an existing implementation file, read it with line numbers and prefer replace_line_range. Do not rewrite an existing file with write_text_file.",
+  "- If an exact-text replacement fails once, do not keep guessing oldText; re-read with line numbers and use replace_line_range.",
+  "- After implementation changes are coherent, run public tests. If they pass and the requested contract work is addressed, finish rather than continuing to edit.",
   "- If authoritative evidence feedback says the Need is unsatisfied, make the implementation changes needed to address those obligations even if public tests are already green.",
   "- Never modify task, contract, state, or test files.",
   "- Do not claim authoritative external evidence; the PLH harness owns the external grader."
