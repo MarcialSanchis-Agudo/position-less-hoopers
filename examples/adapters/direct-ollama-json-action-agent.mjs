@@ -4,6 +4,9 @@ import { spawnSync } from "node:child_process";
 import {
   runOllamaJsonActionAgent
 } from "../../src/ollama-json-action-loop.mjs";
+import {
+  buildJsonActionWorkspacePrompt, JSON_ACTION_PATH_CONTRACT_VERSION
+} from "../../src/json-action-workspace-contract.mjs";
 
 const requestPath = process.env.PLH_EXECUTION_REQUEST;
 const resultPath = process.env.PLH_EXECUTION_RESULT;
@@ -25,21 +28,13 @@ const numCtx = Number(process.env.PLH_OLLAMA_NUM_CTX || 32768);
 const requestTimeoutMs = Number(process.env.PLH_OLLAMA_JSON_REQUEST_TIMEOUT_MS || 120000);
 const totalTimeoutMs = Number(process.env.PLH_OLLAMA_JSON_TOTAL_TIMEOUT_MS || 480000);
 
-const prompt = [
-  instructions.trim(), "", "## Structured JSON-action runtime rules", "",
-  "- This runtime does not expose native Ollama tools.",
-  "- Choose one host-executed JSON action at a time.",
-  "- For existing implementation files, read with line numbers and prefer replace_line_range.",
-  "- Do not overwrite existing implementation files with write_text_file.",
-  "- Run public tests after coherent changes.",
-  "- A green public test is useful but authoritative external evidence remains owned by the PLH harness.",
-  "- Finish when the requested contract work has been addressed and public tests have been checked."
-].join("\n");
+const prompt = buildJsonActionWorkspacePrompt(instructions, resultPath);
 
 const telemetryPath = path.join(runRoot, "provider-wrapper-telemetry.json");
 const startedAt = new Date().toISOString();
 const startedMs = Date.now();
 await fs.mkdir(runRoot, { recursive: true });
+await fs.writeFile(path.join(runRoot, "json-action-agent-prompt.md"), prompt + "\n", "utf8");
 
 async function writeJsonAtomic(file, value) {
   const temporary = `${file}.${process.pid}.tmp`;
@@ -56,6 +51,7 @@ let latestSnapshot = {
 async function persistTelemetry(snapshot = {}, extra = {}) {
   await writeJsonAtomic(telemetryPath, {
     schemaVersion: 1,
+    pathContractVersion: JSON_ACTION_PATH_CONTRACT_VERSION,
     provider: "Local",
     cli: "Direct Ollama structured JSON action loop",
     requestedModel: model,
