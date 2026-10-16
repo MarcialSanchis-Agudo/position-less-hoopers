@@ -17,8 +17,12 @@ async function temp(t) {
 }
 function child(args, env) {
   return new Promise((resolve, reject) => {
+    // Model an ordinary terminal invocation, not another Node test worker.
+    // Otherwise nested `node --test` skips all files and falsely exits zero.
+    const childEnv = {...process.env, ...env};
+    delete childEnv.NODE_TEST_CONTEXT;
     const handle = spawn(process.execPath, [path.join(ROOT, "scripts/check-json-action-workspace-contract.mjs"), ...args], {
-      cwd: ROOT, env: {...process.env, ...env}, stdio: ["ignore", "pipe", "pipe"]
+      cwd: ROOT, env: childEnv, stdio: ["ignore", "pipe", "pipe"]
     });
     let stdout = ""; let stderr = "";
     handle.stdout.on("data", (value) => {stdout += value;});
@@ -93,6 +97,8 @@ test("real CommandAgent envelope reaches JSON adapter without host paths and com
   assert.equal(result.actionCount, 8);
   assert.equal(result.successfulWriteActionCount, 1);
   assert.equal(result.hostTestExitCode, 0);
+  assert.equal(result.actions.find((row) => row.step === 5).testExitCode, 1);
+  assert.equal(result.actions.find((row) => row.step === 7).testExitCode, 0);
   const resultRecord = JSON.parse(await fs.readFile(path.join(out, "fixture/execution/execution-result.json"), "utf8"));
   assert.equal(resultRecord.status, "completed");
   assert.deepEqual(resultRecord.evidenceRefs, []);
