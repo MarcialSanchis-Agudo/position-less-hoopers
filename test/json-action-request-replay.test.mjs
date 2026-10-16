@@ -144,7 +144,8 @@ test("production loop: reconstructed request bytes equal actual failed-request b
   });
   const result = await runOllamaJsonActionAgent({workspace: root, model: "qwen3.5:9b", prompt, baseUrl: mock.url});
   assert.equal(result.failure, "structured_request_failed"); assert.equal(result.actionCount, 2);
-  const saved = {...result, requestedModel: "qwen3.5:9b", cli: config.executorFamily.client,
+  // Persisted adapter telemetry renames the raw loop's completed field.
+  const saved = {...result, agentCompleted: result.completed, requestedModel: "qwen3.5:9b", cli: config.executorFamily.client,
     pathContractVersion: config.executorFamily.pathContractVersion};
   const reconstructed = reconstructRequest(source, prompt, saved, config);
   assert.equal(JSON.stringify(reconstructed), mock.requests[2]);
