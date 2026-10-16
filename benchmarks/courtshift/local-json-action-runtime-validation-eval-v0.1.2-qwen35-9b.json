@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "evaluationSetId": "plh-local-json-action-runtime-validation-v0.1.2-qwen35-9b",
+  "status": "exploratory-development-workspace-relative-json-action-runtime-validation",
+  "developmentOnly": true,
+  "publicationClaimEligible": false,
+  "scientificSemanticsUnchanged": true,
+  "scientificDesignSource": "benchmarks/courtshift/ontology-stress-eval-v0.3.json",
+  "scheduleSource": "benchmarks/courtshift/local-direct-runtime-validation-eval-v0.1.3-qwen35-9b.json",
+  "previousCondition": "benchmarks/courtshift/local-json-action-runtime-validation-eval-v0.1.1-qwen35-9b.json",
+  "ontologyConfig": "benchmarks/courtshift/ontology-stress-baselines-v0.3.json",
+  "runner": "scripts/run-local-capability-frontier-v0.2.mjs",
+  "cellRunner": "scripts/run-ontology-stress-cell-v0.3.2.mjs",
+  "prospectiveTaskPacks": [
+    {"taskPack": "examples/artifact-lineage-incident/task-pack.json", "domain": "artifact-provenance-reconciliation"},
+    {"taskPack": "examples/schema-bridge-incident/task-pack.json", "domain": "external-schema-reconciliation"}
+  ],
+  "baselineOrder": ["B0", "B1", "B2", "B3", "P"],
+  "taskProfiles": {
+    "artifact-lineage-incident": {
+      "implementationPath": "src/artifacts.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {"tests": "test/artifacts.test.mjs", "evidence": "state/audit.log", "provenance": "state/provenance.json", "audit_log": "state/audit.log"}
+    },
+    "schema-bridge-incident": {
+      "implementationPath": "src/bridge.mjs",
+      "referenceSolutionPattern": "reference-solution/v{version}.mjs",
+      "contextFiles": {"tests": "test/bridge.test.mjs", "evidence": "state/external-signal.json", "schema_history": "state/schema-history.json", "external_signal": "state/external-signal.json"}
+    }
+  },
+  "scenarioClasses": ["clean", "contract_reveal", "ontology_stress_contract_mutation"],
+  "analysisPlan": {
+    "minimumReplicatesPerTaskCondition": 5,
+    "unit": "task-scenario-replicate paired comparison",
+    "counterbalance": "same frozen cyclic baseline order as v0.3",
+    "uncertainty": "paired bootstrap interval for latency deltas; exact paired outcomes for success"
+  },
+  "executorFamily": {
+    "provider": "Local",
+    "client": "Direct Ollama structured JSON action loop",
+    "runtime": "direct-ollama-structured-json-action-loop",
+    "auth": "none",
+    "defaultModel": "qwen3.5:9b",
+    "adapter": "examples/adapters/direct-ollama-json-actions.json",
+    "runtimeSourceCommit": "be7083211a4c8ff5eaf97cb27570420c0ca28828",
+    "pathContractVersion": "workspace-relative-v0.1.2",
+    "runtimeBlobs": {
+      "src/ollama-json-action-loop.mjs": "fc885fc29ad78f80cab5911ac5e1d67d35fcade3",
+      "src/ollama-tool-loop.mjs": "618443aa100d7eddacc146b22c2a784e6849d8ac",
+      "examples/adapters/direct-ollama-json-action-agent.mjs": "9a871b6885670ab6abcce668521c592118130d8d",
+      "examples/adapters/direct-ollama-json-actions.json": "e39e26c121ce51a345a1956ac0155148e945aadf",
+      "src/json-action-workspace-contract.mjs": "41b397308a38c1eaffc63c0806563856c4906776",
+      "src/command-agent.mjs": "47a72831a418ab4d44a05e2445d3ec96d8ae4b74",
+      "src/runner-port.mjs": "5a31b52d50a3c52d98f042c3acbf400c70ca1fb1"
+    },
+    "settings": {
+      "maxSteps": 20, "numCtx": 32768, "requestTimeoutMs": 120000, "totalTimeoutMs": 480000,
+      "outerTimeoutMs": 660000, "think": false, "temperature": 0, "nativeTools": false, "parserRetries": 0
+    }
+  },
+  "studyPurpose": "Repeat only the first five PLH schedule cells in a fresh condition with the live-preflighted workspace-relative adapter. Validate executor actions and termination; do not infer PLH superiority.",
+  "primaryEndpoints": ["executor_json_actions", "successful_host_actions", "successful_write_actions", "workspace_changed_from_pre_action", "externally_verified_success"],
+  "runtimeValidation": {
+    "firstBatchCells": 5,
+    "taskPackId": "artifact-lineage-incident",
+    "scenarioId": "artifact-lineage-clean-v2",
+    "repeats": 1,
+    "freshRunRequired": true,
+    "passSignals": [
+      "Exactly schedule indices 0-4, paired with B0/B1/B2/B3/P, are present and analyzable.",
+      "All five agents completed with matching runtime, model and workspace path-contract telemetry, and at least one successful host action per cell.",
+      "At least one successful write action or a final implementation different from its pre-action version is observed.",
+      "No infrastructure failure in any cell or checkpoint history; frozen runtime provenance matches."
+    ],
+    "successGate": "External correctness and evidence satisfaction remain separate from executor validation. A completed incorrect solution is an analyzable task failure. Recoverable tool errors do not automatically invalidate a cell.",
+    "continueRule": "Stop after five cells or the first infrastructure failure. Do not resume this output directory or proceed to the remaining 25 cells before review.",
+    "preflightEvidence": {
+      "source": "User-supplied console output on 2026-10-16; local artifacts not independently retrieved.",
+      "commit": "be7083211a4c8ff5eaf97cb27570420c0ca28828",
+      "resultId": "qwen35-9b-json-action-path-contract-v0.1.2-001",
+      "pathContractVersion": "workspace-relative-v0.1.2",
+      "model": "qwen3.5:9b",
+      "durationMs": 49164,
+      "agentCompleted": true,
+      "actionCount": 8,
+      "successfulWriteActionCount": 1,
+      "pathRejectionCount": 0,
+      "hostTestExitCode": 0,
+      "failure": null,
+      "agentError": null,
+      "passed": true,
+      "failedGates": [],
+      "actionSequence": ["read_text_file", "read_text_file", "read_text_file", "replace_line_range", "read_text_file", "replace_line_range", "run_public_tests", "finish"],
+      "recoveredToolError": {"step": 4, "error": "endLine 2 exceeds file line count 1", "rereadStep": 5, "successfulEditStep": 6},
+      "settings": {"maxSteps": 20, "numCtx": 32768, "requestTimeoutMs": 120000, "totalTimeoutMs": 480000}
+    },
+    "priorFailedAttempt": {
+      "resultId": "qwen35-9b-json-action-runtime-validation-v0.1.1-001",
+      "source": "User-supplied compact trace; retained separately.",
+      "baselineId": "B0", "actionCount": 20, "pathRejectionCount": 20, "successfulWriteActionCount": 0,
+      "failure": "max_steps_exhausted"
+    }
+  },
+  "freezeRules": [
+    "Runtime, adapter, prompt helper, path guards and budgets remain byte-identical to be7083211a4c8ff5eaf97cb27570420c0ca28828.",
+    "TaskPacks, graders, ontology, worker profiles, context mappings and scheduling are unchanged. Only condition, versioned launch/report helpers and tests are added.",
+    "Do not change this condition after inspecting its outcomes. Preserve all earlier native and JSON attempts; never pool them.",
+    "The line-range rejection in the passing integration preflight is retained as a recovered tool error. No line-count or error-recovery changes are made in this freeze.",
+    "Model tag is pinned; no immutable weight digest was supplied. This is development evidence, not publication-grade model replication."
+  ]
+}
